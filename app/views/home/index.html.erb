@@ -45,7 +45,7 @@
       <% if session[:user_id].nil?%>
         <li class="text-center"><a class="login" href="/register">登陆</a></li>
       <%else%>
-        <li class="text-center"><a href="/personalAll">欢迎,<%= User.find(session[:user_id]).name%></a></li>
+        <li class="text-center"><a href="/personalAll"><%= User.find(session[:user_id]).name%></a></li>
       <% end%>
     </ul>
   </div>

@@ -90,6 +90,10 @@
 			$(".revise").hide();
 			$(".save").show();
 		})
+		$("#bodyRevise").click(function(){
+			$(".bodyRevise").hide();
+			$(".bodySave").show();
+		})
 		$("#infoCancel").click(function(){
 			$(".revise").show();
 			$(".save").hide();

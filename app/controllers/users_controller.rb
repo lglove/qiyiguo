@@ -57,6 +57,10 @@ class UsersController < ApplicationController
 
   def body
     bodyInfo = UserInfo.find_by_user_id(session[:user_id])
+    if !bodyInfo
+      bodyInfo = UserInfo.new
+    end
+    bodyInfo.user_id = session[:user_id]
     bodyInfo.height = params[:height] if params[:height].present?
     bodyInfo.weight = params[:weight] if params[:weight].present?
     bodyInfo.shangyiqima = params[:shangyiqima] if params[:shangyiqima].present?

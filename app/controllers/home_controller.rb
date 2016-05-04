@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
   layout "home"
 
-#  before_filter :check_login, :only => ["manner_1","presonal","welcome", "personalAll"]
- # before_filter :get_login_user
+  before_filter :check_login, :only => ["manner_1","personalAll"]
+  before_filter :get_login_user
   protect_from_forgery :except => :mobile_register
 
   def index
@@ -56,7 +56,6 @@ class HomeController < ApplicationController
   end
 
   def register
-      session[:old_url] = request.env["REQUEST_URI"]
   end
 
   def mobile_register
@@ -88,7 +87,7 @@ class HomeController < ApplicationController
 
   def signin
     user = User.find_by(["(name = ? or mobilephone = ?) and password = ?", params[:mobilephone], params[:mobilephone], User.md5(params[:password])])
-    if user
+    if user.present?
       session[:user_id] = user.id
       redirect_to action: "welcome"
     else
@@ -106,7 +105,7 @@ class HomeController < ApplicationController
   private
 
   def check_login
-    if session[:use_id].nil?
+    if session[:user_id].nil?
       flash[:notice] = "请先登录"
       redirect_to :action=>'register'
     end

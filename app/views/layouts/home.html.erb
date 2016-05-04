@@ -44,13 +44,17 @@
         <% if session[:user_id].nil?%>
           <li class="text-center"><a class="login" href="/register">登陆</a></li>
         <%else%>
-          <li class="text-center"><a href="/personalAll">欢迎,<%= User.find(session[:user_id]).name%></a></li>
+          <li class="text-center"><a href="/personalAll"><%= User.find(session[:user_id]).name%></a></li>
         <% end%>
       </ul>
     </div>
     </nav>
 
-    <%= yield %>
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-success"><%= notice %></div>
+      <%end%>
+      <%= yield %>
 
   <footer class="row">
   <ul class="ansow clearfloat col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12">

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
        get :login
        get :logout
        post :info
-       post :body
+       get :body
      end
    end
    resources :orders do
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
       collection do
         get :index
         post :info
-        post :bodyInfo
+        post :body
       end
     end
     resource :orders do
