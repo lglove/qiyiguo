@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::DesignersController < Admin::ApplicationController
   layout "admin"
+  before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
   def index
     @admin_designers = Designer.page(params[:page] ||1)
@@ -9,6 +10,7 @@ class Admin::DesignersController < Admin::ApplicationController
   end
 
   def new
+    @designer = Designer.new
   end
 
   def edit

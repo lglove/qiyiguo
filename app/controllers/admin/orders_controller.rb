@@ -1,14 +1,16 @@
 # -*- encoding : utf-8 -*-
 class Admin::OrdersController < Admin::ApplicationController
   layout "admin"
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
     @admin_orders = Order.page(params[:page] ||1)
-                         .where(["name like ? and mobilephone like ?", "%#{params[:name]}%", "%#{params[:mobilephone]}%"])
+                         .where(["name like ?", "%#{params[:name]}%"])
                          .order("id desc")
   end
 
   def new
+    @order = Order.new
   end
 
   def edit
@@ -38,7 +40,7 @@ class Admin::OrdersController < Admin::ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:name, :status, :express)
+      params.require(:order).permit(:name, :price, :status, :express)
     end
 
 end

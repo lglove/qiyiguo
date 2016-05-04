@@ -18,6 +18,7 @@
   <tr>
     <td class="text-right"><label for="admin_admin_email">邮箱:</label></td>
     <td><%= f.text_field :email, :class => 'form-control' %></td>
+    <%= hidden_field_tag :id, "#{@admin_user.id}"%>
   </tr>
   <tr>
     <td class="text-right"><label for="admin_admin_name">姓名:</label></td>
@@ -26,7 +27,6 @@
   </tr>
     <td class="text-right"><label for="admin_admin_password">密码:</label></td>
     <td><%= f.password_field :password, :class => 'form-control' %></td>
-        <%= hidden_field_tag :page, "#{params[:page]}"%>
   </tr>
   <tr>
     <td class="text-center actions" colspan=2>

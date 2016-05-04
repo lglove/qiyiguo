@@ -50,7 +50,6 @@ Rails.application.routes.draw do
         post :update_password
       end
     end
-    resource :videos
     resource :users do
       collection do
         get :index
@@ -58,12 +57,22 @@ Rails.application.routes.draw do
         post :bodyInfo
       end
     end
-    resources :orders do
+    resource :orders do
       collection do
+        get :index
         get :make_payment
       end
     end
-    resources :designers
+    resource :videos do
+      collection do
+        get :index
+      end
+    end
+    resource :designers do
+      collection do
+        get :index
+      end
+    end
     get 'main/welcome' => 'main#welcome'
     get 'main/login' => 'main#login'
     get 'main/logout' => 'main#logout'

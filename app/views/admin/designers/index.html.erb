@@ -7,7 +7,7 @@
         <%= f.submit '搜索', class: 'btn btn-primary form-control'%>
       <% end %>
     </td>
-    <td class="text-right col-sm-5"><%= link_to '添加', new_admin_users_path, :class=>"btn btn-primary" %></td>
+    <td class="text-right col-sm-5"><%= link_to '添加', new_admin_designers_path, :class=>"btn btn-primary" %></td>
   </tr>
 </table>
 <table class="table table-bordered table-striped">
@@ -16,21 +16,21 @@
       <th class="text-center">ID</th>
       <th class="text-center">姓名</th>
       <th class="text-center">电话</th>
-      <th class="text-center">邮箱</th>
+      <th class="text-center">描述</th>
       <th class="text-center">创建时间</th>
       <th class="text-center" colspan="3">操作</th>
     </tr>
-    <% @users.each do |user| %>
+    <% @admin_designers.each do |designer| %>
       <tr>
-        <td class="text-center"><%= user.id %></td>
-        <td class="text-center"><%= user.name %></td>
-        <td class="text-center"><%= user.mobilephone %></td>
-        <td class="text-center"><%= user.email %></td>
-        <td class="text-center"><%= user.created_at.to_date %></td>
+        <td class="text-center"><%= designer.id %></td>
+        <td class="text-center"><%= designer.name %></td>
+        <td class="text-center"><%= designer.mobilephone %></td>
+        <td class="text-center"><%= truncate designer.description, :length=>200 %></td>
+        <td class="text-center"><%= designer.created_at.to_date %></td>
         <td class="text-center">
-          <%= link_to '编辑',{:action=>'edit', :id=>user.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
+          <%= link_to '编辑',{:action=>'edit', :id=>designer.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
         <td class="text-center"> <%= link_to '删除',
-                      admin_users_path(user),
+                      admin_designers_path(designer),
                       :method => :delete,
                       :data => { :confirm => '你确定删除?' },
                       :class => 'btn btn-danger' %>
@@ -40,5 +40,5 @@
   </tbody>
 </table>
 <div class="pagination center">
-  <%= paginate @users %>
+  <%= paginate @admin_designers %>
 </div>

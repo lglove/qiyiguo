@@ -1,12 +1,12 @@
-<%= form_for @user, url: "/admin/users", :html => { :class => "form-horizontal user" } do |f| %>
-    <% if @user.errors.any? %>
+<%= form_for @designer, url: "/admin/designers", :html => { :class => "form-horizontal designer" } do |f| %>
+    <% if @designer.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> 表单提交错误</h3>
+        <h3 class="panel-title"><%= pluralize(@designer.errors.count, "error") %> 表单提交错误</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @user.errors.full_messages.each do |msg| %>
+        <% @designer.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>
@@ -18,7 +18,7 @@
   <tr>
     <td class="text-right"><label for="admin_admin_name">姓名:</label></td>
     <td><%= f.text_field :name, :class => 'form-control' %></td>
-    <%= hidden_field_tag :id, "#{@user.id}"%>
+    <%= hidden_field_tag :id, "#{@designer.id}"%>
   <tr>
   <tr>
     <td class="text-right"><label for="admin_admin_name">电话:</label></td>
@@ -29,9 +29,13 @@
     <td><%= f.text_field :email, :class => 'form-control' %></td>
   <tr>
   <tr>
+    <td class="text-right"><label for="admin_admin_name">描述:</label></td>
+    <td><%= f.text_field :description, :class => 'form-control' %></td>
+  <tr>
+  <tr>
     <td class="text-center actions" colspan=2>
       <%= f.submit "提交", :class => 'btn btn-primary mr20' %>
-      <%= link_to '取消', admin_users_path, :class => 'btn btn-default' %>
+      <%= link_to '取消', admin_designers_path, :class => 'btn btn-default' %>
     </td>
   </tr>
 </table>

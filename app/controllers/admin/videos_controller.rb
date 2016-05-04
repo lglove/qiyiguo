@@ -1,21 +1,23 @@
 # -*- encoding : utf-8 -*-
 class Admin::VideosController < Admin::ApplicationController
   layout "admin"
+  before_action :set_video, only: [:show, :edit, :update, :destroy]
 
   def index
-    @admin_videos = Video.page(params[:page] ||1)
-                         .where(["name like ? and mobilephone like ?", "%#{params[:name]}%", "%#{params[:mobilephone]}%"])
+    @admin_videos = Admin::Video.page(params[:page] ||1)
+                         .where(["name like ?", "%#{params[:name]}%"])
                          .order("id desc")
   end
 
   def new
+    @video = Admin::Video.new
   end
 
   def edit
   end
 
   def create
-    @video = Video.new(video_params)
+    @video = Admin::Video.new(video_params)
     if @video.save
       redirect_to action: "index"
     end
@@ -34,11 +36,11 @@ class Admin::VideosController < Admin::ApplicationController
 
   private
     def set_video
-      @video = Video.find(params[:id])
+      @video = Admin::Video.find(params[:id])
     end
 
     def video_params
-      params.require(:video).permit(:name, :url)
+      params.require(:admin_video).permit(:name, :url)
     end
 
 end
