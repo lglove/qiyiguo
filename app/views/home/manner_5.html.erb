@@ -1,0 +1,266 @@
+<%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
+<section class="row">
+<header>风格测试中</header>
+<div class="mannerA col-md-2">
+  <p class="text-center left"><a href="/home/manner_4.html">Back</a></p>
+</div>
+<div class="col-md-8">
+  <div class="manner text-center slidef">
+    <h2>NO.5输入关于你的数字</h2>
+    <p class="pane">不能确定尺码？不用担心，你的设计师稍后会详细与你确认</p>
+    <form action="" method="">
+    <div class="progt">
+      <span class="drtye">身高</span>
+      <p id="slider1">
+      <span class="min">150</span>
+      <span class="max">180</span>
+      </p>
+      <span class="texter" id="texter1" name="height">150cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">体重</span>
+      <p id="slider2">
+      <span class="min">40</span>
+      <span class="max">100</span>
+      </p>
+      <span class="texter" id="texter2" name="weight">40kg</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">上衣尺码</span>
+      <p id="slider3">
+      <span class="min">XS</span>
+      <span class="min1">S</span>
+      <span class="min2">M</span>
+      <span class="max1">L</span>
+      <span class="max2">XL</span>
+      <span class="max">XXL</span>
+      </p>
+      <span class="texter" id="texter3" name="shangyichima">XS</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">腰围</span>
+      <p id="slider4">
+      <span class="min">18</span>
+      <span class="max">28</span>
+      </p>
+      <span class="texter" id="texter4" name="yaowei">18码</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">臂长</span>
+      <p id="slider5">
+      <span class="min">40</span>
+      <span class="max">80</span>
+      </p>
+      <span class="texter" id="texter5" name="bichang">40cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">肩宽</span>
+      <p id="slider6">
+      <span class="min">40</span>
+      <span class="max">60</span>
+      </p>
+      <span class="texter" id="texter6" name="jiankuan">40cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">胸围</span>
+      <p id="slider7">
+      <span class="min">55</span>
+      <span class="max">120</span>
+      </p>
+      <span class="texter" id="texter7" name="xiongwei">55cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">臂围</span>
+      <p id="slider8">
+      <span class="min">55</span>
+      <span class="max">120</span>
+      </p>
+      <span class="texter" id="texter8" name="biwei">55cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">大腿围</span>
+      <p id="slider9">
+      <span class="min">25</span>
+      <span class="max">45</span>
+      </p>
+      <span class="texter" id="texter9" name="datuiwei">25cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">裤长</span>
+      <p id="slider10">
+      <span class="min">55</span>
+      <span class="max">120</span>
+      </p>
+      <span class="texter" id="texter10" name="kuchang">55cm</span>
+    </div>
+    <div class="progt">
+      <span class="drtye">鞋码</span>
+      <p id="slider11">
+      <span class="min">34</span>
+      <span class="max">42</span>
+      </p>
+      <span class="texter" id="texter11" name="xiema">34码</span>
+    </div>
+  </form>
+  </div>
+</div>
+<div class="mannerA col-md-2">
+  <p class="text-center right"><a href="/home/manner_6.html">Next</a></p>
+</div>
+</section>
+<script>
+
+  $(function(){
+    var h=$(".manner").height();
+    $(".mannerA>p").css("margin-top",h/2+80);
+  })
+
+
+  $(function(){
+    //slider
+    var span1,slider1,span2,slider2,span3,slider3,span4,slider4,span5,slider5,span6,slider6,span7,slider7,span8,slider8,span9,slider9,span10,slider10,span11,slider11;
+    span1=$("#texter1");
+    slider1=$("#slider1");
+
+    span2=$("#texter2");
+    slider2=$("#slider2");
+
+    span3=$("#texter3");
+    slider3=$("#slider3");
+
+    span4=$("#texter4");
+    slider4=$("#slider4");
+
+    span5=$("#texter5");
+    slider5=$("#slider5");
+
+    span6=$("#texter6");
+    slider6=$("#slider6");
+
+    span7=$("#texter7");
+    slider7=$("#slider7");
+
+    span8=$("#texter8");
+    slider8=$("#slider8");
+
+    span9=$("#texter9");
+    slider9=$("#slider9");
+
+    span10=$("#texter10");
+    slider10=$("#slider10");
+
+    span11=$("#texter11");
+    slider11=$("#slider11");
+
+    slider1.slider({
+      min: 150,
+      max: 180,
+      slide:function(event,ui){
+        span1.text(ui.value+"cm");
+      }
+    })
+    span1.text(slider1.slider("value")+"cm")
+
+    slider2.slider({
+      min: 40,
+      max: 100,
+      slide:function(event,ui){
+        span2.text(ui.value+"kg");
+      }
+    })
+    span2.text(slider2.slider("value")+"kg")
+
+    slider3.slider({
+      min: 1,
+      max: 6,
+      slide:function(event,ui){
+        span3.text(ui.value);
+        if(ui.value==1){
+          span3.text("XS")
+          }else if(ui.value==2){
+          span3.text("S")
+          }else if(ui.value==3){
+          span3.text("M")
+          }else if(ui.value==4){
+          span3.text("L")
+          }else if(ui.value==5){
+          span3.text("XL")
+          }else if(ui.value==6){
+          span3.text("XXL")
+        }
+      }
+    })
+
+    slider4.slider({
+      min: 18,
+      max: 30,
+      slide:function(event,ui){
+        span4.text(ui.value+"码");
+      }
+    })
+    span4.text(slider4.slider("value")+"码")
+
+    slider5.slider({
+      min: 40,
+      max: 80,
+      slide:function(event,ui){
+        span5.text(ui.value+"cm");
+      }
+    })
+    span5.text(slider5.slider("value")+"cm")
+
+    slider6.slider({
+      min: 40,
+      max: 60,
+      slide:function(event,ui){
+        span6.text(ui.value+"cm");
+      }
+    })
+    span6.text(slider6.slider("value")+"cm")
+
+    slider7.slider({
+      min: 55,
+      max: 120,
+      slide:function(event,ui){
+        span7.text(ui.value+"cm");
+      }
+    })
+    span7.text(slider7.slider("value")+"cm")
+
+    slider8.slider({
+      min: 55,
+      max: 120,
+      slide:function(event,ui){
+        span8.text(ui.value+"cm");
+      }
+    })
+    span8.text(slider8.slider("value")+"cm")
+
+    slider9.slider({
+      min: 25,
+      max: 45,
+      slide:function(event,ui){
+        span9.text(ui.value+"cm");
+      }
+    })
+    span9.text(slider9.slider("value")+"cm")
+
+    slider10.slider({
+      min: 55,
+      max: 120,
+      slide:function(event,ui){
+        span10.text(ui.value+"cm");
+      }
+    })
+    span10.text(slider10.slider("value")+"cm")
+
+    slider11.slider({
+      min: 34,
+      max: 42,
+      slide:function(event,ui){
+        span11.text(ui.value+"码");
+      }
+    })
+    span11.text(slider11.slider("value")+"码")
+  })
+</script>

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  height: MyString
+  weight: MyString
+  clothsize: MyString
+  yaowei: MyString
+  bichang: MyString
+  jiankuan: MyString
+  xiongwei: MyString
+  datuiwei: MyString
+  kuchang: MyString
+  xiema: MyString
+
+two:
+  height: MyString
+  weight: MyString
+  clothsize: MyString
+  yaowei: MyString
+  bichang: MyString
+  jiankuan: MyString
+  xiongwei: MyString
+  datuiwei: MyString
+  kuchang: MyString
+  xiema: MyString

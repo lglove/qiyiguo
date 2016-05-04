@@ -1,0 +1,71 @@
+<%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
+<section class="row">
+<header>风格测试中</header>
+<div class="mannerA col-md-3">
+  <p class="text-center left"><a href="/home/manner_1">Back</a></p>
+</div>
+<div class="col-md-6">
+  <div class="row manner text-center">
+    <h2 class="colour">NO.2您的肤色接近一下哪种？</h2>
+    <figure class="col-md-4 col-sm-12 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner2_1.png"/>
+    </div>
+    <figcaption>白皙</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner2_2.png"/>
+    </div>
+    <figcaption>正常</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner2_2.png"/>
+    </div>
+    <figcaption>偏暗</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="mannerA col-md-3">
+  <p class="text-center right"><a id="next2" href="javascript:;">Next</a></p>
+</div>
+<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog1" role="document">
+    <div class="modal-content modal-content1">
+      <div class="modal-header modal-header1">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+      </div>
+      <div class="modal-body text-center selec">
+        <p>你有一项或多项测试风格未选择</p>
+        <a class="btn btn-danger btn-danger1 btn1" href="#" data-dismiss="modal">确定</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<script>
+  $(function(){
+    var h=$(".manner").height();
+    $(".mannerA>p").css("margin-top",h/2+80);
+
+    $("figure").each(function(i){
+      $("figure").eq(i).click(function(){
+        $(this).children(".sss").children("p").addClass("eee");
+        $(this).siblings().children(".sss").children("p").removeClass("eee");
+      })
+    })
+
+    $("#next2").click(function(){
+      if($(".sss>p").hasClass("eee")){
+        $("#next2").attr("href","/home/manner_3")
+        $("#next2").removeAttr("data-toggle data-target")
+        }else{
+        $("#next2").attr({"href":"javascript:;","data-toggle":"modal","data-target":"#myModal8"});
+      }
+    })
+  })
+</script>

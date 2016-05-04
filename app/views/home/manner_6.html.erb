@@ -1,0 +1,72 @@
+<%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
+<section class="row">
+<header>风格测试中</header>
+<div class="mannerA col-md-2">
+  <p class="text-center left"><a href="/home/manner_5.html">Back</a></p>
+</div>
+<div class="col-md-8">
+  <div class="manner text-center slidef">
+    <h2>补充信息让设计师更了解你</h2>
+    <form class="forms">
+      <input id="input1" type="text" name="name" placeholder="姓名" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='姓名'" value="" />
+      <p class="text-center" id="p1"></p>
+      <input id="input2" type="date" name="date" required="required"  value="" />
+      <p class="text-center" id="p2"></p>
+      <div class="sels">
+        <select>
+          <option>请选择</option>
+          <option>1</option>
+        </select>
+        <select>
+          <option>请选择</option>
+          <option>1</option>
+        </select>
+        <select>
+          <option>请选择</option>
+          <option>1</option>
+        </select>
+      </div>
+      <p class="text-center" id="p3"></p>
+      <input id="input3" type="text" name="address" placeholder="详细寄送地址" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='详细寄送地址'" value="" />
+      <p class="text-center" id="p4"></p>
+    </form>
+  </div>
+</div>
+<div class="mannerA col-md-2">
+  <p class="text-center right"><a href="javascirpt:;" id="next">Next</a></p>
+</div>
+</section>
+<script>
+  $(function(){
+    var h=$(".manner").height();
+    $(".mannerA>p").css("margin-top",h/2+50);
+
+    //表单验证 不怎么会写，你改一下
+    $("#next").click(function(){
+      var input1=$("#input1")
+      var input2=$("#input2")
+      var input3=$("#input3")
+      var result = false;
+      if(input1.val()==0){
+        $("#p1").text("请填写你的姓名！")
+        if(input2.val()==0){
+          $("#p2").text("请填写你的出生日期！");
+          if($("option").text("请选择")){
+            $("#p3").text("请填写你完整的省市地区信息！");
+            if(input3.val()==0){
+              $("#p4").text("请填写您的详细寄送地址，方便我们寄送！");
+              }else{
+              $("#p4").text("");
+            }
+            }else{
+            $("#p3").text("");
+          }
+          }else{
+          $("#p2").text("");
+        }
+        }else{
+        $("#p1").text("");
+      }
+    })
+  })
+</script>

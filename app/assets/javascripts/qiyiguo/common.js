@@ -1,22 +1,20 @@
-
-	
 	//第一页改变背景
 	$(document).ready(function(){
-		
+
 		var backgrounds = [];
 		var text = [];
 		var header = $('.bag1');
 		var headline = $('');
 		var index=0;
-		
+
 		backgrounds[0] = 'bag1';
 		backgrounds[1] = 'bag2';
 		backgrounds[2] = 'bag3';
-		
+
 		text[0] = '纠结半天，又没买到衣服';
 		text[1] = '买衣服太浪费时间了';
 		text[2] = '看过很多达人分享，却依然穿不好这一身';
-		
+
 		function changeBackground() {
 			index++;
 			if(index%3==0){
@@ -43,16 +41,16 @@
 			}
 		})
 	})
-	
+
 	//点击logo返回顶部
 	$(function(){
 		$("#top").click(function() {
 			$("html,body").animate({scrollTop:0}, 500);
-		}); 
+		});
 	})
-	
+
 	$(function(){
-		
+
 		//设计师页面选择设计师点击效果
 		$(".rel").each(function(index){
 			var txtr =[]
@@ -77,8 +75,8 @@
 				}
 			})
 		})
-		
-		
+
+
 		//个人中心列表切换
 		$(".liste").find("li").each(function(i){
 			$(".liste>li").eq(i).children("span").click(function(){
@@ -86,48 +84,18 @@
 				$("dt").eq(i).show().siblings().hide();
 			})
 		})
-		
+
 		//个人中心资料修改
 		$("#revise").click(function(){
 			$(".revise").hide();
 			$(".save").show();
 		})
-		
-		
-		
+		$("#infoCancel").click(function(){
+			$(".revise").show();
+			$(".save").hide();
+		})
+
+
+
 	})
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

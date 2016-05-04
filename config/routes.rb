@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
    root 'home#index'
-   get 'login', to: 'users#login'
    get 'designer', to: 'home#designer'
    get 'designervideo', to: 'home#designervideo'
    get 'explain', to: 'home#explain'
@@ -8,21 +7,68 @@ Rails.application.routes.draw do
    get 'serve', to: 'home#serve'
    get 'use', to: 'home#use'
    get 'register', to:'home#register'
+   get 'personal', to:'home#personal'
+   get 'personalAll', to:'home#personalAll'
 
-  resources :orders do
+   resources :users do
+     collection do
+       get :login
+       get :logout
+       post :info
+       post :body
+     end
+   end
+   resources :orders do
+     collection do
+       get :make_payment
+     end
+   end
+
+  resources :home do
     collection do
-      get :make_payment
+      post :mobile_register
+      get :signin
+      get :signout
+      get :welcome
+      get :manner_1
+      get :manner_2
+      get :manner_3
+      get :manner_4
+      get :manner_5
+      get :manner_6
     end
   end
-  resources :users do
-    collection do
-      get :login
-      get :logout
-    end
-  end
 
-  resources :designer
-  resources :home
+  namespace :admin do
+    root 'main#welcome'
+    resource :admins do
+      collection do
+        get :index
+        get :rights
+        post :set_right
+        get :change_password
+        post :update_password
+      end
+    end
+    resource :videos
+    resource :users do
+      collection do
+        get :index
+        post :info
+        post :bodyInfo
+      end
+    end
+    resources :orders do
+      collection do
+        get :make_payment
+      end
+    end
+    resources :designers
+    get 'main/welcome' => 'main#welcome'
+    get 'main/login' => 'main#login'
+    get 'main/logout' => 'main#logout'
+    post 'main/signin' => 'main#signin'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

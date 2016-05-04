@@ -1,0 +1,46 @@
+<%= form_tag :action=>"set_right", :id=>params[:id] do %>
+  <table class="table table-striped">
+    <% for root in Admin::Menu.roots %>
+      <tr>
+        <td class="text-left">
+          <%= check_box_tag "menu_ids[]", root.id, @admin.menu.exists?(root.id) %>
+          <label for="admin_menu_hide"><%= root.text %></label>
+        </td>
+      </tr>
+
+       <% for menu in root.children %>
+       <% next if menu.hide %>
+        <tr>
+          <td class="text-left">
+            &nbsp;&nbsp; -- 
+            <%= check_box_tag "menu_ids[]", menu.id, @admin.menu.exists?(menu.id) %>
+            <label for="admin_menu_hide"><%= menu.text %></label>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
+   
+      <td class="text-left">
+        <label class="btn btn-default" style="width:130px;">
+          <%= check_box_tag 'select_all_rights' %>全选
+        </label>
+      </td>
+      <tr>
+        <td><%= submit_tag "提交", :class=>"btn btn-primary" %></td>
+      </tr>
+  </table>
+<% end %>
+<script>
+  select_all = function() {
+    var checkboxes = $(this).closest(".table").find(":checkbox");
+    if($(this).prop("checked")){
+      checkboxes.prop("checked", true);
+      $(this).prop("checked", true);
+    } else {
+      checkboxes.prop("checked", false);
+      $(this).prop("checked", false);
+    }
+  }
+  $("#select_all_rights").click(select_all);
+</script>

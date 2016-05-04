@@ -1,0 +1,94 @@
+<%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
+<head>
+  <title>风格测试中1</title>
+</head>
+<section class="row">
+<header>风格测试中</header>
+<div class="mannerA col-md-3">
+  <p class="text-center right">您日常的着衣风格</p>
+</div>
+<div class="col-md-6">
+  <div class="row manner text-center">
+    <h2>NO.1您的着装风格接近一下哪种？</h2>
+    <figure class="col-md-4 col-sm-6 col-xs">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner1_1.png"/>
+    </div>
+    <figcaption>时尚商务</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner1_2.png"/>
+    </div>
+    <figcaption>商务休闲</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner1_3.png"/>
+    </div>
+    <figcaption>个性文艺</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner1_4.png"/>
+    </div>
+    <figcaption>休闲运动</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner1_5.png"/>
+    </div>
+    <figcaption>自信潮流</figcaption>
+    </figure>
+    <figure class="col-md-4 col-sm-6 col-xs-12">
+    <div class="sss">
+      <p></p>
+      <img src="/img/manner1_6.png"/>
+    </div>
+    <figcaption>浪漫甜美</figcaption>
+    </figure>
+  </div>
+  <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog1" role="document">
+      <div class="modal-content modal-content1">
+        <div class="modal-header modal-header1">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+        </div>
+        <div class="modal-body text-center selec">
+          <p>你有一项或多项测试风格未选择</p>
+          <a class="btn btn-danger btn-danger1 btn1" href="login.html" data-dismiss="modal">确定</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mannerA col-md-3">
+  <p class="text-center right"><a id="next1" href="javascript:;">Next</a></p>
+</div>
+</section>
+<script>
+  $(function(){
+    var h=$(".manner").height();
+    $(".mannerA>p").css("margin-top",h/2+30);
+
+    $("figure").each(function(i){
+      $("figure").eq(i).click(function(){
+        $(this).children(".sss").children("p").toggleClass("eee");
+      })
+    })
+
+    $("#next1").click(function(){
+      if($(".sss>p").hasClass("eee")){
+        $("#next1").attr("href","/home/manner_2")
+        $("#next1").removeAttr("data-toggle data-target")
+        }else{
+        $("#next1").attr({"href":"javascript:;","data-toggle":"modal","data-target":"#myModal7"});
+      }
+    })
+  })
+</script>
