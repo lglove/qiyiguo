@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504145812) do
+ActiveRecord::Schema.define(version: 20160505095854) do
 
   create_table "admin_videos", force: :cascade do |t|
     t.string   "url",        limit: 255
@@ -39,13 +39,28 @@ ActiveRecord::Schema.define(version: 20160504145812) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "price",       limit: 4
+    t.integer  "user_id",     limit: 4
     t.string   "name",        limit: 255
     t.string   "mobilephone", limit: 45
     t.string   "status",      limit: 255
     t.string   "express",     limit: 255
-    t.integer  "user_id",     limit: 4
+    t.string   "address",     limit: 255
+    t.string   "receiver",    limit: 255
+    t.string   "kuaidi_sn",   limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_id",   limit: 4
+    t.string   "amount",     limit: 255
+    t.string   "channel",    limit: 255
+    t.string   "currency",   limit: 255
+    t.string   "client_ip",  limit: 255
+    t.string   "status",     limit: 255
+    t.string   "paid_at",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "user_addresses", force: :cascade do |t|
@@ -66,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160504145812) do
     t.string   "jiankuan",     limit: 255
     t.string   "xiongwei",     limit: 255
     t.string   "datuiwei",     limit: 255
+    t.string   "biwei",        limit: 255
     t.string   "kuchang",      limit: 255
     t.string   "xiema",        limit: 255
     t.datetime "created_at",               null: false

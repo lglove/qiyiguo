@@ -21,6 +21,8 @@ Rails.application.routes.draw do
    resources :orders do
      collection do
        get :make_payment
+       post :h5_make_payment
+       post :make_order
      end
    end
 

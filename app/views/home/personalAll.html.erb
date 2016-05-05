@@ -1,10 +1,10 @@
+<%= stylesheet_link_tag    'personalAll', media: 'all', 'data-turbolinks-track' => true %>
 <style>
-  .body{
+  .bodyCss{
     font-size: 18px;
     margin-bottom: 20px;
   }
 </style>
-<%= stylesheet_link_tag    'personalAll', media: 'all', 'data-turbolinks-track' => true %>
 <section>
 <header>个人中心</header>
 <div class="container clearfloat">
@@ -25,7 +25,7 @@
     <li><span>我的体型信息</span></li>
     <li><span>账户管理</span></li>
     <li><span>我的奇衣邀请码</span></li>
-    <li><a href="/home/signout" style="color:r#A3A3A3">退出账户</a></li>
+    <li><a href="/home/signout" style="color:#A3A3A3">退出账户</a></li>
   </ul>
   </aside>
   <dl>
@@ -123,17 +123,17 @@
     <dt>
     <div class="bodyRevise">
       <h1><span><%= @user.name%></span>,你的体型信息</h1>
-      <p class="body">身高：<span><%= @user.userInfo.height%></span></p>
-      <p class="body">体重：<span><%= @user.userInfo.weight%></span></p>
-      <p class="body">上衣尺码：<span><%= @user.userInfo.shangyichima%></span></p>
-      <p class="body">腰围：<span><%= @user.userInfo.yaowei%></span></p>
-      <p class="body">臂长：<span><%= @user.userInfo.bichang%></span></p>
-      <p class="body">肩宽：<span><%= @user.userInfo.jiankuan%></span></p>
-      <p class="body">胸围：<span><%= @user.userInfo.xiongwei%></span></p>
-      <p class="body">臂围：<span><%= @user.userInfo.biwei%></span></p>
-      <p class="body">大腿围：<span><%= @user.userInfo.datuiwei%></span></p>
-      <p class="body">裤长：<span><%= @user.userInfo.kuchang%></span></p>
-      <p class="body">鞋码：<span><%= @user.userInfo.xiema%></span></p>
+      <p class="bodyCss">身高：<span><%= @user.userInfo.height%></span></p>
+      <p class="bodyCss">体重：<span><%= @user.userInfo.weight%></span></p>
+      <p class="bodyCss">上衣尺码：<span><%= @user.userInfo.shangyichima%></span></p>
+      <p class="bodyCss">腰围：<span><%= @user.userInfo.yaowei%></span></p>
+      <p class="bodyCss">臂长：<span><%= @user.userInfo.bichang%></span></p>
+      <p class="bodyCss">肩宽：<span><%= @user.userInfo.jiankuan%></span></p>
+      <p class="bodyCss">胸围：<span><%= @user.userInfo.xiongwei%></span></p>
+      <p class="bodyCss">臂围：<span><%= @user.userInfo.biwei%></span></p>
+      <p class="bodyCss">大腿围：<span><%= @user.userInfo.datuiwei%></span></p>
+      <p class="bodyCss">裤长：<span><%= @user.userInfo.kuchang%></span></p>
+      <p class="bodyCss">鞋码：<span><%= @user.userInfo.xiema%></span></p>
       <input class="btn btn1 btn-danger btn-danger1 amend" type="button" id="bodyRevise" value="修改" />
     </div>
     <form class="bodySave" action="/users/body" action="get" style="display: none">
@@ -387,7 +387,7 @@
         </tr>
         <tr colspan="4">
           <td class="text-center">
-            <a class="btn btn1 btn-danger btn-danger1 pad" data-toggle="modal" data-target="#myModal4" onclick="make_order();" >确认需要（去支付）</a>
+            <a class="btn btn1 btn-danger btn-danger1 pad" data-toggle="modal" data-target="#myModal4" id ="make_order()" onclick="make_order();"  >确认需要（去支付）</a>
             <a class="btn btn1 btn-danger btn-danger1 pat" data-dismiss="modal" id="qiyiguo">暂不需要</a>
           </td>
         </tr>
@@ -401,9 +401,9 @@
           </div>
           <div class="modal-body">
             <h4 class="No">订单编号：</h4>
-            <p class="text-center"><img src="img/Image 001.png"/></p>
+            <p class="text-center" id="qrcodeTable" style="padding-left:130px"></p>
             <p class="text-center Noa">打开支付宝，扫码完成支付</p>
-            <p class="text-center Noa"><a class="btn btn1 btn-danger btn-danger1">完成支付</a></p>
+            <p class="text-center Noa"><a data-dismiss="modal" class="btn btn1 btn-danger btn-danger1">完成支付</a></p>
           </div>
         </div>
       </div>
@@ -427,27 +427,11 @@
 </section>
 <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=你的appkey"></script>
 <script>
-  $("#getMore").click(function(){
+  $("#make_order").click(function(){
     $.ajax({
       type : "POST",
-      url : "/users/make_payment",
-      data : {"page":page,"brand":brand,"category":category,"key":key},
+      url : "/orders/make_order",
       success: function(data){
-        if (data['products']!= '') {
-          var html_str = '';
-          $.each(data['products'],function(n,value){
-
-            html_str += '<a href="show/'+value.id+'"><li class="col-xs-6" style="padding:0;margin-top:15px;"><div style="margin-right:15px; border:1px solid #f0f0f0;"><img src="'+ value.source_url+'@!thumb200" class="img-responsive;" style="width:100%;margin-bottom:0.4em;"><p class="hottitle" style="padding:0 0.3em;">'+ value.name+'</p><p style="color:#3ccc85;padding:0 0.3em;">&#165;'+value.price+'</p></div></li></a>';
-          })
-
-          $("#ts").append(html_str);
-          $("#page").val(parseInt(page)+1);
-
-        }else{
-          //$("#getMore").removeAttr('onclick');
-          $("#getMore").unbind("click");
-          $("#getMore").text("没数据了");
-        }
       }
     });
   });
@@ -632,5 +616,19 @@
     })
     span11.text(slider11.slider("value")+"码")
   })
-
 </script>
+  <script type="text/javascript" src="/src/jquery.qrcode.js"></script>
+  <script type="text/javascript" src="/src/qrcode.js"></script>
+
+  <script>
+    //jQuery('#qrcode').qrcode("this plugin is great");
+    jQuery('#qrcodeTable').qrcode({
+      render  : "table",
+      text  : "http://uubpay.com",
+      width   : "175",
+      height  : "165"
+    });
+    jQuery('#qrcodeCanvas').qrcode({
+      text  : "http://uubpay.com"
+    });
+  </script>

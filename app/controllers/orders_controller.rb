@@ -1,28 +1,21 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery :except => :h5_make_payment
 
-  # GET /orders
-  # GET /orders.json
   def index
     @orders = Order.all
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
   def show
   end
 
-  # GET /orders/new
   def new
     @order = Order.new
   end
 
-  # GET /orders/1/edit
   def edit
   end
 
-  # POST /orders
-  # POST /orders.json
   def create
     @order = Order.new(order_params)
 
@@ -37,8 +30,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
       if @order.update(order_params)
@@ -51,22 +42,87 @@ class OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
+  def make_order
+    order = Order.new
+    order.user_id = @user.id
+    order.name = @user.name+"的果子"
+    order.price = 500
+    order.address = @user.userAddress.address
+    if order.save
+    render json: {code: "ok", text: "请付款", price: 500, order_id: order.id}
+    else
+    render json: {code: "false", text: "生成订单失败"}
+    end
+  end
+
   def make_payment
+    payment = Payment.find_by_order_id(params[:order_id])
+    payment = Payment.new if !payment
+    payment.order_id = params[:order_id]
+    payment.amount = 500
+    payment.channel = 'alipay_qr'
+    payment.currency = "cny"
+    payment.client_ip = "127.0.0.1"
+
+    payment.save
+
+    order = Order.find(params[:order_id])
 
 		res = Pingpp::Charge.create(
-	        :order_no => '20164122344',
-	        :amount   => 100,
-	        :subject  => 'test ping++',
-	        :body     => "付款购买",
-	        :channel  => 'alipay_qr',
-	        :currency => 'cny',
-	        :client_ip=> '127.0.0.1',
+	        :order_no => payment.order_id,
+	        :amount   => payment.amount.to_i*100, #以分为单位
+	        :subject  => order.name,
+	        :body     => "#{order.user.name}奇衣果定金",
+	        :channel  => payment.channel,
+	        :currency => payment.currency,
+	        :client_ip=> payment.client_ip,
 	        :app => {:id => "app_GS4SSCKebTCSfTGu"}
 	    )
 
         render :text=>res
+  end
+
+  def h5_make_payment
+    payment = Payment.find_by_order_id(params[:order_no])
+    payment = Payment.new if !payment
+    payment.order_id = params[:order_no]
+    payment.amount = params[:amount]
+    payment.channel = params[:channel]
+    payment.status = params[:body]
+    payment.currency = params[:currency] || "cny"
+    payment.client_ip = params[:client_ip] || "127.0.0.1"
+
+    payment.save
+
+
+    res = Pingpp::Charge.create(
+      :order_no => payment.order_id,
+      :amount   => payment.amount.to_i*100, #以分为单位
+      :subject  => order.name,
+      :body     => "#{order.user.name}奇衣果定金",
+      :channel  => payment.channel,
+      :currency => payment.currency,
+      :client_ip=> payment.client_ip,
+      :app => {:id => "app_GS4SSCKebTCSfTGu"}
+    )
+
+    render :text=>res
+  end
+
+
+  #ping++的回调网址
+  def notify
+    payment = Payment.find_by_order_id(params[:data][:object][:order_id])
+    if params[:type] == "charge.successed"
+      payment.status = 'paid'
+      payment.paid_at = params[:created]
+      payment.save
+
+      order = Order.find(params[:data][:object][:order_id])
+      order.status = "待发货"
+      order.save
+    end
+    render :text=>"ok"
   end
 
   def destroy
@@ -78,13 +134,11 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.fetch(:order, {})
+      params.require(:order).permit(:name, :user_id, :price)
     end
 end
