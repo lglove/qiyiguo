@@ -14,23 +14,21 @@
   <tbody>
     <tr>
       <th class="text-center">ID</th>
-      <th class="text-center">邮箱</th>
       <th class="text-center">姓名</th>
+      <th class="text-center">邮箱</th>
       <th class="text-center">创建时间</th>
-      <th class="text-center" colspan="4">操作</th>
+      <th class="text-center" colspan="3">操作</th>
     </tr>
     <% @admin_users.each do |admin| %>
       <tr>
-        <td class="text-center"><%= link_to admin.id, admin_admins_path(admin) %></td>
-        <td class="text-center"><%= admin.email %></td>
+        <td class="text-center"><%= admin.id%></td>
         <td class="text-center"><%= admin.name %></td>
+        <td class="text-center"><%= admin.email %></td>
         <td class="text-center"><%= admin.created_at.to_date %></td>
         <td class="text-center">
           <%= link_to '编辑',{:action=>'edit', :id=>admin.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
-        <td class="text-center"> <%= link_to '权限', {:action=>"rights", :id=>admin.id}, :class => 'btn btn-default' %></td>
         <td class="text-center"> <%= link_to '删除',
-                      admin_admins_path(admin),
-                      :method => :delete,
+                      {:action=>'shanchu', :id=>admin.id},
                       :data => { :confirm => '你确定删除?' },
                       :class => 'btn btn-danger' %>
         </td>

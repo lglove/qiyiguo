@@ -20,9 +20,12 @@ Rails.application.routes.draw do
    end
    resources :orders do
      collection do
-       get :make_payment
+       get :payment
+       post :make_payment
        post :h5_make_payment
-       post :make_order
+       get :make_order
+       get :cancel_order
+       post :notify
      end
    end
 
@@ -50,6 +53,7 @@ Rails.application.routes.draw do
         post :set_right
         get :change_password
         post :update_password
+        get :shanchu
       end
     end
     resource :users do
@@ -57,22 +61,26 @@ Rails.application.routes.draw do
         get :index
         post :info
         post :body
+        get :shanchu
       end
     end
     resource :orders do
       collection do
         get :index
         get :make_payment
+        get :shanchu
       end
     end
     resource :videos do
       collection do
         get :index
+        get :shanchu
       end
     end
     resource :designers do
       collection do
         get :index
+        get :shanchu
       end
     end
     get 'main/welcome' => 'main#welcome'

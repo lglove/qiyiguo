@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery :except => :h5_make_payment
+  protect_from_forgery :except => [:h5_make_payment, :make_payment]
 
   def index
     @orders = Order.all
@@ -43,8 +43,13 @@ class OrdersController < ApplicationController
   end
 
   def make_order
+    order = User.find(params[:id]).orders.last
+    if order && order.paid != "已支付"
+      flash[:notice] = "你有尚未支付的果子"
+    else
     order = Order.new
     order.user_id = @user.id
+    order.order_number = Time.now + @user.id
     order.name = @user.name+"的果子"
     order.price = 500
     order.address = @user.userAddress.address
@@ -53,60 +58,98 @@ class OrdersController < ApplicationController
     else
     render json: {code: "false", text: "生成订单失败"}
     end
+    end
+  end
+
+  def cancel_order
+    order = User.find(params[:id]).orders.last
+    order.destroy
+    redirect_to controller: "home", action: "personalAll"
   end
 
   def make_payment
-    payment = Payment.find_by_order_id(params[:order_id])
-    payment = Payment.new if !payment
-    payment.order_id = params[:order_id]
-    payment.amount = 500
-    payment.channel = 'alipay_qr'
-    payment.currency = "cny"
-    payment.client_ip = "127.0.0.1"
+    @user = User.find(params[:id])
+    #order = Order.find_by_user_id(@user.id)
+    order = @user.orders.last
+    puts "order#{order.inspect}"
+    if order && order.paid != "已支付"
+      flash[:notice]="您有尚未支付的果子"
+      render json: {code: "false", text: "生成订单失败"}
+    else
+      order = Order.new
+      order.user_id = @user.id || 2
+      order.name = @user.name+"的果子" || "cehsi"
+      order.price = 500
+      #order.address = @user.userAddress.to_ary[0]["address"] || "decjiai"
+      order.address = "decji"
+      puts "创建订单"
+      if order.save
+        payment = Payment.find_by_order_id(order.id)
+        payment = Payment.new if !payment
+        payment.order_id = order.id
+        payment.amount = 500
+        payment.channel = 'alipay_qr'
+        payment.currency = "cny"
+        payment.client_ip = "127.0.0.1"
 
-    payment.save
+        payment.save
 
-    order = Order.find(params[:order_id])
+        order = Order.find(order.id)
 
-		res = Pingpp::Charge.create(
-	        :order_no => payment.order_id,
-	        :amount   => payment.amount.to_i*100, #以分为单位
-	        :subject  => order.name,
-	        :body     => "#{order.user.name}奇衣果定金",
-	        :channel  => payment.channel,
-	        :currency => payment.currency,
-	        :client_ip=> payment.client_ip,
-	        :app => {:id => "app_GS4SSCKebTCSfTGu"}
-	    )
+        res = Pingpp::Charge.create(
+          :order_no => payment.order_id,
+          :amount   => payment.amount.to_i*100, #以分为单位
+          :subject  => order.name,
+          :body     => "#{order.user.name}奇衣果定金",
+          :channel  => payment.channel,
+          :currency => payment.currency,
+          :client_ip=> payment.client_ip,
+          :app => {:id => "app_GS4SSCKebTCSfTGu"}
+        )
+        puts "ppp#{res}"
+        puts res["credential"]["alipay_qr"]
+        render json: {data: res["credential"]["alipay_qr"]}
+      else
+        render json: {code: "false", text: "生成订单失败"}
+      end
+    end
+  end
 
-        render :text=>res
+  def payment
+    render :layout=>false
   end
 
   def h5_make_payment
     payment = Payment.find_by_order_id(params[:order_no])
     payment = Payment.new if !payment
     payment.order_id = params[:order_no]
-    payment.amount = params[:amount]
+    payment.amount = 500
     payment.channel = params[:channel]
     payment.status = params[:body]
+    payment.result_url = params[:result_url]
+    payment.success_url = params[:success_url]
+    payment.cancel_url = params[:cancel_url]
     payment.currency = params[:currency] || "cny"
     payment.client_ip = params[:client_ip] || "127.0.0.1"
 
     payment.save
 
 
-    res = Pingpp::Charge.create(
-      :order_no => payment.order_id,
-      :amount   => payment.amount.to_i*100, #以分为单位
-      :subject  => order.name,
-      :body     => "#{order.user.name}奇衣果定金",
-      :channel  => payment.channel,
-      :currency => payment.currency,
-      :client_ip=> payment.client_ip,
-      :app => {:id => "app_GS4SSCKebTCSfTGu"}
-    )
+    #res = Pingpp::Charge.create(
+    #  :order_no => payment.order_id,
+    #  :amount   => payment.amount.to_i*100, #以分为单位
+    #  :subject  => "order.name",
+    #  :body     => "奇衣果定金",
+    #  :channel  => payment.channel,
+    #  :currency => payment.currency,
+    #  :client_ip=> payment.client_ip,
+    #  :app => {:id => "app_GS4SSCKebTCSfTGu"},
+    #  :extra =>{:success_url=> payment.success_url, :cancel_url=>payment.cancel_url}
+    #)
 
-    render :text=>res
+    puts "=======#{res.inspect}"
+    #render :json=>res
+    render :json=>"ok"
   end
 
 
@@ -119,6 +162,7 @@ class OrdersController < ApplicationController
       payment.save
 
       order = Order.find(params[:data][:object][:order_id])
+      order.paid = "paid"
       order.status = "待发货"
       order.save
     end

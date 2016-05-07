@@ -14,6 +14,7 @@
     <tr>
       <th class="text-center">ID</th>
       <th class="text-center">名称</th>
+      <th class="text-center">封面图</th>
       <th class="text-center">链接</th>
       <th class="text-center">创建时间</th>
       <th class="text-center" colspan="3">操作</th>
@@ -22,13 +23,13 @@
       <tr>
         <td class="text-center"><%= video.id %></td>
         <td class="text-center"><%= video.name %></td>
+        <td class="text-center"><%=image_tag video.logo, class: "image"%></td>
         <td class="text-center"><%= video.url %></td>
         <td class="text-center"><%= video.created_at.to_date %></td>
         <td class="text-center">
           <%= link_to '编辑',{:action=>'edit', :id=>video.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
         <td class="text-center"> <%= link_to '删除',
-                      admin_videos_path(video),
-                      :method => :delete,
+                      {:action=>'shanchu', :id=>video.id},
                       :data => { :confirm => '你确定删除?' },
                       :class => 'btn btn-danger' %>
         </td>

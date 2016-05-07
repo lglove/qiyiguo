@@ -8,7 +8,8 @@
   <div class="manner text-center slidef">
     <h2>NO.5输入关于你的数字</h2>
     <p class="pane">不能确定尺码？不用担心，你的设计师稍后会详细与你确认</p>
-    <form action="" method="">
+    <form action="/users/body" method="get">
+      <input name="from" value="manner" style="display:none" />
     <div class="progt">
       <span class="drtye">身高</span>
       <p id="slider1">
@@ -16,6 +17,7 @@
       <span class="max">180</span>
       </p>
       <span class="texter" id="texter1" name="height">150cm</span>
+        <input class="texter" id="input1" name="height" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">体重</span>
@@ -24,6 +26,7 @@
       <span class="max">100</span>
       </p>
       <span class="texter" id="texter2" name="weight">40kg</span>
+        <input class="texter" id="input2" name="weight" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">上衣尺码</span>
@@ -36,6 +39,7 @@
       <span class="max">XXL</span>
       </p>
       <span class="texter" id="texter3" name="shangyichima">XS</span>
+        <input class="texter" id="input3" name="shangyichima" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">腰围</span>
@@ -44,6 +48,7 @@
       <span class="max">28</span>
       </p>
       <span class="texter" id="texter4" name="yaowei">18码</span>
+        <input class="texter" id="input4" name="yaowei" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">臂长</span>
@@ -52,6 +57,7 @@
       <span class="max">80</span>
       </p>
       <span class="texter" id="texter5" name="bichang">40cm</span>
+        <input class="texter" id="input5" name="bichang" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">肩宽</span>
@@ -60,6 +66,7 @@
       <span class="max">60</span>
       </p>
       <span class="texter" id="texter6" name="jiankuan">40cm</span>
+        <input class="texter" id="input6" name="jiankuan" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">胸围</span>
@@ -68,6 +75,7 @@
       <span class="max">120</span>
       </p>
       <span class="texter" id="texter7" name="xiongwei">55cm</span>
+        <input class="texter" id="input7" name="xiongwei" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">臂围</span>
@@ -76,6 +84,7 @@
       <span class="max">120</span>
       </p>
       <span class="texter" id="texter8" name="biwei">55cm</span>
+        <input class="texter" id="input8" name="biwei" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">大腿围</span>
@@ -84,6 +93,7 @@
       <span class="max">45</span>
       </p>
       <span class="texter" id="texter9" name="datuiwei">25cm</span>
+        <input class="texter" id="input9" name="datuiwei" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">裤长</span>
@@ -92,6 +102,7 @@
       <span class="max">120</span>
       </p>
       <span class="texter" id="texter10" name="kuchang">55cm</span>
+        <input class="texter" id="input10" name="kuchang" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">鞋码</span>
@@ -100,7 +111,9 @@
       <span class="max">42</span>
       </p>
       <span class="texter" id="texter11" name="xiema">34码</span>
+        <input class="texter" id="input11" name="xiema" value='' type="hidden" ></input>
     </div>
+      <button type="submit" style=" display: inline-block; width: 85px;height: 100%;background-color: #000;color: #fff;">提交</button>
   </form>
   </div>
 </div>
@@ -121,42 +134,54 @@
     var span1,slider1,span2,slider2,span3,slider3,span4,slider4,span5,slider5,span6,slider6,span7,slider7,span8,slider8,span9,slider9,span10,slider10,span11,slider11;
     span1=$("#texter1");
     slider1=$("#slider1");
+    input1=$("#input1")
 
     span2=$("#texter2");
     slider2=$("#slider2");
+    input2=$("#input2")
 
     span3=$("#texter3");
     slider3=$("#slider3");
+    input3=$("#input3")
 
     span4=$("#texter4");
     slider4=$("#slider4");
+    input4=$("#input4")
 
     span5=$("#texter5");
     slider5=$("#slider5");
+    input5=$("#input5")
 
     span6=$("#texter6");
     slider6=$("#slider6");
+    input6=$("#input6")
 
     span7=$("#texter7");
     slider7=$("#slider7");
+    input7=$("#input7")
 
     span8=$("#texter8");
     slider8=$("#slider8");
+    input8=$("#input8")
 
     span9=$("#texter9");
     slider9=$("#slider9");
+    input9=$("#input9")
 
     span10=$("#texter10");
     slider10=$("#slider10");
+    input10=$("#input10")
 
     span11=$("#texter11");
     slider11=$("#slider11");
+    input11=$("#input11")
 
     slider1.slider({
       min: 150,
       max: 180,
       slide:function(event,ui){
         span1.text(ui.value+"cm");
+        input1.val(ui.value);
       }
     })
     span1.text(slider1.slider("value")+"cm")
@@ -166,6 +191,7 @@
       max: 100,
       slide:function(event,ui){
         span2.text(ui.value+"kg");
+        input2.val(ui.value);
       }
     })
     span2.text(slider2.slider("value")+"kg")
@@ -175,6 +201,7 @@
       max: 6,
       slide:function(event,ui){
         span3.text(ui.value);
+        input3.val(ui.value);
         if(ui.value==1){
           span3.text("XS")
           }else if(ui.value==2){
@@ -196,6 +223,7 @@
       max: 30,
       slide:function(event,ui){
         span4.text(ui.value+"码");
+        input4.val(ui.value);
       }
     })
     span4.text(slider4.slider("value")+"码")
@@ -205,6 +233,7 @@
       max: 80,
       slide:function(event,ui){
         span5.text(ui.value+"cm");
+        input5.val(ui.value);
       }
     })
     span5.text(slider5.slider("value")+"cm")
@@ -214,6 +243,7 @@
       max: 60,
       slide:function(event,ui){
         span6.text(ui.value+"cm");
+        input6.val(ui.value);
       }
     })
     span6.text(slider6.slider("value")+"cm")
@@ -223,6 +253,7 @@
       max: 120,
       slide:function(event,ui){
         span7.text(ui.value+"cm");
+        input7.val(ui.value);
       }
     })
     span7.text(slider7.slider("value")+"cm")
@@ -232,6 +263,7 @@
       max: 120,
       slide:function(event,ui){
         span8.text(ui.value+"cm");
+        input8.val(ui.value);
       }
     })
     span8.text(slider8.slider("value")+"cm")
@@ -241,6 +273,7 @@
       max: 45,
       slide:function(event,ui){
         span9.text(ui.value+"cm");
+        input9.val(ui.value);
       }
     })
     span9.text(slider9.slider("value")+"cm")
@@ -250,6 +283,7 @@
       max: 120,
       slide:function(event,ui){
         span10.text(ui.value+"cm");
+        input10.val(ui.value);
       }
     })
     span10.text(slider10.slider("value")+"cm")
@@ -259,6 +293,7 @@
       max: 42,
       slide:function(event,ui){
         span11.text(ui.value+"码");
+        input11.val(ui.value);
       }
     })
     span11.text(slider11.slider("value")+"码")

@@ -50,9 +50,8 @@
     </div>
     </nav>
 
-    <div class="container">
       <% if notice %>
-        <div class="alert alert-success"><%= notice %></div>
+        <div class="alert alert-success" style="position: relative; top:60px; text-align:center;"><%= notice %></div>
       <%end%>
       <%= yield %>
 
@@ -67,4 +66,3 @@
   </footer>
   </body>
 </html>
-

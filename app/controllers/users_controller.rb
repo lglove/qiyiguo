@@ -48,11 +48,12 @@ class UsersController < ApplicationController
       address = UserAddress.new
       address.user_id = user.id
     end
+    params[:mail_address] = params[:shengshi]+params[:mail_address] if params[:shengshi].present?
     address.name = params[:mail_name] if params[:mail_name].present?
     address.address = params[:mail_address] if params[:mail_address].present?
     address.save
 
-    redirect_to controller: "home", action: "personalAll"
+      redirect_to controller: "home", action: "personalAll"
   end
 
   def body
@@ -74,7 +75,11 @@ class UsersController < ApplicationController
     bodyInfo.xiema = params[:xiema] if params[:xiema].present?
     bodyInfo.save
 
-    redirect_to controller: "home", action: "personalAll"
+    if params[:from]=="manner"
+      redirect_to controller: "home", action: "manner_6"
+    else
+      redirect_to controller: "home", action: "personalAll"
+    end
   end
 
   def create

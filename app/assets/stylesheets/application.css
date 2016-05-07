@@ -13,3 +13,8 @@
  *= require bootstrap.min
  *= require_self
  */
+
+.image{
+  width:100px;
+  height:100px;
+}

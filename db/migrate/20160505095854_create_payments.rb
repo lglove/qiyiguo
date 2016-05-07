@@ -8,6 +8,9 @@ class CreatePayments < ActiveRecord::Migration
       t.string :client_ip
       t.string :status
       t.string :paid_at
+      t.string :result_url
+      t.string :success_url
+      t.string :cancel_url
 
       t.timestamps null: false
     end

@@ -31,8 +31,7 @@
         <td class="text-center">
           <%= link_to '编辑',{:action=>'edit', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
         <td class="text-center"> <%= link_to '删除',
-                      admin_orders_path(order),
-                      :method => :delete,
+                      {:action=>'shanchu', :id=>order.id},
                       :data => { :confirm => '你确定删除?' },
                       :class => 'btn btn-danger' %>
         </td>

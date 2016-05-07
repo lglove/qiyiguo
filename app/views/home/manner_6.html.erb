@@ -7,10 +7,10 @@
 <div class="col-md-8">
   <div class="manner text-center slidef">
     <h2>补充信息让设计师更了解你</h2>
-    <form class="forms">
+    <form class="forms" action="/users/info" method="post">
       <input id="input1" type="text" name="name" placeholder="姓名" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='姓名'" value="" />
       <p class="text-center" id="p1"></p>
-      <input id="input2" type="date" name="date" required="required"  value="" />
+      <input id="input2" type="date" name="birthday" required="required"  value="" />
       <p class="text-center" id="p2"></p>
       <!--div class="sels">
         <select>
@@ -28,13 +28,14 @@
       </div-->
       <input class="sels" id="input3" type="text" name="shengshi" placeholder="输入地址：例如北京市朝阳区" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='输入地址:例如北京市朝阳区'" value="" />
       <p class="text-center" id="p3"></p>
-      <input id="input4" type="text" name="address" placeholder="详细寄送地址" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='详细寄送地址'" value="" />
+      <input id="input4" type="text" name="mail_address" placeholder="详细寄送地址" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='详细寄送地址'" value="" />
       <p class="text-center" id="p4"></p>
+      <button type="submit" style=" display: inline-block; width: 85px;height: 100%;background-color: #000;color: #fff;">提交</button>
     </form>
   </div>
 </div>
 <div class="mannerA col-md-2">
-  <p class="text-center right"><a href="/personalAll" id="next">Next</a></p>
+  <p class="text-center right"><a href="/personalAll"  id="next">Next</a></p>
 </div>
 </section>
 <script>
@@ -47,25 +48,30 @@
       var input1=$("#input1")
       var input2=$("#input2")
       var input3=$("#input3")
-      var result = false;
+      var input4=$("#input4")
+      var result = true;
       if(input1.val()==0){
         $("#p1").text("请填写你的姓名！")
         if(input2.val()==0){
           $("#p2").text("请填写你的出生日期！");
-          if($("option").text("请选择")){
+          if($(input4.val()==0)){
             $("#p3").text("请填写你完整的省市地区信息！");
             if(input3.val()==0){
               $("#p4").text("请填写您的详细寄送地址，方便我们寄送！");
-              }else{
+            }
+            else{
               $("#p4").text("");
             }
-            }else{
+          }
+          else{
             $("#p3").text("");
           }
-          }else{
+        }
+        else{
           $("#p2").text("");
         }
-        }else{
+      }
+      else{
         $("#p1").text("");
       }
     })

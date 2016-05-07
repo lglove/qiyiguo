@@ -1,12 +1,20 @@
 # -*- encoding : utf-8 -*-
 class Admin::DesignersController < Admin::ApplicationController
   layout "admin"
-  before_action :set_designer, only: [:show, :edit, :update, :destroy]
+  before_action :set_designer, only: [:show, :edit,:shanchu, :update, :destroy]
 
   def index
     @admin_designers = Designer.page(params[:page] ||1)
                          .where(["name like ? and mobilephone like ?", "%#{params[:name]}%", "%#{params[:mobilephone]}%"])
                          .order("id desc")
+  end
+
+  def shanchu
+    @designer.destroy
+    respond_to do |format|
+      format.html { redirect_to  :action=>'index', :page=>params[:page]}
+      flash[:notice]= '删除了一条信息.'
+    end
   end
 
   def new
@@ -17,7 +25,6 @@ class Admin::DesignersController < Admin::ApplicationController
   end
 
   def create
-    designer_params["password"] = Admin.md5("#{designer_params["password"]}")
     @designer = Designer.new(designer_params)
     if @designer.save
       redirect_to action: "index"
@@ -25,7 +32,6 @@ class Admin::DesignersController < Admin::ApplicationController
   end
 
   def update
-    designer_params["password"] = Admin.md5("#{designer_params["password"]}")
     if @designer.update(designer_params)
       redirect_to action: "index"
     end
@@ -42,7 +48,7 @@ class Admin::DesignersController < Admin::ApplicationController
     end
 
     def designer_params
-      params.require(:designer).permit(:name, :email, :password, :mobilephone, :description)
+      params.require(:designer).permit(:name, :sex, :email,:logo, :mobilephone, :description)
     end
 
 end

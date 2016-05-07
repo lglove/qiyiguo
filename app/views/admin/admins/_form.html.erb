@@ -16,16 +16,16 @@
 
   <table class="table table-bordered table-striped">
   <tr>
-    <td class="text-right"><label for="admin_admin_email">邮箱:</label></td>
+    <td class="text-right"><label for="admin_email">邮箱:</label></td>
     <td><%= f.text_field :email, :class => 'form-control' %></td>
     <%= hidden_field_tag :id, "#{@admin_user.id}"%>
   </tr>
   <tr>
-    <td class="text-right"><label for="admin_admin_name">姓名:</label></td>
+    <td class="text-right"><label for="admin_name">姓名:</label></td>
     <td><%= f.text_field :name, :class => 'form-control' %></td>
   <tr>
   </tr>
-    <td class="text-right"><label for="admin_admin_password">密码:</label></td>
+    <td class="text-right"><label for="admin_password">密码:</label></td>
     <td><%= f.password_field :password, :class => 'form-control' %></td>
   </tr>
   <tr>
@@ -36,3 +36,23 @@
   </tr>
 </table>
 <% end %>
+<script>
+  $(function() {
+    $("form").validate({
+      rules: {
+        "admin[name]": "required",
+        "admin[email]": {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        "admin[name]": "请输入姓名",
+        "admin[email]": {
+          required: "请输入Email地址",
+          email: "请输入正确的email地址"
+        }
+      }
+    });
+  });
+</script>

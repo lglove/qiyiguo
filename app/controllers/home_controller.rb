@@ -1,17 +1,20 @@
 class HomeController < ApplicationController
-  layout "home"
+  #layout "home"
 
   before_filter :check_login, :only => ["manner_1","personalAll"]
   before_filter :get_login_user
   protect_from_forgery :except => :mobile_register
 
   def index
+    render :layout=>false
   end
 
   def designer
+    @designers = Designer.all
   end
 
   def designervideo
+    @video = Admin::Video.all
   end
 
   def explain
@@ -40,6 +43,10 @@ class HomeController < ApplicationController
 
   def personalAll
     @user = User.find(session[:user_id])
+    if params[:designer_id]
+      @user.designer_id = params[:designer_id]
+      @user.save
+    end
     @address = UserAddress.find_by_user_id(@user.id)
   end
 
@@ -50,6 +57,17 @@ class HomeController < ApplicationController
   end
 
   def use
+    if params[:order] == "yes"
+      @order = Order.find_by_user_id(2)
+      unless @order
+        @order = Order.new
+        @order.user_id = 2
+        @order.name = "测试的果子"
+        @order.price = 500
+        @order.address = "呼家楼"
+        @order.save
+      end
+    end
   end
 
   def welcome
@@ -77,7 +95,7 @@ class HomeController < ApplicationController
       UserInfo.create(user_id: user.id)
 
       session[:user_id] = user.id
-      redirect_to action: "welcome"
+      redirect_to "/home/personalAll?form=welcome"
     else
       flash[:notice] = "该手机号已经注册"
       redirect_to action: "register"

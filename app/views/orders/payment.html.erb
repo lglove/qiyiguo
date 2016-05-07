@@ -1,0 +1,32 @@
+    <%= stylesheet_link_tag    'home_application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<p class="text-center" id="qrcodeTable" style="padding-left:130px">ajalajiaji</p>
+<p class="text-center" id="qrcodeCanvas" style="padding-left:130px">ajalajiaji</p>
+<button id="make_order">求点击</button>
+<input id="user_id" style="display:none" value='5'/>
+<script type="text/javascript" src="/src/jquery.qrcode.js"></script>
+<script type="text/javascript" src="/src/qrcode.js"></script>
+<script>
+  $("#make_order").click(function(){
+    var id=$("#user_id").val();
+    $.ajax({
+      type : "POST",
+      url : "/orders/make_payment",
+      data: {"id":id},
+      success: function(data){
+        console.info(data);
+        var http=data["data"];
+        alert(http);
+        jQuery('#qrcodeTable').qrcode({
+          render  : "table",
+          text    : http,
+          width   : "175",
+          height  : "165"
+        });
+        jQuery('#qrcodeCanvas').qrcode({
+          text  : http
+        });
+      }
+    });
+  });
+</script>

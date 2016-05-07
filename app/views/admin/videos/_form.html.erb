@@ -21,6 +21,10 @@
     <%= hidden_field_tag :id, "#{@video.id}"%>
   </tr>
   <tr>
+    <td class="text-right"><label for="admin_admin_name">封面图:</label></td>
+    <td><%= f.file_field :logo, :class => 'form-control' %></td>
+  <tr>
+  <tr>
     <td class="text-right"><label for="admin_admin_name">链接:</label></td>
     <td><%= f.text_field :url, :class => 'form-control' %></td>
   </tr>
@@ -32,3 +36,21 @@
   </tr>
 </table>
 <% end %>
+<script>
+  $(function() {
+    $("form").validate({
+      rules: {
+        "admin_video[name]": "required",
+        "admin_video[url]": {
+          required: true,
+        }
+      },
+      messages: {
+        "admin_video[name]": "请输入名称",
+        "admin_video[url]": {
+          required: "请输入视频地址",
+        }
+      }
+    });
+  });
+</script>

@@ -15,6 +15,8 @@
     <tr>
       <th class="text-center">ID</th>
       <th class="text-center">姓名</th>
+      <th class="text-center">头像</th>
+      <th class="text-center">性别</th>
       <th class="text-center">电话</th>
       <th class="text-center">描述</th>
       <th class="text-center">创建时间</th>
@@ -24,14 +26,15 @@
       <tr>
         <td class="text-center"><%= designer.id %></td>
         <td class="text-center"><%= designer.name %></td>
+        <td class="text-center"><img src="<%= designer.logo%>" class="image" ></td>
+        <td class="text-center"><%= designer.sex %></td>
         <td class="text-center"><%= designer.mobilephone %></td>
         <td class="text-center"><%= truncate designer.description, :length=>200 %></td>
         <td class="text-center"><%= designer.created_at.to_date %></td>
         <td class="text-center">
           <%= link_to '编辑',{:action=>'edit', :id=>designer.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
         <td class="text-center"> <%= link_to '删除',
-                      admin_designers_path(designer),
-                      :method => :delete,
+                      {:action=>'shanchu', :id=>designer.id},
                       :data => { :confirm => '你确定删除?' },
                       :class => 'btn btn-danger' %>
         </td>

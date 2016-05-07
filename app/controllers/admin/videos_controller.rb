@@ -1,12 +1,20 @@
 # -*- encoding : utf-8 -*-
 class Admin::VideosController < Admin::ApplicationController
   layout "admin"
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [:show, :edit, :shanchu, :update, :destroy]
 
   def index
     @admin_videos = Admin::Video.page(params[:page] ||1)
                          .where(["name like ?", "%#{params[:name]}%"])
                          .order("id desc")
+  end
+
+  def shanchu
+    @video.destroy
+    respond_to do |format|
+      format.html { redirect_to  :action=>'index', :page=>params[:page]}
+      flash[:notice]= '删除了一条信息.'
+    end
   end
 
   def new
@@ -40,7 +48,7 @@ class Admin::VideosController < Admin::ApplicationController
     end
 
     def video_params
-      params.require(:admin_video).permit(:name, :url)
+      params.require(:admin_video).permit(:name,:logo,:url)
     end
 
 end

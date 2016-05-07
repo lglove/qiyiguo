@@ -9,14 +9,14 @@
 <header>个人中心</header>
 <div class="container clearfloat">
   <aside>
-  <p>你的专属设计师：<span>果果</span></p>
+  <p>你的专属设计师：<span><%= @user.designer.name%></span></p>
   <figure>
   <div class="pare" data-toggle="modal" data-target="#myModal">
     <img src="img/designer_1.png" />
   </div>
   <figcaption>
   <span id="give">我要</span>
-  <span>换一位</span>
+  <span><a href="/designer" style="color:#c7c7c7">换一位</a></span>
   </figcaption>
   </figure>
   <ul class="liste">
@@ -89,7 +89,7 @@
       </thead>
       <tbody class="table-striped bgt">
         <tr>
-          <td>20160410181818</td>
+          <td><%= @user.orders.last.id%></td>
           <td>设计师即将与你联系</td>
           <td>已支付押金<span>500元</span></td>
           <td><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td>
@@ -113,7 +113,7 @@
           </div>
           <div class="modal-body text-center forek">
             <p>确定取消订单吗？</p>
-            <a class="btn btn-danger btn-danger1 btn1">是，狠心取消</a>
+            <a class="btn btn-danger btn-danger1 btn1" href="/orders/cancel_order?id=<%= @user.id%>">是，狠心取消</a>
             <a class="btn btn-danger btn-danger1 btn1"  data-dismiss="modal">不，来点玩的</a>
           </div>
         </div>
@@ -245,35 +245,37 @@
       </dt>
     </form>
     <dt>
-    <h1><span>黑黑</span>，你的账户<p class="cash">将押金留在奇衣每个月可以自动获得20元奇衣代金券</p></h1>
+    <h1><span><%= @user.name%></span>，你的账户<p class="cash">将押金留在奇衣每个月可以自动获得20元奇衣代金券</p></h1>
     <table class="table table-responsive">
-      <caption class="nows">当前账户余额：<span class="numt">500</span></caption>
+      <caption class="nows">当前账户余额：<span class="numt"><%= @user.amount.to_i + @user.invite_amount.to_i%></span></caption>
       <thead>
         <tr class="active">
           <th colspan="4">历史记录</th>
         </tr>
       </thead>
       <tbody class="table-striped bgt">
-        <tr>
-          <td>2016-04-10 18：18：18</td>
-          <td>转入</td>
-          <td>500元</td>
-          <td>支付订单号：141018</td>
-        </tr>
+        <% @user.orders.each do |order|%>
+          <tr>
+            <td><%= order.created_at.to_date%></td>
+            <td>转入</td>
+            <td>500元</td>
+            <td>支付订单号：<%= order.order_number%></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     </dt>
     <dt>
     <h1>我的奇衣邀请码</h1>
     <table class="table table-responsive">
-      <caption class="">SMKUYSHSA</caption>
-      <thead>
+      <caption class=""><%= @user.invitecode%></caption>
+      <!--thead>
         <tr>
           <th class="active"><span>点击复制邀请码</span></th>
           <th>&nbsp;</th>
           <th>&nbsp;</th>
           <th>&nbsp;</th>
-        </tr>
+        </tr-->
       </thead>
       <tbody class="table-striped sourcf">
         <tr colspan="4">
@@ -316,7 +318,7 @@
     <ul class="-mob-share-list">
       <li class="-mob-share-weibo"><p>新浪微博</p></li>
       <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
-      <li class="-mob-share-weixin"><p>腾讯微博</p></li>
+      <li class="-mob-share-weixin"><p>微信</p></li>
       <li class="-mob-share-qzone"><p>QQ空间</p></li>
       <li class="-mob-share-qq"><p>QQ好友</p></li>
       <li class="-mob-share-renren"><p>人人网</p></li>
@@ -387,7 +389,8 @@
         </tr>
         <tr colspan="4">
           <td class="text-center">
-            <a class="btn btn1 btn-danger btn-danger1 pad" data-toggle="modal" data-target="#myModal4" id ="make_order()" onclick="make_order();"  >确认需要（去支付）</a>
+            <a class="btn btn1 btn-danger btn-danger1 pad" data-toggle="modal" data-target="#myModal4" id ="make_order_web">确认需要（去支付）</a>
+            <a class="btn btn1 btn-danger btn-danger1 pad" data-toggle="modal" data-target="" id ="make_order_mobile"  style="display:none" >确认需要（去支付）</a>
             <a class="btn btn1 btn-danger btn-danger1 pat" data-dismiss="modal" id="qiyiguo">暂不需要</a>
           </td>
         </tr>
@@ -401,9 +404,9 @@
           </div>
           <div class="modal-body">
             <h4 class="No">订单编号：</h4>
-            <p class="text-center" id="qrcodeTable" style="padding-left:130px"></p>
+            <p class="text-center" id="qrcodeTable" style="padding-left:0px"></p>
             <p class="text-center Noa">打开支付宝，扫码完成支付</p>
-            <p class="text-center Noa"><a data-dismiss="modal" class="btn btn1 btn-danger btn-danger1">完成支付</a></p>
+            <p class="text-center Noa"><a href="/personalAll" class="btn btn1 btn-danger btn-danger1">完成支付</a></p>
           </div>
         </div>
       </div>
@@ -422,19 +425,125 @@
       </div>
     </div>
     </dd>
+
+    <div class="modal fade" id="myModal14" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content modal-content1">
+          <div class="modal-header modal-header1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+          </div>
+          <div class="modal-body Nob">
+            <h3 class="text-center defter">欢迎你成为奇衣会员</h3>
+            <p class="text-center">下一步请完成风格测试</p>
+            <p class="text-center">让设计师了解您的风格偏好和基本信息。</p>
+            <p class="text-center">以便准确的服务您。</p>
+            <p class="text-center Noc"><a class="btn btn1 btn-danger btn-danger1" href="/home/manner_1">开始风格测试</a></p>
+            <p class="text-center Nof">同时，你已获得专属奇衣邀请码</p>
+            <p class="text-center Nod Nof"><%= @user.invitecode%></p>
+            <p class="text-center Nof"><span data-toggle="modal" data-target="#myModal3" data-dismiss="modal" aria-label="Close">了解详情</span></p>
+            <p class="text-center">用奇衣邀请码邀请朋友加入奇衣，即可与朋友共享奇衣基金</p>
+            <p class="text-center icon">
+            <a href="#"><img src="/img/weixin.png" /></a>
+            <a href="#"><img src="/img/qq.png" /></a>
+            <a href="#"><img src="/img/xinlang.png" /></a>
+            <a href="#"><img src="/img/dou.png" /></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content modal-content1">
+          <div class="modal-header modal-header1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+          </div>
+          <div class="modal-body">
+            <h2 class="text-center visin">关于奇衣果邀请码</h2>
+            <P class="rule">让朋友用你的邀请码注册，共享奇衣基金</P>
+            <p class="rule">1.每位奇衣用户拥有一个独立的邀请码，用于邀请感兴趣的朋友，一起获得奇衣基金，分享消费返现！</p>
+            <p class="rule">2.当朋友使用你的邀请码完成注册，你们都获得奇衣基金。xxx（后面一样）</p>
+            <p class="rule">3.奇衣基金可用于抵扣你在奇衣的消费。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   </dl>
 </div>
 </section>
+<input id="user_id" style="display:none" value="<%= @user.id %>"/>
 <script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=你的appkey"></script>
 <script>
-  $("#make_order").click(function(){
+  $(document).ready(function() {
+    if (<%=params[:from] == "welcome"%>){
+      $("#myModal14").modal('show');
+    }
+  })
+
+  $("#make_order_web").click(function(){
+    var id=$("#user_id").val();
     $.ajax({
       type : "POST",
-      url : "/orders/make_order",
+      url : "orders/make_payment",
+      data: {"id":id},
       success: function(data){
+        console.info(data["data"]["credential"]);
+        //jQuery('#qrcodeTable').qrcode({
+         // render  : "table",
+         // text  : data["data"],
+         // width   : "175",
+         // height  : "165"
+       // });
+        jQuery('#qrcodeTable').qrcode({
+          text  :data["data"]
+        });
       }
     });
   });
+
+  function cancel_order(id){
+    $.ajax({
+       type: "POST",
+       url: "orders/cancel_payment",
+       data: {"id":id},
+       success: function(data){
+           console.info(data);
+       }
+    })
+  }
+
+  function mobile_or_web() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    var bIsBlack = sUserAgent.match(/playbook/i) == "playbook";
+    var bIsBb = sUserAgent.match(/bb10/i) == "bb10";
+    var bIsCompatible = sUserAgent.match(/compatible/i) == "compatible";
+    var bIsWechate = sUserAgent.match(/MicroMessenger/i) == "micromessenger";
+    var mobile = true;
+    if (bIsIphoneOs || bIsUc7 || bIsUc || bIsAndroid || bIsWM)
+    mobile = false;
+    console.info(mobile);
+
+    if (!mobile){
+    $("#make_order_mobile").show();
+    $("#make_order_web").hide();
+    }else{
+    $("#make_order_mobile").hide();
+    $("#make_order_web").show();
+  }
+  }
+  mobile_or_web();
+
 
   $(function(){
 
@@ -446,6 +555,29 @@
 
     $("#qiyiguo").click(function(){
      $("dd").hide();
+    })
+
+
+    //个人中心列表切换
+    $(".liste").find("li").each(function(i){
+      $(".liste>li").eq(i).children("span").click(function(){
+        $(this).addClass("activer").parent().siblings().children().removeClass("activer");
+        $("dt").eq(i).show().siblings().hide();
+      })
+    })
+
+    //个人中心资料修改
+    $("#revise").click(function(){
+      $(".revise").hide();
+      $(".save").show();
+    })
+    $("#bodyRevise").click(function(){
+      $(".bodyRevise").hide();
+      $(".bodySave").show();
+    })
+    $("#infoCancel").click(function(){
+      $(".revise").show();
+      $(".save").hide();
     })
 
     //slider
@@ -619,16 +751,53 @@
 </script>
   <script type="text/javascript" src="/src/jquery.qrcode.js"></script>
   <script type="text/javascript" src="/src/qrcode.js"></script>
-
-  <script>
-    //jQuery('#qrcode').qrcode("this plugin is great");
-    jQuery('#qrcodeTable').qrcode({
-      render  : "table",
-      text  : "http://uubpay.com",
-      width   : "175",
-      height  : "165"
+<script type="text/javascript" src="https://one.pingxx.com/lib/pingpp_one.js"></script>
+<script>
+  document.addEventListener('pingpp_one_ready',function(){
+    document.getElementById('make_order_mobile').addEventListener('click',function(){
+      pingpp_one.init({
+        app_id:'app_GS4SSCKebTCSfTGu',                     //该应用在 ping++ 的应用 ID
+        <% if @order%>
+          order_no:<%= @order.id%>,                     //订单在商户系统中的订单号
+        <% end %>
+        amount:10,                                   //订单价格，单位：人民币 分
+        // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
+        channel:['alipay_wap'],
+        charge_url:'/orders/h5_make_payment',  //商户服务端创建订单的 url
+        charge_param:{body:"奇衣果定金",result_url:"www.iqiyiguo.com/personalAll", success_url:"www.iqiyiguo.com/personalAll", cancel_url:"www.iqiyiguo.com/personalAll"},                      //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
+        //open_id:'wx1234567890',                      //(可选，使用微信公众号支付时必须传入)
+        debug:true                                   //(可选，debug 模式下会将 charge_url 的返回结果透传回来)
+        },function(res){
+        //debug 模式下获取 charge_url 的返回结果
+        if(res.debug&&res.chargeUrlOutput){
+          console.log(res.chargeUrlOutput);
+        }
+        if(!res.status){
+          //处理错误
+          alert(res.msg);
+        }
+        else{
+          //debug 模式下调用 charge_url 后会暂停，可以调用 pingpp_one.resume 方法继续执行
+          if(res.debug&&!res.wxSuccess){
+            if(confirm('当前为 debug 模式，是否继续支付？')){
+              pingpp_one.resume();
+            }
+          }
+          //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，
+          //调用 pingpp_one.success 方法，你也可以自己定义回调函数
+          //其他渠道的处理方法请见第 2 节
+          else pingpp_one.success(function(res){
+            if(!res.status){
+              alert(res.msg);
+            }
+            },function(){
+            //这里处理支付成功页面点击“继续购物”按钮触发的方法，
+            //例如：若你需要点击“继续购物”按钮跳转到你的购买页，
+            //则在该方法内写入 window.location.href = "你的购买页面 url"
+            window.location.href='http://yourdomain.com/payment_succeeded';//示例
+          });
+        }
+      });
     });
-    jQuery('#qrcodeCanvas').qrcode({
-      text  : "http://uubpay.com"
-    });
-  </script>
+  });
+</script>

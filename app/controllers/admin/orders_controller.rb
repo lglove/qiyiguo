@@ -1,12 +1,20 @@
 # -*- encoding : utf-8 -*-
 class Admin::OrdersController < Admin::ApplicationController
   layout "admin"
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit,:shanchu, :update, :destroy]
 
   def index
     @admin_orders = Order.page(params[:page] ||1)
                          .where(["name like ?", "%#{params[:name]}%"])
                          .order("id desc")
+  end
+
+  def shanchu
+    @order.destroy
+    respond_to do |format|
+      format.html { redirect_to  :action=>'index', :page=>params[:page]}
+      flash[:notice]= '删除了一条信息.'
+    end
   end
 
   def new

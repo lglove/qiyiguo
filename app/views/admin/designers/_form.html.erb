@@ -21,6 +21,14 @@
     <%= hidden_field_tag :id, "#{@designer.id}"%>
   <tr>
   <tr>
+    <td class="text-right"><label for="admin_admin_name">头像:</label></td>
+    <td><%= f.file_field :logo, :class => 'form-control' %></td>
+  <tr>
+  <tr>
+    <td class="text-right"><label for="admin_admin_name">性别:</label></td>
+    <td><%= f.select :sex,['男','女'],{}, :class => 'form-control' %></td>
+  <tr>
+  <tr>
     <td class="text-right"><label for="admin_admin_name">电话:</label></td>
     <td><%= f.text_field :mobilephone, :class => 'form-control' %></td>
   <tr>
@@ -30,7 +38,7 @@
   <tr>
   <tr>
     <td class="text-right"><label for="admin_admin_name">描述:</label></td>
-    <td><%= f.text_field :description, :class => 'form-control' %></td>
+    <td><%= f.text_area :description, :class => 'form-control' %></td>
   <tr>
   <tr>
     <td class="text-center actions" colspan=2>
@@ -40,3 +48,23 @@
   </tr>
 </table>
 <% end %>
+<script>
+  $(function() {
+    $("form").validate({
+      rules: {
+        "designer[name]": "required",
+        "designer[email]": {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        "designer[name]": "请输入姓名",
+        "designer[email]": {
+          required: "请输入Email地址",
+          email: "请输入正确的email地址"
+        }
+      }
+    });
+  });
+</script>

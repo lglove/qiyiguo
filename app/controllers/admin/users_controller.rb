@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::UsersController < Admin::ApplicationController
   layout "admin"
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit,:shanchu, :update, :destroy]
 
   def index
     @users= User.page(params[:page] || 1).where("email like ? and name like ?", "%#{params[:email]}%","%#{params[:name]}%").order("id")
@@ -62,7 +62,15 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def destroy
-    @admin_user.destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to  :action=>'index', :page=>params[:page]}
+      flash[:notice]= '删除了一条用户信息.'
+    end
+  end
+
+  def shanchu
+    @user.destroy
     respond_to do |format|
       format.html { redirect_to  :action=>'index', :page=>params[:page]}
       flash[:notice]= '删除了一条用户信息.'

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::AdminsController < Admin::ApplicationController
   layout "admin"
-  before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_user, only: [:show, :edit,:shanchu, :update, :destroy]
 
   def index
     @admin_users = Admin.page(params[:page] || 1).
@@ -19,6 +19,14 @@ class Admin::AdminsController < Admin::ApplicationController
     end
 
     redirect_to action: "change_password"
+  end
+
+  def shanchu
+    @admin_user.destroy
+    respond_to do |format|
+      format.html { redirect_to  :action=>'index', :page=>params[:page]}
+      flash[:notice]= '删除了一条用户信息.'
+    end
   end
 
   def rights
