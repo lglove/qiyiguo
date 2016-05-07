@@ -16,7 +16,7 @@ gem 'carrierwave'
 gem 'carrierwave-aliyun'
 gem 'will_paginate', '~> 3.0.5'
 gem 'mini_magick'
-gem 'ckeditor'
+#gem 'ckeditor'
 gem 'acts_as_tree'
 
 # Use SCSS for stylesheets
@@ -33,7 +33,7 @@ gem 'therubyracer', '0.12.2'
 #增加分页的功能
 gem 'kaminari', '0.16.1'
 #增加页面缓存
-gem 'actionpack-page_caching', '1.0.2'
+#gem 'actionpack-page_caching', '1.0.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
