@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:make_order, :make_payment, :h5_make_payment]
   protect_from_forgery :except => [:h5_make_payment, :make_payment]
 
   def index
@@ -77,11 +78,11 @@ class OrdersController < ApplicationController
       render json: {code: "false", text: "生成订单失败"}
     else
       order = Order.new
-      order.user_id = @user.id || 2
+      order.user_id = @user.id
       order.name = @user.name+"的果子" || "cehsi"
       order.price = 500
       #order.address = @user.userAddress.to_ary[0]["address"] || "decjiai"
-      order.address = "decji"
+      order.address = @user.userAddress.last.address
       puts "创建订单"
       if order.save
         payment = Payment.find_by_order_id(order.id)
@@ -121,35 +122,43 @@ class OrdersController < ApplicationController
 
   def h5_make_payment
     payment = Payment.find_by_order_id(params[:order_no])
-    payment = Payment.new if !payment
-    payment.order_id = params[:order_no]
-    payment.amount = 500
-    payment.channel = params[:channel]
-    payment.status = params[:body]
-    payment.result_url = params[:result_url]
-    payment.success_url = params[:success_url]
-    payment.cancel_url = params[:cancel_url]
-    payment.currency = params[:currency] || "cny"
-    payment.client_ip = params[:client_ip] || "127.0.0.1"
+    #创建新的订单
+    order = Order.new
+    order.id = params[:order_no]
+    order.name = @user.name+"的果子"
+    order.price = 500
+    order.address = @user.userAddress.last.address
+    puts "创建订单"
+    if order.save
+      payment = Payment.new if !payment
+      payment.order_id = params[:order_no]
+      payment.amount = 500
+      payment.channel = params[:channel]
+      payment.status = params[:body]
+      payment.result_url = params[:result_url]
+      payment.success_url = params[:success_url]
+      payment.cancel_url = params[:cancel_url]
+      payment.currency = params[:currency] || "cny"
+      payment.client_ip = params[:client_ip] || "127.0.0.1"
 
-    payment.save
+      payment.save
 
 
-    #res = Pingpp::Charge.create(
-    #  :order_no => payment.order_id,
-    #  :amount   => payment.amount.to_i*100, #以分为单位
-    #  :subject  => "order.name",
-    #  :body     => "奇衣果定金",
-    #  :channel  => payment.channel,
-    #  :currency => payment.currency,
-    #  :client_ip=> payment.client_ip,
-    #  :app => {:id => "app_GS4SSCKebTCSfTGu"},
-    #  :extra =>{:success_url=> payment.success_url, :cancel_url=>payment.cancel_url}
-    #)
+      res = Pingpp::Charge.create(
+        :order_no => payment.order_id,
+        :amount   => payment.amount.to_i*100, #以分为单位
+        :subject  => "order.name",
+        :body     => "奇衣果定金",
+        :channel  => payment.channel,
+        :currency => payment.currency,
+        :client_ip=> payment.client_ip,
+        :app => {:id => "app_GS4SSCKebTCSfTGu"},
+        :extra =>{:success_url=> payment.success_url, :cancel_url=>payment.cancel_url}
+      )
 
-    puts "=======#{res.inspect}"
-    #render :json=>res
-    render :json=>"ok"
+      puts "=======#{res.inspect}"
+      render :json=>res
+    end
   end
 
 
@@ -180,6 +189,10 @@ class OrdersController < ApplicationController
   private
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find(session[:user_id])
     end
 
     def order_params

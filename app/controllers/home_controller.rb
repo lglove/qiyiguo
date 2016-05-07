@@ -81,6 +81,7 @@ class HomeController < ApplicationController
     if !user
       puts user.inspect
       user = User.new
+      user.name = params[:mobilephone]
       user.mobilephone = params[:mobilephone]
       user.password = User.md5(params[:password])
       user.invitecode = "qiyi"+params[:mobilephone]
@@ -89,13 +90,13 @@ class HomeController < ApplicationController
         invite_user = User.find_by("invitecode = ?", params[:invitecode])
         invite_user.invite_amount += 20
         invite_user.save
+        user.update(invite_id: invite_user.id)
       end
-      user.update(invite_id: invite_user.id)
       UserAddress.create(user_id: user.id)
       UserInfo.create(user_id: user.id)
 
       session[:user_id] = user.id
-      redirect_to "/home/personalAll?form=welcome"
+      redirect_to "/personalAll?form=welcome"
     else
       flash[:notice] = "该手机号已经注册"
       redirect_to action: "register"

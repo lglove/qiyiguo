@@ -16,51 +16,61 @@ ActiveRecord::Schema.define(version: 20160505095854) do
   create_table "admin_videos", force: :cascade do |t|
     t.string   "url",        limit: 255
     t.string   "name",       limit: 255
+    t.string   "logo",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "admins", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "password",   limit: 255
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "designers", force: :cascade do |t|
-    t.string   "name",        limit: 45
-    t.string   "email",       limit: 255
-    t.text     "description", limit: 65535
-    t.string   "mobilephone", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.integer  "price",       limit: 4
-    t.integer  "user_id",     limit: 4
     t.string   "name",        limit: 255
-    t.string   "mobilephone", limit: 45
-    t.string   "status",      limit: 255
-    t.string   "express",     limit: 255
-    t.string   "address",     limit: 255
-    t.string   "receiver",    limit: 255
-    t.string   "kuaidi_sn",   limit: 255
+    t.string   "email",       limit: 255
+    t.string   "mobilephone", limit: 255
+    t.string   "admin",       limit: 255
+    t.string   "password",    limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
 
+  create_table "designers", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "sex",         limit: 255
+    t.string   "logo",        limit: 255
+    t.string   "email",       limit: 255
+    t.string   "mobilephone", limit: 255
+    t.string   "description", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "price",        limit: 4
+    t.string   "order_number", limit: 255
+    t.string   "name",         limit: 255
+    t.string   "mobilephone",  limit: 255
+    t.string   "status",       limit: 255
+    t.string   "paid",         limit: 255
+    t.string   "express",      limit: 255
+    t.string   "address",      limit: 255
+    t.string   "receiver",     limit: 255
+    t.string   "kuaidi_sn",    limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "payments", force: :cascade do |t|
-    t.integer  "order_id",   limit: 4
-    t.string   "amount",     limit: 255
-    t.string   "channel",    limit: 255
-    t.string   "currency",   limit: 255
-    t.string   "client_ip",  limit: 255
-    t.string   "status",     limit: 255
-    t.string   "paid_at",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "order_id",    limit: 4
+    t.string   "amount",      limit: 255
+    t.string   "channel",     limit: 255
+    t.string   "currency",    limit: 255
+    t.string   "client_ip",   limit: 255
+    t.string   "status",      limit: 255
+    t.string   "paid_at",     limit: 255
+    t.string   "result_url",  limit: 255
+    t.string   "success_url", limit: 255
+    t.string   "cancel_url",  limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "user_addresses", force: :cascade do |t|
@@ -90,6 +100,7 @@ ActiveRecord::Schema.define(version: 20160505095854) do
 
   create_table "users", force: :cascade do |t|
     t.integer  "invite_id",     limit: 4
+    t.integer  "designer_id",   limit: 4
     t.string   "name",          limit: 255
     t.string   "mobilephone",   limit: 255
     t.integer  "age",           limit: 4
@@ -97,10 +108,10 @@ ActiveRecord::Schema.define(version: 20160505095854) do
     t.string   "birthday",      limit: 255
     t.string   "email",         limit: 255
     t.string   "password",      limit: 255
-    t.string   "youxiang",      limit: 255
     t.string   "invitecode",    limit: 255
-    t.integer  "amount",        limit: 4
-    t.integer  "invite_amount", limit: 4
+    t.string   "amount",        limit: 255
+    t.string   "invite_amount", limit: 255
+    t.string   "month_amount",  limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

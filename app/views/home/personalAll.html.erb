@@ -9,7 +9,11 @@
 <header>个人中心</header>
 <div class="container clearfloat">
   <aside>
-  <p>你的专属设计师：<span><%= @user.designer.name%></span></p>
+  <% if @user.designer%>
+    <p>你的专属设计师：<span><%= @user.designer.name%></span></p>
+  <%else%>
+    <p>你的专属设计师：<span>还没有设计师<a href="/designer">去选择设计师</a></span></p>
+  <%end%>
   <figure>
   <div class="pare" data-toggle="modal" data-target="#myModal">
     <img src="img/designer_1.png" />
@@ -79,22 +83,31 @@
     <dt>
     <table class="table table-responsive">
       <caption class="qiyi">我的奇衣果</caption>
-      <thead>
-        <tr class="active">
-          <th>订单号</th>
-          <th>果子状态</th>
-          <th>&nbsp;&nbsp;&nbsp;</th>
-          <th>2016-04-10 18:18:18</th>
-        </tr>
-      </thead>
-      <tbody class="table-striped bgt">
-        <tr>
-          <td><%= @user.orders.last.id%></td>
-          <td>设计师即将与你联系</td>
-          <td>已支付押金<span>500元</span></td>
-          <td><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td>
-        </tr>
+      <% if @user.orders.present? %>
+        <thead>
+          <tr class="active">
+            <th>订单号</th>
+            <th>果子状态</th>
+            <th>&nbsp;&nbsp;&nbsp;</th>
+            <th>2016-04-10 18:18:18</th>
+          </tr>
+        </thead>
+        <tbody class="table-striped bgt">
+          <tr>
+            <td><%= @user.orders.last.id%></td>
+            <% if @user.orders.last.paid != "已支付"%>
+              <td>设计师即将与你联系</td>
+              <td>已支付押金<span>500元</span></td>
+              <td><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td>
+            <% else%>
+              <td>设计师即将与你联系</td>
+              <td>需要支付押金<span>500元</span></td>
+              <a class="btn btn1 btn-danger btn-danger1 pad make_order_web">去支付</a>
+              <a class="btn btn1 btn-danger btn-danger1 pad" id="make_order_mobile"  style="display:none" >去支付</a>
+            <% end %>
+          </tr>
       </tbody>
+      <%end%>
     </table>
     <div class="pgres clearfloat">
       <p><span>设计师助理将在24小时内与你联系</span></p>
@@ -757,9 +770,7 @@
     document.getElementById('make_order_mobile').addEventListener('click',function(){
       pingpp_one.init({
         app_id:'app_GS4SSCKebTCSfTGu',                     //该应用在 ping++ 的应用 ID
-        <% if @order%>
-          order_no:<%= @order.id%>,                     //订单在商户系统中的订单号
-        <% end %>
+        order_no:<%= Time.now.to_i.to_s%>,                     //订单在商户系统中的订单号
         amount:10,                                   //订单价格，单位：人民币 分
         // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
         channel:['alipay_wap'],
