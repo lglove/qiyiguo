@@ -1,0 +1,181 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">订单详情</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+        <tr>
+          <td>订单状态:</td>
+          <td><%= @order.status%></td>
+          <td>下单时间:</td>
+          <td><%= @order.created_at.to_date%></td>
+        </tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">个人信息</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+      <tr>
+        <td>昵称</td>
+        <td><%= @user.name%></td>
+        <td>手机号:</td>
+        <td><%= @user.mobilephone %></td>
+        <td>邮箱:</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>生日:</td>
+        <td><%= @user.birthday%></td>
+        <td>地址:</td>
+        <td><%= @user.userAddress.last.address %></td>
+        <td>余额:</td>
+        <td><%= @user.amount%></td>
+      </tr>
+      <tr>
+        <td>设计师:</td>
+        <td><%= @designer.name%></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">风格信息</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+      <tr>
+        <td>偏爱风格:</td>
+        <td><%= @style.style%></td>
+        <td>肤色</td>
+        <td><%= @style.fuse %></td>
+      </tr>
+      <tr>
+        <td>抗拒类型:</td>
+        <td><%= @style.kangju%></td>
+        <td>身材特点</td>
+        <td><%= @style.shencai%></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">体型信息</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+      <tr>
+        <td>身高</td>
+        <td><%= @body.height %></td>
+        <td>体重:</td>
+        <td><%= @body.weight %></td>
+        <td>上衣尺码</td>
+        <td><%= @body.shangyichima %></td>
+        <td>胸围:</td>
+        <td><%= @body.xiongwei %></td>
+      </tr>
+      <tr>
+        <td>臂长:</td>
+        <td><%= @body.bichang %></td>
+        <td>肩宽:</td>
+        <td><%= @body.jiankuan %></td>
+        <td>腰围:</td>
+        <td><%= @body.yaowei %></td>
+        <td>臂围:</td>
+        <td><%= @body.biwei %></td>
+      </tr>
+      <tr>
+        <td>大腿围:</td>
+        <td><%= @body.datuiwei %></td>
+        <td>裤长:</td>
+        <td><%= @body.kuchang %></td>
+        <td>鞋码:</td>
+        <td><%= @body.xiema %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<%#<script>                                                                              %>
+<%#  $(document).ready(function() {                                                      %>
+<%#    $(".image_view").imgbox({                                                         %>
+<%#      'speedIn': 0,                                                                   %>
+<%#      'speedOut': 0,                                                                  %>
+<%#      'alignment': 'center',                                                          %>
+<%#      'overlayShow': true,                                                            %>
+<%#      'allowMultiple': false                                                          %>
+<%#    });                                                                               %>
+<%#    $(".detail_content").editable('/orders/update_content_of_order_detail',{          %>
+<%#      type   : 'text',                                                                %>
+<%#      select : true,                                                                  %>
+<%#      event: 'dblclick',      // 双击编辑                                         %>
+<%#      submit : 'OK',                                                                  %>
+<%#      cancel : 'cancel',                                                              %>
+<%#      style: 'width: 100%',   // input 宽度是100%                                  %>
+<%#      submitdata: function(value, settings){  // $(this) 代表当前被click的元素%>
+<%#        result = {                                                                    %>
+<%#          id: $(this).attr('detail_id'),                                              %>
+<%#        }                                                                             %>
+<%#        return result                                                                 %>
+<%#      }                                                                               %>
+<%#    });                                                                               %>
+<%#  });                                                                                 %>
+<%#</script>                                                                             %>
+<%#<style>                   %>
+<%#  *{                      %>
+<%#    margin:0;             %>
+<%#    padding:0;            %>
+<%#    list-style-type:none; %>
+<%#  }                       %>
+<%#  img,a{                  %>
+<%#    border:0;             %>
+<%#    cursor:pointer;       %>
+<%#  }                       %>
+<%#  .piccon{                %>
+<%#    clear:both;           %>
+<%#    margin:0 0 10px 50px; %>
+<%#  }                       %>
+<%#  .piccon #li{            %>
+<%#    float:left;           %>
+<%#    width:90px;           %>
+<%#    padding:10px 10px;    %>
+<%#  }                       %>
+<%#  #image_view{            %>
+<%#    position:absolute;    %>
+<%#    border:1px solid #ccc;%>
+<%#    background:#333;      %>
+<%#    padding:5px;          %>
+<%#    display:none;         %>
+<%#    color:#fff;           %>
+<%#    cursor:pointer;       %>
+<%#    }                     %>
+<%#    .check{               %>
+<%#    margin:8px;           %>
+<%#  }                       %>
+<%#  .submit_button{         %>
+<%#    float: right;         %>
+<%#    background: #9ccc65;  %>
+<%#    padding: 3px;         %>
+<%#    border: 0;            %>
+<%#    border-radius: 4px;   %>
+<%#    color: white;         %>
+<%#  }                       %>
+<%#  .stage_bg_color {       %>
+<%#    background: #FDA638;  %>
+<%#    padding-left: 10px;   %>
+<%#    padding-right: 10px;  %>
+<%#    border-radius: 5px;   %>
+<%#  }                       %>
+<%#  .qualified_bg_color {   %>
+<%#    background: #9DCB6A;  %>
+<%#    padding-left: 10px;   %>
+<%#    padding-right: 10px;  %>
+<%#    border-radius: 5px;   %>
+<%#  }                       %>
+<%#</style>                  %>

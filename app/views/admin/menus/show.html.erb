@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @admin_menu.parent_id %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @admin_menu.text %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @admin_menu.url %>
+</p>
+
+<p>
+  <strong>Hide:</strong>
+  <%= @admin_menu.hide %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @admin_menu.position %>
+</p>
+
+<%= link_to 'Edit', edit_admin_menu_path(@admin_menu) %> |
+<%= link_to 'Back', admin_menus_path %>

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505095854) do
+ActiveRecord::Schema.define(version: 20160509125001) do
+
+  create_table "admin_admin_menus", force: :cascade do |t|
+    t.integer  "admin_id",   limit: 4
+    t.integer  "menu_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "admin_menus", force: :cascade do |t|
+    t.integer  "parent_id",  limit: 4
+    t.string   "text",       limit: 255
+    t.string   "url",        limit: 255
+    t.string   "hide",       limit: 255, default: "0"
+    t.integer  "position",   limit: 4,   default: 100
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "admin_videos", force: :cascade do |t|
     t.string   "url",        limit: 255
@@ -56,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160505095854) do
     t.string   "kuaidi_sn",    limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "designer_id",  limit: 4
   end
 
   create_table "payments", force: :cascade do |t|
@@ -96,6 +114,17 @@ ActiveRecord::Schema.define(version: 20160505095854) do
     t.string   "xiema",        limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "user_styles", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "style",      limit: 255
+    t.string   "fuse",       limit: 255
+    t.string   "shencai",    limit: 255
+    t.string   "kangju",     limit: 255
+    t.string   "else",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|

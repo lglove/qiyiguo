@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :menus
+  end
    root 'home#index'
    get 'designer', to: 'home#designer'
    get 'designervideo', to: 'home#designervideo'
@@ -61,13 +64,14 @@ Rails.application.routes.draw do
         get :index
         post :info
         post :body
+        get :zhanshi
         get :shanchu
       end
     end
     resource :orders do
       collection do
         get :index
-        get :make_payment
+        get :zhanshi
         get :shanchu
       end
     end

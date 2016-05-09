@@ -6,7 +6,6 @@
         <%= f.submit '搜索', class: 'btn btn-primary form-control'%>
       <% end %>
     </td>
-    <td class="text-right col-sm-5"><%= link_to '添加', new_admin_orders_path, :class=>"btn btn-primary" %></td>
   </tr>
 </table>
 <table class="table table-bordered table-striped">
@@ -30,11 +29,8 @@
         <td class="text-center"><%= order.created_at.to_date %></td>
         <td class="text-center">
           <%= link_to '编辑',{:action=>'edit', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
-        <td class="text-center"> <%= link_to '删除',
-                      {:action=>'shanchu', :id=>order.id},
-                      :data => { :confirm => '你确定删除?' },
-                      :class => 'btn btn-danger' %>
-        </td>
+        <td class="text-center">
+          <%= link_to '显示详情',{:action=>'zhanshi', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
       </tr>
     <% end %>
   </tbody>

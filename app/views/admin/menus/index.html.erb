@@ -1,0 +1,53 @@
+<table class="table table-bordered table-striped">
+  <tr>
+    <td class="col-sm-2 form-inline" >
+      <%= form_for '', method: 'get' do |f|%>
+        <%= text_field_tag :text, params[:text] , placeholder: '输入名称查询', :class=>"form-control"%>
+        <%= f.submit '搜索', class: 'btn btn-primary form-control'%>
+      <% end %>
+    </td>
+    <td class="text-right col-sm-5"><%= link_to '添加', new_admin_menu_path, :class=>"btn btn-primary" %></td>
+  </tr>
+</table>
+<table class="table table-bordered table-striped table-condensed">
+  <tbody>
+    <tr>
+      <th class="text-center">名称</th>
+      <th class="text-center">ID</th>
+      <th class="text-center">网址</th>
+      <th class="text-center">隐藏</th>
+      <th  class="text-center"colspan="3">操作</th>
+    </tr>
+    <% for root in Admin::Menu.roots %>
+      <tr>
+        <td><%= root.text %></td>
+        <td class="text-right"><%= root.id %></td>
+        <td><%= root.url %></td>
+        <td><%= root.hide==1 ? "隐藏" : ""%></td>
+        <td class="text-center"><%= link_to '修改', edit_admin_menu_path(root), :class=>"btn btn-primary btn-sm" %></td>
+      </tr>
+
+      <% for child in root.children %>
+        <tr>
+        <td> &nbsp;&nbsp; -- <%= child.text %></td>
+        <td class="text-right"><%= child.id %></td>
+        <td><%= child.url %></td>
+        <td><%= child.hide==1 ? "隐藏" : ""%></td>
+        <td class="text-center"><%= link_to '修改', edit_admin_menu_path(child), :class=>"btn btn-primary btn-sm" %></td>
+      </tr>
+      <% end %>
+    <% end %>
+
+    <!--
+    <% @admin_menus.each do |admin_menu| %>
+      <tr>
+        <td><%= admin_menu.text %></td>
+        <td><%= admin_menu.url %></td>
+        <td><%= admin_menu.hide ? "隐藏" : ""%></td>
+        <td class="text-center"><%= link_to '修改', edit_admin_menu_path(admin_menu), :class=>"btn btn-default" %></td>
+        <td class="text-center"><%= link_to '删除', admin_menu, method: :delete, data: { confirm: '确认删除吗?' }, class: "btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  -->
+  </tbody>
+</table>

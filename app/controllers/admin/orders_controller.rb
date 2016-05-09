@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::OrdersController < Admin::ApplicationController
   layout "admin"
-  before_action :set_order, only: [:show, :edit,:shanchu, :update, :destroy]
+  before_action :set_order, only: [:zhanshi, :edit,:shanchu, :update, :destroy]
 
   def index
     @admin_orders = Order.page(params[:page] ||1)
@@ -35,6 +35,14 @@ class Admin::OrdersController < Admin::ApplicationController
     if @order.update(order_params)
       redirect_to action: "index"
     end
+  end
+
+  def zhanshi
+    @user = @order.user
+    @body = @user.userInfo
+    @style = @user.userStyle
+    puts @style.inspect
+    @designer = @order.designer
   end
 
   def destroy

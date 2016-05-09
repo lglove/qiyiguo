@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
 class Admin::UsersController < Admin::ApplicationController
   layout "admin"
-  before_action :set_user, only: [:show, :edit,:shanchu, :update, :destroy]
+  before_action :set_user, only: [:zhanshi, :edit,:shanchu, :update, :destroy]
 
   def index
-    @users= User.page(params[:page] || 1).where("email like ? and name like ?", "%#{params[:email]}%","%#{params[:name]}%").order("id")
+    @users= User.page(params[:page] || 1).where("mobilephone like ? and name like ?", "%#{params[:mobilephone]}%","%#{params[:name]}%").order("id")
   end
 
   def update_password
@@ -24,6 +24,12 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def show
+  end
+
+  def zhanshi
+    @body = @user.userInfo
+    @designer = @user.designer
+    @style = @user.userStyle
   end
 
   def new

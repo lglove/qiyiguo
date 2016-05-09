@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :userInfo
+  has_one :userStyle
   has_many :userAddress
   has_many :orders
   belongs_to :designer

@@ -1,0 +1,89 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">个人信息</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+      <tr>
+        <td>昵称</td>
+        <td><%= @user.name%></td>
+        <td>手机号:</td>
+        <td><%= @user.mobilephone %></td>
+        <td>邮箱:</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>生日:</td>
+        <td><%= @user.birthday%></td>
+        <td>地址:</td>
+        <td><%= @user.userAddress.last.address %></td>
+        <td>余额:</td>
+        <td><%= @user.amount%></td>
+      </tr>
+      <tr>
+        <td>设计师:</td>
+        <td><%= @designer.name%></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">风格信息</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+      <tr>
+        <td>偏爱风格:</td>
+        <td><%= @style.style%></td>
+        <td>肤色</td>
+        <td><%= @style.fuse %></td>
+      </tr>
+      <tr>
+        <td>抗拒类型:</td>
+        <td><%= @style.kangju%></td>
+        <td>身材特点</td>
+        <td><%= @style.shencai%></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">体型信息</h3>
+  </div>
+  <div class="panel-body">
+    <table class='table table-hover table-striped'>
+      <tr>
+        <td>身高</td>
+        <td><%= @body.height %></td>
+        <td>体重:</td>
+        <td><%= @body.weight %></td>
+        <td>上衣尺码</td>
+        <td><%= @body.shangyichima %></td>
+        <td>胸围:</td>
+        <td><%= @body.xiongwei %></td>
+      </tr>
+      <tr>
+        <td>臂长:</td>
+        <td><%= @body.bichang %></td>
+        <td>肩宽:</td>
+        <td><%= @body.jiankuan %></td>
+        <td>腰围:</td>
+        <td><%= @body.yaowei %></td>
+        <td>臂围:</td>
+        <td><%= @body.biwei %></td>
+      </tr>
+      <tr>
+        <td>大腿围:</td>
+        <td><%= @body.datuiwei %></td>
+        <td>裤长:</td>
+        <td><%= @body.kuchang %></td>
+        <td>鞋码:</td>
+        <td><%= @body.xiema %></td>
+      </tr>
+    </table>
+  </div>
+</div>
