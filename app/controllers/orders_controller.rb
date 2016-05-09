@@ -172,7 +172,7 @@ class OrdersController < ApplicationController
 
       order = Order.find(params[:data][:object][:order_id])
       order.paid = "paid"
-      order.status = "待发货"
+      order.status = "已支付"
       order.save
     end
     render :text=>"ok"

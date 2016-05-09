@@ -12,23 +12,23 @@
   <tbody>
     <tr>
       <th class="text-center">ID</th>
-      <th class="text-center">姓名</th>
-      <th class="text-center">价格</th>
-      <th class="text-center">状态</th>
-      <th class="text-center">快递</th>
-      <th class="text-center">创建时间</th>
+      <th class="text-center">买家姓名</th>
+      <th class="text-center">设计师</th>
+      <th class="text-center">下单时间</th>
+      <th class="text-center">订单状态</th>
       <th class="text-center" colspan="4">操作</th>
     </tr>
     <% @admin_orders.each do |order| %>
-      <tr>
+      <tr id="<%= order.id %>">
         <td class="text-center"><%= order.id %></td>
-        <td class="text-center"><%= order.name %></td>
-        <td class="text-center"><%= order.price %></td>
-        <td class="text-center"><%= order.status %></td>
-        <td class="text-center"><%= order.express %></td>
+        <td class="text-center"><%= order.user.name %></td>
+        <td class="text-center"><%= order.designer.name %></td>
         <td class="text-center"><%= order.created_at.to_date %></td>
+        <td class="text-center"><%= order.status %></td>
         <td class="text-center">
-          <%= link_to '编辑',{:action=>'edit', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
+          <%= link_to '联系',{:action=>'lianxi', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %>
+          <%= link_to '发货',{:action=>'fahuo', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %>
+          <%= link_to '完成',{:action=>'wancheng', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
         <td class="text-center">
           <%= link_to '显示详情',{:action=>'zhanshi', :id=>order.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
       </tr>

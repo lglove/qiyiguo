@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::OrdersController < Admin::ApplicationController
   layout "admin"
-  before_action :set_order, only: [:zhanshi, :edit,:shanchu, :update, :destroy]
+  before_action :set_order, only: [:lianxi, :fahuo, :wancheng, :zhanshi, :edit,:shanchu, :update, :destroy]
 
   def index
     @admin_orders = Order.page(params[:page] ||1)
@@ -50,6 +50,36 @@ class Admin::OrdersController < Admin::ApplicationController
     redirect_to action: "index"
   end
 
+  def lianxi
+    if @order.status == "已支付"
+      @order.status = "已联系"
+      to_index
+    else
+      flash[:notice] = "该订单尚未支付"
+      to_index
+    end
+  end
+
+  def fahuo
+    if @order.status == "已联系"
+      @order.status = "已发货"
+      to_index
+    else
+      flash[:notice] = "该订单尚未联系"
+      to_index
+    end
+  end
+
+  def wancheng
+    if @order.status == "已发货"
+      @order.status = "已完成"
+      to_index
+    else
+      flash[:notice] = "该订单尚未发货"
+      to_index
+    end
+  end
+
   private
     def set_order
       @order = Order.find(params[:id])
@@ -57,6 +87,11 @@ class Admin::OrdersController < Admin::ApplicationController
 
     def order_params
       params.require(:order).permit(:name, :price, :status, :express)
+    end
+
+    def to_index
+      redirect_to :action=>"index", :page=>params[:page], :anchor=>params[:id]
+      return;
     end
 
 end

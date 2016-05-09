@@ -9,10 +9,10 @@
       </tr>
 
        <% for menu in root.children %>
-       <% next if menu.hide %>
+       <% next if menu.hide == 1%>
         <tr>
           <td class="text-left">
-            &nbsp;&nbsp; -- 
+            &nbsp;&nbsp; --
             <%= check_box_tag "menu_ids[]", menu.id, @admin.menu.exists?(menu.id) %>
             <label for="admin_menu_hide"><%= menu.text %></label>
           </td>
@@ -20,7 +20,7 @@
       <% end %>
     <% end %>
 
-   
+
       <td class="text-left">
         <label class="btn btn-default" style="width:130px;">
           <%= check_box_tag 'select_all_rights' %>全选

@@ -10,17 +10,17 @@
 	/*background-color:#fff!important;*/
 }
 .bag1{
-	background:url(../img/banner1.jpg) no-repeat;
+	background:url(../img/banner6.jpg) no-repeat;
 	width:100%;
 	background-size: cover;
 }
 .bag2{
-	background:url(../img/banner2.jpg) no-repeat;
+	background:url(../img/banner7.jpg) no-repeat;
 	width:100%;
 	background-size: cover;
 }
 .bag3{
-	background:url(../img/banner3.jpg) no-repeat;
+	background:url(../img/banner6.jpg) no-repeat;
 	width:100%;
 	background-size: cover;
 }
@@ -89,7 +89,7 @@
 }
 .titthree{
 	font-size:22px;
-	
+
 }
 .imge{
 	padding:0 10% 180px;

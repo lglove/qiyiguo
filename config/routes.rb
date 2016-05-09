@@ -71,6 +71,9 @@ Rails.application.routes.draw do
     resource :orders do
       collection do
         get :index
+        get :lianxi
+        get :fahuo
+        get :wancheng
         get :zhanshi
         get :shanchu
       end
