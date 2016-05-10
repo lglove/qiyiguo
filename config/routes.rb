@@ -76,6 +76,7 @@ Rails.application.routes.draw do
         get :wancheng
         get :zhanshi
         get :shanchu
+        post :user_amount
       end
     end
     resource :videos do

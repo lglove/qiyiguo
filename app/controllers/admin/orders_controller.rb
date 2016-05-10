@@ -45,6 +45,13 @@ class Admin::OrdersController < Admin::ApplicationController
     @designer = @order.designer
   end
 
+  def user_amount
+    @user =  User.find(params[:id])
+    @user.amount = params[:value].to_i
+    @user.save
+    render text: params[:value]
+  end
+
   def destroy
     @order.destroy
     redirect_to action: "index"

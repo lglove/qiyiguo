@@ -34,7 +34,7 @@
         <td>地址:</td>
         <td><%= @user.userAddress.last.address %></td>
         <td>余额:</td>
-        <td><%= @user.amount%></td>
+        <td class="amount" id="<%= @user.id%>" > <%= @user.amount%></td>
       </tr>
       <tr>
         <td>设计师:</td>
@@ -102,8 +102,8 @@
     </table>
   </div>
 </div>
-<%#<script>                                                                              %>
-<%#  $(document).ready(function() {                                                      %>
+<script>
+$(document).ready(function() {
 <%#    $(".image_view").imgbox({                                                         %>
 <%#      'speedIn': 0,                                                                   %>
 <%#      'speedOut': 0,                                                                  %>
@@ -111,22 +111,22 @@
 <%#      'overlayShow': true,                                                            %>
 <%#      'allowMultiple': false                                                          %>
 <%#    });                                                                               %>
-<%#    $(".detail_content").editable('/orders/update_content_of_order_detail',{          %>
-<%#      type   : 'text',                                                                %>
-<%#      select : true,                                                                  %>
-<%#      event: 'dblclick',      // 双击编辑                                         %>
-<%#      submit : 'OK',                                                                  %>
-<%#      cancel : 'cancel',                                                              %>
-<%#      style: 'width: 100%',   // input 宽度是100%                                  %>
-<%#      submitdata: function(value, settings){  // $(this) 代表当前被click的元素%>
-<%#        result = {                                                                    %>
-<%#          id: $(this).attr('detail_id'),                                              %>
-<%#        }                                                                             %>
-<%#        return result                                                                 %>
-<%#      }                                                                               %>
-<%#    });                                                                               %>
-<%#  });                                                                                 %>
-<%#</script>                                                                             %>
+    $(".amount").editable('/admin/orders/user_amount',{
+      type   : 'text',
+      select : true,
+      event: 'dblclick',      // 双击编辑
+      submit : 'OK',
+      cancel : 'cancel',
+      style: 'width: 100%',   // input 宽度是100%
+      submitdata: function(value, settings){  // $(this) 代表当前被click的元素
+        result = {
+          id: $(this).attr('detail_id'),
+        }
+        return result
+      }
+    });
+  });
+</script>
 <%#<style>                   %>
 <%#  *{                      %>
 <%#    margin:0;             %>

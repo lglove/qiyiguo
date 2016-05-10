@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
         payment.amount = 500
         payment.channel = 'alipay_qr'
         payment.currency = "cny"
-        payment.client_ip = "127.0.0.1"
+        payment.client_ip = request.remote_ip
 
         payment.save
 
@@ -139,7 +139,7 @@ class OrdersController < ApplicationController
       payment.success_url = params[:success_url]
       payment.cancel_url = params[:cancel_url]
       payment.currency = params[:currency] || "cny"
-      payment.client_ip = params[:client_ip] || "127.0.0.1"
+      payment.client_ip = request.remote_ip
 
       payment.save
 

@@ -14,6 +14,7 @@
 //= require qiyiguo/jquery-ui.min
 //= require qiyiguo/bootstrap.min
 //= require qiyiguo/common
+//= require admin/jquery.jeditable
 //= require jquery.validate.min
 //= require jquery_ujs
 //= require turbolinks
