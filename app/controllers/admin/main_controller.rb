@@ -17,7 +17,7 @@ class Admin::MainController < Admin::ApplicationController
   end
 
   def signin
-    user = Admin.find_by(["(name = ? or email = ?) and password = ?", params[:name], params[:name], Admin::Admin.md5(params[:password])])
+    user = Admin.find_by(["(name = ? or email = ?) and password = ?", params[:name], params[:email], Admin::Admin.md5(params[:password])])
     if user
       session[:admin_user_id] = user.id
       redirect_to action: "welcome"

@@ -9,7 +9,7 @@ class Admin::ApplicationController < ActionController::Base
   def check_login
     if session[:admin_user_id].nil?
       flash[:notice] = "请先登录"
-      redirect_to :controller => 'admin/main', :action => 'login'
+      redirect_to :controller => '/admin/main', :action => 'login'
     end
   end
 
