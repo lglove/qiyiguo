@@ -94,6 +94,7 @@ class HomeController < ApplicationController
       end
       UserAddress.create(user_id: user.id)
       UserInfo.create(user_id: user.id)
+      UserStyle.create(user_id: user.id)
 
       session[:user_id] = user.id
       redirect_to "/personalAll?form=welcome"
@@ -108,7 +109,7 @@ class HomeController < ApplicationController
     user = User.find_by(["(name = ? or mobilephone = ?) and password = ?", params[:mobilephone], params[:mobilephone], User.md5(params[:password])])
     if user.present?
       session[:user_id] = user.id
-      redirect_to action: "welcome"
+      redirect_to action: "personalAll"
     else
       flash[:notice] = "账号或密码错误"
       redirect_to action: "register"
