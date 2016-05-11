@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :menus
-  end
    root 'home#index'
    get 'designer', to: 'home#designer'
    get 'designervideo', to: 'home#designervideo'
@@ -77,6 +74,8 @@ Rails.application.routes.draw do
         get :zhanshi
         get :shanchu
         post :user_amount
+        post :month_amount
+        post :invite_amount
       end
     end
     resource :videos do

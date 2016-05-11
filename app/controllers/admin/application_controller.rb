@@ -15,7 +15,7 @@ class Admin::ApplicationController < ActionController::Base
 
   def get_login_user
   	if session[:admin_user_id]
-  		@admin_user= Admin::Admin.find(session[:admin_user_id])
+  		@admin= Admin::Admin.find(session[:admin_user_id])
   	end
   end
 end

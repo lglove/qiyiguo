@@ -47,17 +47,17 @@
         </button>
         <a class="navbar-brand" href="/admin">奇衣果后台管理</a>
 
-        <% if @admin_user %>
+        <% if @admin %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav navbar-right">
             <% for root in Admin::Menu.roots %>
-            <% next if (root.children.map{|c| c.id} & @admin_user.menu.map{|c| c.id}).length == 0 && @admin_user.id != 1%>
+            <% next if (root.children.map{|c| c.id} & @admin.menu.map{|c| c.id}).length == 0 && @admin.id != 1%>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= root.text %><span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <% for menu in root.children %>
                   <% next if menu.hide == 1 %>
-                  <% if @admin_user.menu.exists?(menu.id) || @admin_user.id == 1 %>
+                  <% if @admin.menu.exists?(menu.id) || @admin.id == 1 %>
                     <li><a href="<%= menu.url %>"><%= menu.text %></a></li>
                   <% end %>
                 <% end %>
@@ -65,11 +65,11 @@
             </li>
             <% end %>
 
-            <% if @admin_user %>
+            <% if @admin %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人账号<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">欢迎您：<%= @admin_user.name %></a></li>
+                <li><a href="#">欢迎您：<%= @admin.name %></a></li>
                 <li><%= link_to '更改密码', {:controller=>"admin/admins", :action=>"change_password"}, target: "content" %></li>
                 <li><a href="/admin/main/logout">退出登录</a></li>
               </ul>
