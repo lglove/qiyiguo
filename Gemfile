@@ -27,6 +27,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'rufus-scheduler', '3.1.3'
+gem 'god', '0.13.6'
 
 gem 'therubyracer', '0.12.2'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509151817) do
+ActiveRecord::Schema.define(version: 20160511085041) do
 
   create_table "admin_admin_menus", force: :cascade do |t|
     t.integer  "admin_id",   limit: 4
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 20160509151817) do
     t.string   "month_amount",  limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.datetime "amount_date"
   end
 
 end

@@ -50,6 +50,7 @@ class OrdersController < ApplicationController
     else
     order = Order.new
     order.user_id = @user.id
+    order.designer_id = @user.designer_id
     order.order_number = Time.now + @user.id
     order.name = @user.name+"的果子"
     order.price = 500
@@ -79,7 +80,8 @@ class OrdersController < ApplicationController
     else
       order = Order.new
       order.user_id = @user.id
-      order.name = @user.name+"的果子" || "cehsi"
+      order.designer_id = @user.designer_id
+      order.name = @user.name+"的果子"
       order.price = 500
       #order.address = @user.userAddress.to_ary[0]["address"] || "decjiai"
       order.address = @user.userAddress.last.address
@@ -125,6 +127,8 @@ class OrdersController < ApplicationController
     #创建新的订单
     order = Order.new
     order.id = params[:order_no]
+    order.user_id = @user.id
+    order.designer_id = @user.designer_id
     order.name = @user.name+"的果子"
     order.price = 500
     order.address = @user.userAddress.last.address
