@@ -52,6 +52,20 @@ class Admin::OrdersController < Admin::ApplicationController
     render text: params[:value]
   end
 
+  def month_amount
+    @user =  User.find(params[:id])
+    @user.month_amount = params[:value].to_i
+    @user.save
+    render text: params[:value]
+  end
+
+  def invite_amount
+    @user =  User.find(params[:id])
+    @user.invite_amount = params[:value].to_i
+    @user.save
+    render text: params[:value]
+  end
+
   def destroy
     @order.destroy
     redirect_to action: "index"
