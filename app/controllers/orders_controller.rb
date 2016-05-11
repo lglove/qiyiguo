@@ -71,50 +71,57 @@ class OrdersController < ApplicationController
 
   def make_payment
     @user = User.find(params[:id])
-    #order = Order.find_by_user_id(@user.id)
     order = @user.orders.last
     puts "order#{order.inspect}"
-    if order && order.paid != "已支付"
-      flash[:notice]="您有尚未支付的果子"
-      render json: {code: "false", text: "生成订单失败"}
-    else
+    unless order && order.paid != "已支付"
       order = Order.new
       order.user_id = @user.id
       order.designer_id = @user.designer_id
       order.name = @user.name+"的果子"
       order.price = 500
-      #order.address = @user.userAddress.to_ary[0]["address"] || "decjiai"
       order.address = @user.userAddress.last.address
       puts "创建订单"
-      if order.save
-        payment = Payment.find_by_order_id(order.id)
-        payment = Payment.new if !payment
-        payment.order_id = order.id
-        payment.amount = 500
-        payment.channel = 'alipay_qr'
-        payment.currency = "cny"
-        payment.client_ip = request.remote_ip
+      order.save
+    end
 
-        payment.save
+      payment = Payment.find_by_order_id(order.id)
+      payment = Payment.new if !payment
+      payment.order_id = order.id
+      payment.amount = 500
+      payment.channel = 'alipay_qr'
+      payment.currency = "cny"
+     # payment.client_ip = "127.0.0.1"
+      payment.client_ip = request.remote_ip
 
-        order = Order.find(order.id)
+      payment.save
 
-        res = Pingpp::Charge.create(
-          :order_no => payment.order_id,
-          :amount   => payment.amount.to_i*100, #以分为单位
-          :subject  => order.name,
-          :body     => "#{order.user.name}奇衣果定金",
-          :channel  => payment.channel,
-          :currency => payment.currency,
-          :client_ip=> payment.client_ip,
-          :app => {:id => "app_GS4SSCKebTCSfTGu"}
-        )
-        puts "ppp#{res}"
-        puts res["credential"]["alipay_qr"]
-        render json: {data: res["credential"]["alipay_qr"]}
+      #order = Order.find(order.id)
+
+      res = Pingpp::Charge.create(
+        :order_no => payment.order_id,
+        :amount   => payment.amount.to_i*100, #以分为单位
+        :subject  => order.name,
+        :body     => "#{order.user.name}奇衣果定金",
+        :channel  => payment.channel,
+        :currency => payment.currency,
+        :client_ip=> payment.client_ip,
+        :app => {:id => "app_GS4SSCKebTCSfTGu"}
+      )
+      puts "ppp#{res}"
+      puts res["credential"]["alipay_qr"]
+      render json: {data: res["credential"]["alipay_qr"]}
+  end
+
+  def designer_and_manner user
+    user = user
+    if user.designer.present?
+      if user.userStyle.style.present? && user.userInfo.height.present?
       else
-        render json: {code: "false", text: "生成订单失败"}
+        flash[:notice] = "还没有进行风格测试，请先进行风格测试"
+        redirect_to controller: "home", action: "manner_1" and return
       end
+        flash[:notice] = "还没有选择设计师，请先选择设计师"
+        redirect_to controller: "home", action: "personalAll"
     end
   end
 

@@ -11,18 +11,25 @@
   <aside>
   <% if @user.designer%>
     <p>你的专属设计师：<span><%= @user.designer.name%></span></p>
+    <div class="pare" data-toggle="modal" data-target="#myModal">
+      <img src="<%= @user.designer.logo%>" />
+    </div>
+    <figure>
+    <figcaption>
+    <span id="give">我要</span>
+    <span><a href="/designer" style="color:#c7c7c7">换一位</a></span>
+    </figcaption>
+    </figure>
   <%else%>
-    <p>你的专属设计师：<span>还没有设计师<a href="/designer">去选择设计师</a></span></p>
+    <p>你的专属设计师：</p>
+    <figure>
+    <div class="pare" data-toggle="modal" data-target="#myModal">
+      <span>居然还没有设计师</span>
+    </div>
+    <figcaption class="text-left">
+    <a href="designer.html">去选择我的专属设计师</a>
+    </figcaption>
   <%end%>
-  <figure>
-  <div class="pare" data-toggle="modal" data-target="#myModal">
-    <img src="img/designer_1.png" />
-  </div>
-  <figcaption>
-  <span id="give">我要</span>
-  <span><a href="/designer" style="color:#c7c7c7">换一位</a></span>
-  </figcaption>
-  </figure>
   <ul class="liste">
     <li><span class="activer">我的信息</span></li>
     <li><span>我的订单</span></li>
@@ -481,8 +488,23 @@
         </div>
       </div>
     </div>
-
-
+    <div class="modal fade" id="order_panduan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content modal-content1">
+          <div class="modal-header modal-header1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+          </div>
+          <div class="modal-body Nob">
+            <h3 class="text-center defter">你需要先进行风格测试</h3>
+            <p class="text-center">请完成风格测试</p>
+            <p class="text-center">让设计师了解您的风格偏好和基本信息。</p>
+            <p class="text-center">以便准确的服务您。</p>
+            <p class="text-center Noc"><a class="btn btn1 btn-danger btn-danger1" href="/home/manner_1">开始风格测试</a></p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </dl>
 </div>
@@ -561,6 +583,9 @@
   $(function(){
 
     $("#give").click(function(){
+      <%unless @user.userStyle.style.present?%>
+         $("#order_panduan").modal('show');
+      <%end%>
       $("dt").hide();
       $("dd").show();
       $(".liste>li>span").removeClass("activer");
