@@ -1,4 +1,4 @@
-chdir: '/opt/app/qiyiguo'  #  这里需要修改。
+chdir: '/opt/app/qiyi'  #  这里需要修改。
 environment: production
 address: 0.0.0.0
 port: 5000

@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160511085041) do
     t.integer  "parent_id",  limit: 4
     t.string   "text",       limit: 255
     t.string   "url",        limit: 255
-    t.string   "hide",       limit: 255, default: "0"
+    t.string   "hide",       limit: 45,  default: "0"
     t.integer  "position",   limit: 4,   default: 100
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false

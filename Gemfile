@@ -19,6 +19,8 @@ gem 'mini_magick'
 #gem 'ckeditor'
 gem 'acts_as_tree'
 
+gem 'thin'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
