@@ -4,28 +4,23 @@
   <header>马上选一位设计师</header>
   <div class="container clearfloat">
     <aside>
-    <p>它将是你的专属设计师：</p>
+    <p>你的专属设计师：</p>
     <figure>
-    <% if session[:user_id]%>
-      <a id="designer" href="/personalAll">
+    <% if session[:user_id] %>
+      <a id="designer" href="/personalAll?designer_id=<%= @designers.first.id%>">
         <div class="pare">
           <span>选择她</span>
-          <img src="/img/designer_2.png" />
+          <img src="<%= @designers.first.logo%>" />
         </div>
       </a>
-    <% else %>
+    <%else%>
       <div class="pare" data-toggle="modal" data-target="#myModal">
         <span>选择她</span>
-        <img src="/img/designer_2.png" />
+        <img src="<%= @designers.first.logo%>" />
       </div>
-    <% end %>
+    <%end%>
     <figcaption class="text-left">
-    中国著名设计师，师从国际形象大师吉米，曾获得2013年中国国际时装周最佳化妆奖
-    提名、2014年中国十大化妆师创意大奖。今年主创个人形象和品牌“YOUGX”寓意--同行
-    永远的陪伴。<br/><br/>
-    中国著名设计师，师从国际形象大师吉米，曾获得2013年中国国际时装周最佳化妆奖
-    提名、2014年中国十大化妆师创意大奖。今年主创个人形象和品牌“YOUGX”寓意--同行
-    永远的陪伴。
+    <%= @designers.first.description%>
     </figcaption>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
@@ -35,7 +30,7 @@
           </div>
           <div class="modal-body text-center loginas">
             <p>我去，没登录，选不鸟</p>
-            <a class="btn btn-danger btn-danger1 btn1" href="register">登陆/注册</a>
+            <a class="btn btn-danger btn-danger1 btn1" href="/register?from=login&designer=designer">去登录</a>
           </div>
         </div>
       </div>
@@ -75,12 +70,6 @@
   </div>
   </section>
   <script>
-    $(document).ready(function() {
-      <% unless @user.designer.present?%>
-      $("#myModal9").modal('show');
-    <% end %>
-    })
-
     $(function(){
       //设计师页面选择设计师点击效果
       $(".rel").each(function(index){

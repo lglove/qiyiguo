@@ -97,10 +97,10 @@ class HomeController < ApplicationController
       UserStyle.create(user_id: user.id)
 
       session[:user_id] = user.id
-      redirect_to "/personalAll?form=welcome"
+      redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll?form=welcome"
     else
       flash[:notice] = "该手机号已经注册"
-      redirect_to action: "register"
+      redirect_to action: "register", from: params[:from], designer: params[:designer]
     end
 
   end
@@ -109,10 +109,10 @@ class HomeController < ApplicationController
     user = User.find_by(["(name = ? or mobilephone = ?) and password = ?", params[:mobilephone], params[:mobilephone], User.md5(params[:password])])
     if user.present?
       session[:user_id] = user.id
-      redirect_to action: "personalAll"
+      redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll"
     else
       flash[:notice] = "账号或密码错误"
-      redirect_to action: "register"
+      redirect_to action: "register", from: params[:from], designer: params[:designer]
     end
   end
 
@@ -127,7 +127,7 @@ class HomeController < ApplicationController
   def check_login
     if session[:user_id].nil?
       flash[:notice] = "请先登录"
-      redirect_to :action=>'register'
+      redirect_to action: "register", from: params[:from], designer: params[:designer]
     end
   end
 
