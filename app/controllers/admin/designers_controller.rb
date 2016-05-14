@@ -5,8 +5,8 @@ class Admin::DesignersController < Admin::ApplicationController
 
   def index
     @admin_designers = Designer.page(params[:page] ||1)
-                         .where(["name like ? and mobilephone like ?", "%#{params[:name]}%", "%#{params[:mobilephone]}%"])
-                         .order("id desc")
+                         .where(["name like ?", "%#{params[:name]}%"])
+                         .order("id")
   end
 
   def shanchu
