@@ -448,3 +448,17 @@ dd>h1{
 		margin: 0;
 	}
 }
+
+
+.loginas>p,.dossier{
+	font-size:20px;
+}
+.dossier~p{
+	font-size:14px;
+}
+.dossier+p{
+	margin-top:40px;
+}
+.dossier+p+p{
+	margin-bottom:40px;
+}

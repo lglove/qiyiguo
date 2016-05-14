@@ -450,7 +450,7 @@
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+            <button type="button" id="closeModal14" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
           </div>
           <div class="modal-body Nob">
             <h3 class="text-center defter">欢迎你成为奇衣会员</h3>
@@ -468,22 +468,6 @@
             <a href="#"><img src="/img/xinlang.png" /></a>
             <a href="#"><img src="/img/dou.png" /></a>
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-dialog1" role="document">
-        <div class="modal-content modal-content1">
-          <div class="modal-header modal-header1">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
-          </div>
-          <div class="modal-body">
-            <h2 class="text-center visin">关于奇衣果邀请码</h2>
-            <P class="rule">让朋友用你的邀请码注册，共享奇衣基金</P>
-            <p class="rule">1.每位奇衣用户拥有一个独立的邀请码，用于邀请感兴趣的朋友，一起获得奇衣基金，分享消费返现！</p>
-            <p class="rule">2.当朋友使用你的邀请码完成注册，你们都获得奇衣基金。xxx（后面一样）</p>
-            <p class="rule">3.奇衣基金可用于抵扣你在奇衣的消费。</p>
           </div>
         </div>
       </div>
@@ -506,6 +490,22 @@
       </div>
     </div>
 
+    <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content modal-content1">
+          <div class="modal-header modal-header1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+          </div>
+          <div class="modal-body text-center">
+            <p class="dossier">奇衣果为你创建档案</p>
+            <p>当你需要买衣服，只需要选一个设计师要一个果子</p>
+            <p>设计师就会在24小时内与你联系，为你精选服饰</p>
+            <a class="btn btn-danger btn-danger1 btn1 expect1" href="/designer" >期待已久，立即选择设计师</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </dl>
 </div>
 </section>
@@ -516,6 +516,15 @@
     if (<%=params[:from] == "welcome"%>){
       $("#myModal14").modal('show');
     }
+    $("#myModal14").on('hidden.bs.modal', function(e){
+      $("#myModal9").modal('show');
+    })
+    if (<%= params[:from] == "manner"%>){
+      $("#myModal9").modal('show');
+    }
+    //$("#closeModal14").click(function(){
+     // $("#myModal9").modal('show');
+   // })
   })
 
   $("#make_order_web").click(function(){
