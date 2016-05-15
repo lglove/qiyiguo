@@ -21,6 +21,21 @@ module Aizhong
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.time_zone = 'Beijing'
+
+    config.active_record.default_timezone = :local
     config.active_record.raise_in_transactional_callbacks = true
+  end
+end
+
+class ActiveSupport::TimeWithZone
+  def to_s(format = :default)
+    if format == :db
+      time.strftime("%Y-%m-%d %H:%M:%S")
+    elsif formatter = ::Time::DATE_FORMATS[format]
+      formatter.respond_to?(:call) ? formatter.call(self).to_s : strftime(formatter)
+    else
+      "#{time.strftime("%Y-%m-%d %H:%M:%S")} #{formatted_offset(false, 'UTC')}" # mimicking Ruby 1.9 Time#to_s format
+    end
   end
 end
