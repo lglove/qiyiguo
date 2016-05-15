@@ -526,6 +526,20 @@
       </div>
     </div>
 
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content modal-content1">
+          <div class="modal-header modal-header1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="img/del-.png" /></button>
+          </div>
+          <div class="modal-body text-center loginas">
+            <p>美女，你的个人资料还没完善哦！</p>
+            <a class="btn btn-danger btn-danger1 btn1" href="manner-1.html">现在就去</a>
+            <a class="btn btn-danger btn-danger1 btn1" href="personalAll.html">稍后吧</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </dl>
 </div>
 </section>
@@ -542,6 +556,11 @@
     if (<%= params[:from] == "manner"%>){
       $("#myModal9").modal('show');
     }
+    $("#myModal9").on('hidden.bs.modal', function(e){
+      if (!<%= @wanzheng %>) {
+        $("#myModal5").modal('show');
+      }
+    })
     //$("#closeModal14").click(function(){
      // $("#myModal9").modal('show');
    // })

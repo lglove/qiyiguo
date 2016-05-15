@@ -85,6 +85,10 @@ class HomeController < ApplicationController
       @user.save
     end
     @address = UserAddress.find_by_user_id(@user.id)
+    @wanzheng = false
+    if @user.name.present? && @user.mobilephone.present? && @address.name.present? && @address.address.present?
+      @wanzheng = true
+    end
   end
 
   def political
