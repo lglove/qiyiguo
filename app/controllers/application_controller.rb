@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def check_login
     if session[:user_id].nil?
       flash[:notice] = "请先登录"
-      redirect_to :action=>'register'
+      redirect_to :action=>'register', :controller=>"/home"
     end
   end
 

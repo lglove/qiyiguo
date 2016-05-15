@@ -2,6 +2,8 @@
 class Admin::AdminsController < Admin::ApplicationController
   layout "admin"
   before_action :set_admin_user, only: [:show, :edit,:shanchu, :update, :destroy]
+  before_filter :check_login, :except => ["login", "signin", "logout"]
+  before_filter :get_login_user
 
   def index
     @admin_users = Admin.page(params[:page] || 1).
@@ -98,4 +100,17 @@ class Admin::AdminsController < Admin::ApplicationController
     def admin_user_params
       params.require(:admin).permit(:email, :password,  :name)
     end
+
+  def check_login
+    if session[:admin_user_id].nil?
+      flash[:notice] = "请先登录"
+      redirect_to :controller => '/admin/main', :action => 'login'
+    end
+  end
+
+  def get_login_user
+  	if session[:admin_user_id]
+  		@admin= Admin::Admin.find(session[:admin_user_id])
+  	end
+  end
 end

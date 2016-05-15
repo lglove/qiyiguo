@@ -20,5 +20,3 @@ class Admin::ApplicationController < ActionController::Base
   	end
   end
 end
-
-
