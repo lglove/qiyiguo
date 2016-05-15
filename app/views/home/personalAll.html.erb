@@ -4,6 +4,11 @@
     font-size: 18px;
     margin-bottom: 20px;
   }
+  .orderOrder{
+    border: 2px solid #E9314B;
+    background-color: #E9314B;
+    color: #fff
+  }
 </style>
 <section>
 <header>个人中心</header>
@@ -70,13 +75,13 @@
         </tbody>
     </table>
         <div class="pgres clearfloat">
-          <p><span>设计师助理将在24小时内与你联系</span></p>
+          <p <% if @user.orders.last.paid == "已支付"|| @user.orders.last.paid == "待付款" || @user.orders.last.paid == ""%> class="orderOrder"<%end%>><span>设计师助理将在24小时内与你联系</span></p>
           <span><img src="img/pan.jpg"/></span>
-          <p><span>设计师助理为你精心挑选</span></p>
+          <p <% if @user.orders.last.paid == "已联系"%> class="orderOrder"<%end%>><span>设计师助理为你精心挑选</span></p>
           <span><img src="img/pan-.jpg"/></span>
-          <p><span>奇衣果即将送达</span></p>
+          <p <% if @user.orders.last.paid == "已发货"%> class="orderOrder"<%end%>><span>奇衣果即将送达</span></p>
           <span><img src="img/pan-.jpg"/></span>
-          <p><span>与设计师助理确认需要购买的服饰 并完成支付</span></p>
+          <p <% if @user.orders.last.paid == "已完成"%> class="orderOrder"<%end%>><span>与设计师助理确认需要购买的服饰 并完成支付</span></p>
         </div>
       <% else%>
         <article class="hidden-xs hidden-sm">
@@ -534,7 +539,7 @@
           </div>
           <div class="modal-body text-center loginas">
             <p>美女，你的个人资料还没完善哦！</p>
-            <a class="btn btn-danger btn-danger1 btn1" href="manner-1.html">现在就去</a>
+            <a class="btn btn-danger btn-danger1 btn1" data-dismiss="modal" id="close_userInfo">现在就去</a>
             <a class="btn btn-danger btn-danger1 btn1" href="personalAll.html">稍后吧</a>
           </div>
         </div>
@@ -679,6 +684,12 @@
 
     //个人中心资料修改
     $("#revise").click(function(){
+      $(".revise").hide();
+      $(".save").show();
+    })
+    $("#close_userInfo").click(function(){
+      $("dl dt").eq(0).hide();
+      $("dl dt").eq(1).show();
       $(".revise").hide();
       $(".save").show();
     })

@@ -187,11 +187,11 @@ th{
 	display:table-cell;
 	vertical-align:middle;
 }
-.pgres>p:nth-child(1){
-	border:2px solid #E9314B;
-	background-color:#E9314B;
-	color:#fff;
-}
+/*.pgres>p:nth-child(1){       */
+/*    border:2px solid #E9314B;*/
+/*    background-color:#E9314B;*/
+/*    color:#fff;              */
+/*}                            */
 .pgres>span{
 	font-size:20px;
 	float:left;
