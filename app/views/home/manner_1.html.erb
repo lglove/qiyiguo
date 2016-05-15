@@ -12,42 +12,42 @@
     <h2>NO.1您的着装风格接近一下哪种？</h2>
     <figure class="col-md-4 col-sm-6 col-xs">
     <div class="sss">
-      <p></p>
+      <p><span>时尚商务,</span></p>
       <img src="/img/manner1_1.png"/>
     </div>
     <figcaption>时尚商务</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>商务休闲,</span></p>
       <img src="/img/manner1_2.png"/>
     </div>
     <figcaption>商务休闲</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>个性文艺,</span></p>
       <img src="/img/manner1_3.png"/>
     </div>
     <figcaption>个性文艺</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>休闲运动,</span></p>
       <img src="/img/manner1_4.png"/>
     </div>
     <figcaption>休闲运动</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>自信潮流,</span></p>
       <img src="/img/manner1_5.png"/>
     </div>
     <figcaption>自信潮流</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>浪漫甜美,</span></p>
       <img src="/img/manner1_6.png"/>
     </div>
     <figcaption>浪漫甜美</figcaption>
@@ -84,8 +84,17 @@
 
     $("#next1").click(function(){
       if($(".sss>p").hasClass("eee")){
-        $("#next1").attr("href","/home/manner_2")
-        $("#next1").removeAttr("data-toggle data-target")
+        var text = $(".eee>span").text();
+        $.ajax({
+          type: 'post',
+          url: '/home/update_manner',
+          data: {"style":text},
+          success: function(data){
+            if (data['code'] == 0) {
+              window.location.href="/home/manner_2";
+            };
+          }
+        });
         }else{
         $("#next1").attr({"href":"javascript:;","data-toggle":"modal","data-target":"#myModal7"});
       }

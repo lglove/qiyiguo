@@ -9,38 +9,51 @@
     <h2 class="colour">NO.4你的身材会有以下的情况吗？</h2>
     <figure class="col-md-3 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>胸器袭人,</span></p>
       <img src="/img/manner4_1.png"/>
     </div>
     <figcaption>胸器袭人</figcaption>
     </figure>
     <figure class="col-md-3 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>腰部赘肉,</span></p>
       <img src="/img/manner4_2.png"/>
     </div>
     <figcaption>腰部赘肉</figcaption>
     </figure>
     <figure class="col-md-3 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>臀部较大,</span></p>
       <img src="/img/manner4_3.png"/>
     </div>
     <figcaption>臂部较大</figcaption>
     </figure>
     <figure class="col-md-3 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>大腿较粗</span></p>
       <img src="/img/manner4_4.png"/>
     </div>
     <figcaption>大腿较粗</figcaption>
     </figure>
   </div>
 </div>
-<div class="mannerA col-md-2">
-  <p class="text-center right"><a href="/home/manner_5.html">Next</a></p>
+<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog1" role="document">
+    <div class="modal-content modal-content1">
+      <div class="modal-header modal-header1">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+      </div>
+      <div class="modal-body text-center selec">
+        <p>你有一项或多项测试风格未选择</p>
+        <a class="btn btn-danger btn-danger1 btn1" href="#" data-dismiss="modal">确定</a>
+      </div>
+    </div>
+  </div>
 </div>
-<p class="col-md-12 text-center clret"><span id="perfectall">我是女神 我没有</span></p>
+<div class="mannerA col-md-2">
+  <p class="text-center right"><a id="next4" href="javascript:;">Next</a></p>
+</div>
+<p class="col-md-12 text-center clret"><span id="perfectall"><a href="/home/manner_5" style="color: white">我是女神 我没有</a></span></p>
 </section>
 <script>
   $(function(){
@@ -54,6 +67,25 @@
       $("#perfectall").click(function(){
         $("figure").children(".sss").children("p").removeClass("eee");
       })
+    })
+
+    $("#next4").click(function(){
+      if($(".sss>p").hasClass("eee")){
+        var text = $(".eee>span").text();
+        alert(text);
+        $.ajax({
+          type: 'post',
+          url: '/home/update_manner',
+          data: {"shencai":text},
+          success: function(data){
+            if (data['code'] == 0) {
+              window.location.href="/home/manner_5";
+            };
+          }
+        });
+        }else{
+        $("#next4").attr({"href":"javascript:;","data-toggle":"modal","data-target":"#myModal8"});
+      }
     })
   })
 </script>

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   resources :home do
     collection do
       post :mobile_register
+      post :update_manner
+      post :update_body
       get :signin
       get :signout
       get :welcome

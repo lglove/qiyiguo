@@ -9,22 +9,22 @@
     <h2 class="colour">NO.2您的肤色接近一下哪种？</h2>
     <figure class="col-md-4 col-sm-12 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>白皙</span></p>
       <img src="/img/manner2_1.png"/>
     </div>
     <figcaption>白皙</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>正常</span></p>
       <img src="/img/manner2_2.png"/>
     </div>
     <figcaption>正常</figcaption>
     </figure>
     <figure class="col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
-      <img src="/img/manner2_2.png"/>
+      <p><span>偏暗</span></p>
+      <img src="/img/manner2_3.png"/>
     </div>
     <figcaption>偏暗</figcaption>
     </figure>
@@ -61,8 +61,20 @@
 
     $("#next2").click(function(){
       if($(".sss>p").hasClass("eee")){
-        $("#next2").attr("href","/home/manner_3")
-        $("#next2").removeAttr("data-toggle data-target")
+        var text = $(".eee>span").text();
+        alert(text);
+        $.ajax({
+          type: 'post',
+          url: '/home/update_manner',
+          data: {"fuse":text},
+          success: function(data){
+            alert(data);
+            if (data['code'] == 0) {
+              alert("成功发送");
+              window.location.href="/home/manner_3";
+            };
+          }
+        });
         }else{
         $("#next2").attr({"href":"javascript:;","data-toggle":"modal","data-target":"#myModal8"});
       }

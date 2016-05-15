@@ -38,6 +38,39 @@ class HomeController < ApplicationController
   def manner_6
   end
 
+  def update_manner
+      userStyle = UserStyle.find_by_user_id(@user.id)
+    if params[:style]
+      userStyle.update(style: params[:style])
+    end
+    if params[:fuse]
+      userStyle.update(fuse: params[:fuse])
+    end
+    if params[:kangju]
+      userStyle.update(kangju: params[:kangju])
+    end
+    if params[:shencai]
+      userStyle.update(shencai: params[:shencai])
+    end
+    render :json=>{code: 0}
+  end
+
+  def update_body
+    body = UserInfo.find_by_user_id(@user.id)
+    body.update(height: params[:height],
+                weight: params[:weight],
+                shangyichima: params[:shangyichima],
+                yaowei: params[:yaowei],
+                bichang: params[:bichang],
+                jiankuan: params[:jiankuan],
+                xiongwei: params[:xiongwei],
+                biwei: params[:biwei],
+                datuiwei: params[:datuiwei],
+                kuchang: params[:kuchang],
+                xiema:params[:xiema])
+    render :json=> {code:0}
+  end
+
   def personal
   end
 

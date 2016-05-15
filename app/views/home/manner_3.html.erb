@@ -9,66 +9,79 @@
     <h2>NO.3你比较抗拒一下哪些服饰类型？</h2>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs">
     <div class="sss">
-      <p></p>
+      <p><span>亮片</span></p>
       <img src="/img/manner3_1.png"/>
     </div>
     <figcaption>亮片</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>波点</span></p>
       <img src="/img/manner3_2.png"/>
     </div>
     <figcaption>波点</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>条纹</span></p>
       <img src="/img/manner3_3.png"/>
     </div>
     <figcaption>条纹</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>格子</span></p>
       <img src="/img/manner3_4.png"/>
     </div>
     <figcaption>格子</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>大logo图案</span></p>
       <img src="/img/manner3_5.png"/>
     </div>
     <figcaption>大logo图案</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>撞色</span></p>
       <img src="/img/manner3_6.png"/>
     </div>
     <figcaption>撞色</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>图案印花</span></p>
       <img src="/img/manner3_7.png"/>
     </div>
     <figcaption>图案印花</figcaption>
     </figure>
     <figure class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
     <div class="sss">
-      <p></p>
+      <p><span>黑白灰</span></p>
       <img src="/img/manner3_8.png"/>
     </div>
     <figcaption>黑白灰</figcaption>
     </figure>
   </div>
 </div>
-<div class="mannerA col-md-3">
-  <p class="text-center right"><a href="/home/manner_4">Next</a></p>
+<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-dialog1" role="document">
+    <div class="modal-content modal-content1">
+      <div class="modal-header modal-header1">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+      </div>
+      <div class="modal-body text-center selec">
+        <p>你有一项或多项测试风格未选择</p>
+        <a class="btn btn-danger btn-danger1 btn1" href="#" data-dismiss="modal">确定</a>
+      </div>
+    </div>
+  </div>
 </div>
-<p class="col-md-12 text-center clret"><span id="perfect">不抗拒任何类型</span></p>
+<div class="mannerA col-md-3">
+  <p class="text-center right"><a id="next3" href="javascript:;">Next</a></p>
+</div>
+<p class="col-md-12 text-center clret"><span id="perfect"><a href="/home/manner_4" style="color:white">不抗拒任何类型</a></span></p>
 </section>
 <script>
   $(function(){
@@ -82,6 +95,27 @@
       $("#perfect").click(function(){
         $("figure").children(".sss").children("p").removeClass("eee");
       })
+    })
+
+    $("#next3").click(function(){
+      if($(".sss>p").hasClass("eee")){
+        var text = $(".eee>span").text();
+        alert(text);
+        $.ajax({
+          type: 'post',
+          url: '/home/update_manner',
+          data: {"kangju":text},
+          success: function(data){
+            alert(data);
+            if (data['code'] == 0) {
+              alert("成功发送");
+              window.location.href="/home/manner_4";
+            };
+          }
+        });
+        }else{
+        $("#next3").attr({"href":"javascript:;","data-toggle":"modal","data-target":"#myModal8"});
+      }
     })
   })
 </script>

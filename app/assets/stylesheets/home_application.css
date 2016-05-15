@@ -4,3 +4,10 @@
  *= require jquery-ui.min.css
  *= require common.css
  */
+.image{
+  width:100px;
+  height:100px;
+}
+.sss>p>span{
+  display:none;
+}

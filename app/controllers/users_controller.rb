@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     address.address = params[:mail_address] if params[:mail_address].present?
     address.save
 
-      redirect_to controller: "home", action: "personalAll"
+    redirect_to controller: "home", action: "personalAll", from: params[:from]
   end
 
   def body

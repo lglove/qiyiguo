@@ -8,7 +8,7 @@
   <div class="manner text-center slidef">
     <h2>NO.5输入关于你的数字</h2>
     <p class="pane">不能确定尺码？不用担心，你的设计师稍后会详细与你确认</p>
-    <form action="/users/body" method="get">
+    <form id="bodyForm"action="/users/body" method="get">
       <input name="from" value="manner" style="display:none" />
     <div class="progt">
       <span class="drtye">身高</span>
@@ -17,7 +17,7 @@
       <span class="max">180</span>
       </p>
       <span class="texter" id="texter1" name="height">150cm</span>
-        <input class="texter" id="input1" name="height" value='' type="hidden" ></input>
+      <input class="texter" id="input1" name="height" value='' type="hidden" ></input>
     </div>
     <div class="progt">
       <span class="drtye">体重</span>
@@ -113,12 +113,11 @@
       <span class="texter" id="texter11" name="xiema">34码</span>
         <input class="texter" id="input11" name="xiema" value='' type="hidden" ></input>
     </div>
-      <button type="submit" style=" display: inline-block; width: 85px;height: 100%;background-color: #000;color: #fff;">提交</button>
   </form>
   </div>
 </div>
 <div class="mannerA col-md-2">
-  <p class="text-center right"><a href="/home/manner_6.html">Next</a></p>
+  <p class="text-center right"><a id="next5" href="javascript:;">Next</a></p>
 </div>
 </section>
 <script>
@@ -126,10 +125,7 @@
   $(function(){
     var h=$(".manner").height();
     $(".mannerA>p").css("margin-top",h/2+80);
-  })
 
-
-  $(function(){
     //slider
     var span1,slider1,span2,slider2,span3,slider3,span4,slider4,span5,slider5,span6,slider6,span7,slider7,span8,slider8,span9,slider9,span10,slider10,span11,slider11;
     span1=$("#texter1");
@@ -297,5 +293,9 @@
       }
     })
     span11.text(slider11.slider("value")+"码")
+
+    $("#next5").click(function(){
+      document.getElementById("bodyForm").submit();
+    })
   })
 </script>
