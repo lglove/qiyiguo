@@ -20,3 +20,4 @@
 .keep
 .swp
 /public/uploads/*
+/public/assets/*
