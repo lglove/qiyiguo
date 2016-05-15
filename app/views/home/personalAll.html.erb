@@ -31,8 +31,8 @@
     </figcaption>
   <%end%>
   <ul class="liste">
-    <li><span class="activer">我的信息</span></li>
-    <li><span>我的订单</span></li>
+    <li><span class="activer">我的订单</span></li>
+    <li><span>我的信息</span></li>
     <li><span>我的体型信息</span></li>
     <li><span>账户管理</span></li>
     <li><span>我的奇衣邀请码</span></li>
@@ -40,53 +40,6 @@
   </ul>
   </aside>
   <dl>
-    <dt>
-    <div class="revise">
-      <h1><span><%= @user.name%></span>，欢迎你回到奇衣</h1>
-      <p>昵称：<span><%= @user.name%></span></p>
-      <p>生日：<span><%= @user.birthday%></span></p>
-      <p>邮箱：<span><%= @user.email%></span></p>
-      <p>手机：<span><%= @user.mobilephone%></span></p>
-      <p>我的收件信息</p>
-      <p>收件人姓名：<span><%= @address.name if @address%></span></p>
-      <p>收件人地址：<span><%= @address.address if @address%></span></p>
-      <input type="button" id="revise" value="修改" />
-    </div>
-    <form class="save" action="/users/info" method="post">
-      <h1><span><%= @user.name%></span>，欢迎你回到奇衣</h1>
-      <p>
-      <label for="name">昵称：</label>
-      <input type="text" id="name" name="name" value="<%= @user.name%>" required="required" />
-      </p>
-      <p>
-      <label for="birt">生日：</label>
-      <input type="date" id="birt" name="date" value="<%= @user.birthday%>" required="required" />
-      </p>
-      <p>
-      <label for="password">密码：</label>
-      <input type="password" id="password" name="password" value="" />
-      </p>
-      <p>
-      <label for="email">邮箱：</label>
-      <input type="email" id="email" name="email" value="<%= @user.email%>" required="required" />
-      </p>
-      <p>
-      <label for="tel">手机：</label>
-      <input type="text" id="tel" name="mobilephone" value="<%= @user.mobilephone%>" required="required" />
-      </p>
-      <p>我的收件信息</p>
-      <p>
-      <label for="name2">收件人姓名：</label>
-      <input type="text" id="name2" name="mail_name" value="<%= @address.name if @address%>" required="required" />
-      </p>
-      <p>
-      <label for="adres">收件人地址：</label>
-      <input type="text" id="adres" name="mail_address" value="<%= @address.address if @address%>" required="required" />
-      </p>
-      <input type="submit" value="保存" />
-      <input type="button" id="infoCancel" value="取消" />
-    </form>
-    </dt>
     <dt>
     <table class="table table-responsive">
       <caption class="qiyi">我的奇衣果</caption>
@@ -139,6 +92,53 @@
         </div>
       </div>
     </div>
+    </dt>
+    <dt>
+    <div class="revise">
+      <h1><span><%= @user.name%></span>，欢迎你回到奇衣</h1>
+      <p>昵称：<span><%= @user.name%></span></p>
+      <p>生日：<span><%= @user.birthday%></span></p>
+      <p>邮箱：<span><%= @user.email%></span></p>
+      <p>手机：<span><%= @user.mobilephone%></span></p>
+      <p>我的收件信息</p>
+      <p>收件人姓名：<span><%= @address.name if @address%></span></p>
+      <p>收件人地址：<span><%= @address.address if @address%></span></p>
+      <input type="button" id="revise" value="修改" />
+    </div>
+    <form class="save" action="/users/info" method="post">
+      <h1><span><%= @user.name%></span>，欢迎你回到奇衣</h1>
+      <p>
+      <label for="name">昵称：</label>
+      <input type="text" id="name" name="name" value="<%= @user.name%>" required="required" />
+      </p>
+      <p>
+      <label for="birt">生日：</label>
+      <input type="date" id="birt" name="date" value="<%= @user.birthday%>" required="required" />
+      </p>
+      <p>
+      <label for="password">密码：</label>
+      <input type="password" id="password" name="password" value="" />
+      </p>
+      <p>
+      <label for="email">邮箱：</label>
+      <input type="email" id="email" name="email" value="<%= @user.email%>" required="required" />
+      </p>
+      <p>
+      <label for="tel">手机：</label>
+      <input type="text" id="tel" name="mobilephone" value="<%= @user.mobilephone%>" required="required" />
+      </p>
+      <p>我的收件信息</p>
+      <p>
+      <label for="name2">收件人姓名：</label>
+      <input type="text" id="name2" name="mail_name" value="<%= @address.name if @address%>" required="required" />
+      </p>
+      <p>
+      <label for="adres">收件人地址：</label>
+      <input type="text" id="adres" name="mail_address" value="<%= @address.address if @address%>" required="required" />
+      </p>
+      <input type="submit" value="保存" />
+      <input type="button" id="infoCancel" value="取消" />
+    </form>
     </dt>
     <dt>
     <div class="bodyRevise">

@@ -7,7 +7,7 @@
       <li class="pull-left <% if params[:from] != "register"%>active<%end%>">注册</li>
       <li class="pull-left <% if params[:from] != "login"%>active<%end%>">登录</li>
     </ul>
-    <div class="register" <% if params[:from] != "register"%>style="display:none"<%end%>>
+    <div class="register" <% if params[:from] == "login"%>style="display:none"<%end%>>
       <form action="/home/mobile_register" method="post">
         <input class="text-center" type="text" name="mobilephone" placeholder="您的手机号" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='您的手机号'" value="" />
         <input class="text-center" type="password" id="password" name="password" placeholder="创建密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='创建密码'" value="" />
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="loading" <% if params[:from] != "login"%>style="display:none;"<%end%>>
+    <div class="loading" <% if params[:from] == "register"%>style="display:none;"<%end%>>
       <form action="/home/signin" method="get">
         <input class="text-center" name="mobilephone" type="text" placeholder="请输入手机号" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入手机号'" value="" />
         <input class="text-center" name="password" type="password" placeholder="请输入密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入密码'" value="" />
