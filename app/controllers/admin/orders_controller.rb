@@ -72,8 +72,8 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def lianxi
-    if @order.status == "已支付"
-      @order.status = "已联系"
+    if @order.paid == "已支付"
+      @order.paid = "已联系"
       to_index
     else
       flash[:notice] = "该订单尚未支付"
@@ -82,8 +82,8 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def fahuo
-    if @order.status == "已联系"
-      @order.status = "已发货"
+    if @order.paid == "已联系"
+      @order.paid = "已发货"
       to_index
     else
       flash[:notice] = "该订单尚未联系"
@@ -92,8 +92,8 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def wancheng
-    if @order.status == "已发货"
-      @order.status = "已完成"
+    if @order.paid == "已发货"
+      @order.paid = "已完成"
       to_index
     else
       flash[:notice] = "该订单尚未发货"
