@@ -75,7 +75,7 @@
         </tbody>
     </table>
         <div class="pgres clearfloat">
-          <p <% if @user.orders.last.paid == "已支付"|| @user.orders.last.paid == "待付款" || @user.orders.last.paid == ""%> class="orderOrder"<%end%>><span>设计师助理将在24小时内与你联系</span></p>
+          <p <% if @user.orders.last.paid == "已支付"|| @user.orders.last.paid == "待付款" || @user.orders.last.paid == null%> class="orderOrder"<%end%>><span>设计师助理将在24小时内与你联系</span></p>
           <span><img src="img/pan.jpg"/></span>
           <p <% if @user.orders.last.paid == "已联系"%> class="orderOrder"<%end%>><span>设计师助理为你精心挑选</span></p>
           <span><img src="img/pan-.jpg"/></span>
