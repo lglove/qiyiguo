@@ -133,16 +133,18 @@ class OrdersController < ApplicationController
   def h5_make_payment
     payment = Payment.find_by_order_id(params[:order_no])
     #创建新的订单
-    order = Order.new
-    order.id = params[:order_no]
-    order.user_id = @user.id
-    order.designer_id = @user.designer_id
-    order.name = @user.name+"的果子"
-    order.paid = "待付款"
-    order.price = 500
-    order.address = @user.userAddress.last.address
-    puts "创建订单"
-    if order.save
+    unless payment
+      order = Order.new
+      order.id = params[:order_no]
+      order.user_id = @user.id
+      order.designer_id = @user.designer_id
+      order.name = @user.name+"的果子"
+      order.paid = "待付款"
+      order.price = 500
+      order.address = @user.userAddress.last.address
+      puts "创建订单"
+      order.save
+    end
       payment = Payment.new if !payment
       payment.order_id = params[:order_no]
       payment.amount = 500
@@ -171,7 +173,6 @@ class OrdersController < ApplicationController
 
       puts "=======#{res.inspect}"
       render :json=>res
-    end
   end
 
 
