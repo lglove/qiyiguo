@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 class Admin::AdminsController < Admin::ApplicationController
-  layout "admin"
   before_action :set_admin_user, only: [:show, :edit,:shanchu, :update, :destroy]
 
   def index

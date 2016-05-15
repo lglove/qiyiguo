@@ -100,15 +100,12 @@
     $("#next3").click(function(){
       if($(".sss>p").hasClass("eee")){
         var text = $(".eee>span").text();
-        alert(text);
         $.ajax({
           type: 'post',
           url: '/home/update_manner',
           data: {"kangju":text},
           success: function(data){
-            alert(data);
             if (data['code'] == 0) {
-              alert("成功发送");
               window.location.href="/home/manner_4";
             };
           }

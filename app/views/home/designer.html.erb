@@ -4,7 +4,7 @@
   <header>马上选一位设计师</header>
   <div class="container clearfloat">
     <aside>
-    <p>你的专属设计师：</p>
+    <p>你的专属设计师</p>
     <figure>
     <% if session[:user_id] %>
       <a id="designer" href="/personalAll?designer_id=<%= @designers.first.id%>">
@@ -75,7 +75,7 @@
         var txtr = []
         var designer = []
         <% @designers.each_with_index do |designer, index|%>
-          txtr[<%=index %>] = "<%= designer.description%>"
+          txtr[<%=index %>] = "<%= raw designer.description%>"
           designer[<%=index%>] = "/personalAll?designer_id=<%= designer.id%>"
         <%end%>
         <%#txtr[0] = "中国著名设计师，师从国际形象大师吉米，曾获得2013年中国国际时装周最佳化妆奖提名、2014年中国十大化妆师创意大奖。今年主创个人形象和品牌“YOUGX”寓意--同行永远的陪伴。中国著名设计师，师从国际形象大师吉米，曾获得2013年中国国际时装周最佳化妆奖提名、2014年中国十大化妆师创意大奖。今年主创个人形象和品牌“YOUGX”寓意--同行永远的陪伴。"%>
