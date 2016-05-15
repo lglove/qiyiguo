@@ -5,7 +5,7 @@
   <div class="row text-center">
     <% @video.each do |video|%>
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-        <a class="butaf" href="http://<%= video.url%>" target="_blank">
+      <a class="butaf" href="/video?id=<%= video.id%>" target="_blank">
           <img src="<%= video.logo%>"/>
         </a>
         <p><%= video.name%></p>

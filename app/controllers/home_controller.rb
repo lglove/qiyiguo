@@ -17,6 +17,10 @@ class HomeController < ApplicationController
     @video = Admin::Video.all
   end
 
+  def video
+    @video = Admin::Video.find(params[:id])
+  end
+
   def explain
   end
 

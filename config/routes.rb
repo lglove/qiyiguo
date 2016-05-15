@@ -6,6 +6,7 @@ Rails.application.routes.draw do
    get 'political', to: 'home#political'
    get 'serve', to: 'home#serve'
    get 'use', to: 'home#use'
+   get 'video', to: 'home#video'
    get 'register', to:'home#register'
    get 'personal', to:'home#personal'
    get 'personalAll', to:'home#personalAll'

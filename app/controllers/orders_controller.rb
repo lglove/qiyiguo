@@ -78,6 +78,7 @@ class OrdersController < ApplicationController
       order.user_id = @user.id
       order.designer_id = @user.designer_id
       order.name = @user.name+"的果子"
+      order.paid = "待付款"
       order.price = 500
       order.address = @user.userAddress.last.address
       puts "创建订单"
@@ -137,6 +138,7 @@ class OrdersController < ApplicationController
     order.user_id = @user.id
     order.designer_id = @user.designer_id
     order.name = @user.name+"的果子"
+    order.paid = "待付款"
     order.price = 500
     order.address = @user.userAddress.last.address
     puts "创建订单"
@@ -182,8 +184,8 @@ class OrdersController < ApplicationController
       payment.save
 
       order = Order.find(params[:data][:object][:order_id])
-      order.paid = "paid"
-      order.status = "已支付"
+      order.paid = "已支付"
+      order.status = "paid"
       order.save
     end
     render :text=>"ok"

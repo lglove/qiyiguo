@@ -96,13 +96,13 @@
             <th>订单号</th>
             <th>果子状态</th>
             <th>&nbsp;&nbsp;&nbsp;</th>
-            <th>2016-04-10 18:18:18</th>
+            <th><%= @user.orders.last.created_at.to_date%></th>
           </tr>
         </thead>
         <tbody class="table-striped bgt">
           <tr>
             <td><%= @user.orders.last.id%></td>
-            <% if @user.orders.last.paid != "已支付"%>
+            <% if @user.orders.last.paid == "已支付"%>
               <td>设计师即将与你联系</td>
               <td>已支付押金<span>500元</span></td>
               <td><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td>
