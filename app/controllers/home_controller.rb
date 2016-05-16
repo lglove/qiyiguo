@@ -138,7 +138,7 @@ class HomeController < ApplicationController
       UserStyle.create(user_id: user.id)
 
       session[:user_id] = user.id
-      redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll?form=welcome"
+      redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll?from=welcome"
     else
       flash[:notice] = "该手机号已经注册"
       redirect_to action: "register", from: params[:from], designer: params[:designer]
