@@ -63,13 +63,14 @@
             <td><%= @user.orders.last.id%></td>
             <% if @user.orders.last.paid == "已支付"%>
               <td>设计师即将与你联系</td>
-              <td>已支付押金<span>500元</span></td>
-              <td><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td>
+              <td>已支付押金</td>
+              <td><span>500元</span></td>
+              <!--td><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td-->
             <% else%>
               <td>设计师即将与你联系</td>
               <td>需要支付押金<span>500元</span></td>
               <td><a class="btn btn1 btn-danger btn-danger1 pad" data-toggle="modal" data-target="#myModal4_again" id="make_order_web_again">去支付</a>
-                <a class="btn btn1 btn-danger btn-danger1 pad" id="make_order_mobile_again"  style="display:none" >去支付</a></td>
+                <a class="btn btn1 btn-danger btn-danger1 pad" id="make_order_mobile_again"  style="display:none" >去支付</a><span class="cancle" data-toggle="modal" data-target="#myModal2">订单取消</span></td>
             <% end %>
           </tr>
         </tbody>
@@ -170,17 +171,17 @@
     <dt>
     <div class="bodyRevise">
       <h1><span><%= @user.name%></span>,你的体型信息</h1>
-      <p class="bodyCss">身高：<span><%= @user.userInfo.height%></span></p>
-      <p class="bodyCss">体重：<span><%= @user.userInfo.weight%></span></p>
-      <p class="bodyCss">上衣尺码：<span><%= @user.userInfo.shangyichima%></span></p>
-      <p class="bodyCss">腰围：<span><%= @user.userInfo.yaowei%></span></p>
-      <p class="bodyCss">臂长：<span><%= @user.userInfo.bichang%></span></p>
-      <p class="bodyCss">肩宽：<span><%= @user.userInfo.jiankuan%></span></p>
-      <p class="bodyCss">胸围：<span><%= @user.userInfo.xiongwei%></span></p>
-      <p class="bodyCss">臂围：<span><%= @user.userInfo.biwei%></span></p>
-      <p class="bodyCss">大腿围：<span><%= @user.userInfo.datuiwei%></span></p>
-      <p class="bodyCss">裤长：<span><%= @user.userInfo.kuchang%></span></p>
-      <p class="bodyCss">鞋码：<span><%= @user.userInfo.xiema%></span></p>
+      <p class="bodyCss">身高：<span><%= @user.userInfo.height || '150cm'%></span></p>
+      <p class="bodyCss">体重：<span><%= @user.userInfo.weight || '40kg'%></span></p>
+      <p class="bodyCss">上衣尺码：<span><%= @user.userInfo.shangyichima || 'XS'%></span></p>
+      <p class="bodyCss">腰围：<span><%= @user.userInfo.yaowei || '18码'%></span></p>
+      <p class="bodyCss">臂长：<span><%= @user.userInfo.bichang || '40cm'%></span></p>
+      <p class="bodyCss">肩宽：<span><%= @user.userInfo.jiankuan || '34cm'%></span></p>
+      <p class="bodyCss">胸围：<span><%= @user.userInfo.xiongwei || '55cm'%></span></p>
+      <p class="bodyCss">臂围：<span><%= @user.userInfo.biwei || '55cm'%></span></p>
+      <p class="bodyCss">大腿围：<span><%= @user.userInfo.datuiwei || '25cm'%></span></p>
+      <p class="bodyCss">裤长：<span><%= @user.userInfo.kuchang || '55cm'%></span></p>
+      <p class="bodyCss">鞋码：<span><%= @user.userInfo.xiema || '34码'%></span></p>
       <input class="btn btn1 btn-danger btn-danger1 amend" type="button" id="bodyRevise" value="修改" />
     </div>
     <div class="bodySave" style="display: none">
@@ -238,7 +239,7 @@
         <div class="progt">
           <span class="drtye">肩宽</span>
           <p id="slider6">
-          <span class="min">40</span>
+          <span class="min">34</span>
           <span class="max">60</span>
           </p>
           <span class="texter" id="texter6">40cm</span>
@@ -304,7 +305,7 @@
         </tr>
       </thead>
       <tbody class="table-striped bgt">
-        <% @user.orders.each do |order|%>
+        <% @user.orders.where("paid != '待付款'").each do |order|%>
           <tr>
             <td><%= order.created_at.to_date%></td>
             <td>转入</td>
@@ -669,8 +670,16 @@
 
     $("#give").click(function(){
       <%unless @user.userStyle.style.present?%>
-         $("#order_panduan").modal('show');
+        $("#order_panduan").modal('show');
+        $("#order_panduan").on('hidden.bs.modal', function(e){
+          if (!<%= @wanzheng %>) {
+            $("#myModal5").modal('show');
+          }
+        })
       <%end%>
+      if (!<%= @wanzheng %>) {
+        $("#myModal5").modal('show');
+      }
       $("dt").hide();
       $("dd").show();
       $(".liste>li>span").removeClass("activer");
@@ -822,7 +831,7 @@
     span5.text(slider5.slider("value")+"cm")
 
     slider6.slider({
-      min: 40,
+      min: 34,
       max: 60,
       slide:function(event,ui){
         span6.text(ui.value+"cm");

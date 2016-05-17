@@ -13,7 +13,7 @@ a,a:focus,a:hover,a:active{
 }
 .on{
 	background:rgba(255,255,255,1)!important;
-	padding:5px 0;
+	/*padding:5px 0;*/
 }
 .navbar-nav{
 	width:35%;
@@ -41,12 +41,12 @@ a,a:focus,a:hover,a:active{
 	color:#fff;
 }
 .navbar-default .navbar-nav>.active>a,
-.navbar-default .navbar-nav>.active>a:focus, 
+.navbar-default .navbar-nav>.active>a:focus,
 .navbar-default .navbar-nav>.active>a:hover {
 	color: #fff;
     background: rgba(0,55,122,0);
 }
-.navbar-default .navbar-nav>li>a:focus, 
+.navbar-default .navbar-nav>li>a:focus,
 .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
     background-color: transparent;
@@ -60,7 +60,7 @@ a,a:focus,a:hover,a:active{
 	height:30px;
 }
 footer{
-	padding:30px 0;
+	padding:5px 0;
 	background-color:#000;
 }
 .ansow{
@@ -88,6 +88,7 @@ footer{
 	color:#696565;
 	font-size:16px;
 	font-weight:700;
+    margin-bottom: 0;
 }
 .modal-content1{
 	border-radius:0;
@@ -158,5 +159,8 @@ footer{
 		margin:20px 7% 0 7%;
 	}
 }
-
-
+@media screen and (min-width:992px) {
+    .ansow{
+        margin-top:33px;
+    }
+}

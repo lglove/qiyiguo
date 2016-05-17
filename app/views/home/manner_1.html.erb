@@ -1,8 +1,14 @@
 <%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
+<script type="text/javascript">
+  window.onload = function(){
+    var h=$(".manner").height();
+    $(".mannerA>p").css("margin-top",h/2+30);
+  }
+</script>
 <head>
   <title>风格测试中1</title>
 </head>
-<section class="row">
+<section class="row" style="margin-left:0;">
 <header>风格测试中</header>
 <div class="mannerA col-md-3">
   <p class="text-center right">您日常的着衣风格</p>

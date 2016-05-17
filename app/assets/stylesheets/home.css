@@ -53,24 +53,23 @@
 .canvas{
 	position:relative;
 	margin:100px auto 0;
-	width:140px;
-	height:140px;
+	width:200px;
 }
 .canest{
 	position:absolute;
-	top:40%;
-	left:10px;
-	width:120px;
+    top:40%;
+    width:200px;
+    background-color:#fff;
 	text-align:center;
 }
 .canest>a{
 	font-size:24px;
-	color:#fff;
+    color:rgba(0,0,0,.9);
 }
 .num{
 	width: 100%;
 	margin:0 auto;
-	padding:30px 0 50px;
+	padding:40px 0 50px;
 	text-align: center;
 }
 .num>a{
@@ -180,7 +179,7 @@
 	color:#AEAEAE;
 }
 .txto{
-	margin: 50px 0 20px;
+	margin: 150px 0 20px;
 	font-size:50px;
 	letter-spacing: -5px;
 	font-weight: bold;
@@ -214,10 +213,12 @@
 	margin:70px 0;
 }
 .design>a{
-	color:#E8324A;
+    display: inline-block;
+	color:#fff;
 	font-size:26px;
 	font-weight:bold;
 	cursor:pointer;
+    background-color: #E8324A;
 }
 .design>a:hover{
 	text-decoration:none;

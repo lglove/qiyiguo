@@ -16,7 +16,7 @@ header{
 	padding:20px 0 20px 70px;
 	background-color:#A0A0A0;
 	color:#fff;
-	font-size:30px;
+	font-size:26px;
 	font-weight:bold;
 }
 .mannerA>p{
@@ -203,7 +203,7 @@ figcaption{
 .selec>p{
 	margin:20px 0;
 }
-.ui-state-default, 
+.ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
 	border-radius:50%;

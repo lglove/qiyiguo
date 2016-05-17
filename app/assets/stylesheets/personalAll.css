@@ -14,7 +14,7 @@ header{
 	padding:20px 0 20px 70px;
 	background-color:#A0A0A0;
 	color:#fff;
-	font-size:30px;
+	font-size:26px;
 	font-weight:bold;
 }
 .container{
@@ -69,15 +69,15 @@ figcaption>span{
 	margin:0 28px;
 	cursor:pointer;
 }
-figcaption>span:first-of-type{
-	background-color:#E9314B;
-	border:2px solid #E9314B;
-	color:#fff;
-}
-figcaption>span:last-of-type{
+figcaption>span{
 	background-color:#fff;
 	border:2px solid #C7C7C7;
 	color:#C7C7C7;
+}
+figcaption>span:hover{
+	background-color:#E9314B;
+	border:2px solid #E9314B;
+	color:#fff;
 }
 figcaption>a{
 	font-size:28px;

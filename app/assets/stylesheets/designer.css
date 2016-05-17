@@ -14,7 +14,7 @@ header{
 	padding:20px 0 20px 70px;
 	background-color:#A0A0A0;
 	color:#fff;
-	font-size:30px;
+	font-size:26px;
 	font-weight:bold;
 }
 .container{
@@ -60,12 +60,12 @@ aside>p{
 .pare>img{
 	width:280px;
 	height:280px;
-	
+
 }
 figcaption{
 	width:300px;
 	font-size:18px;
-	color:#BEBEBE;
+	color:#777;
 }
 article{
 	width:70%;

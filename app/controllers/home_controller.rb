@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   #layout "home"
+  SMS_URL = "http://yunpian.com/v1/sms/tpl_send.json"
 
   before_filter :check_login, :only => ["manner_1","personalAll"]
   before_filter :get_login_user
@@ -115,6 +116,17 @@ class HomeController < ApplicationController
   end
 
   def register
+  end
+
+  def mobile_validate
+    v = MobileValidate.new
+    v.mobile = params[:mobile]
+    v.code = rand(1000..10000)
+    v.save
+
+    RestClient.post SMS_URL, apikey: "cf1879047c9216b64e5a233eceee0d79", mobile: params[:mobile], tpl_id: 771157, tpl_value: "#code#=#{v.code}"
+
+    render :text=>"ok"
   end
 
   def mobile_register

@@ -20,7 +20,7 @@
       </div>
     <%end%>
     <figcaption class="text-left">
-    <%= @designers.first.description%>
+    <p><%= @designers.first.description%></p>
     </figcaption>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
@@ -61,7 +61,7 @@
             <p class="dossier">奇衣果为你创建档案</p>
             <p>当你需要买衣服，只需要选一个设计师要一个果子</p>
             <p>设计师就会在24小时内与你联系，为你精选服饰</p>
-            <a class="btn btn-danger btn-danger1 btn1 expect1" href="#" data-dismiss="modal" >期待已久，立即选择设计师</a>
+            <a class="btn btn-danger btn-danger1 btn1 expect1" href="#" data-dismiss="modal" aria-label="Close">期待已久，立即选择设计师</a>
           </div>
         </div>
       </div>

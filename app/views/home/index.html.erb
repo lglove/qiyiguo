@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="canvas">
-      <canvas id="test" width=140 height=140></canvas>
+      <!--canvas id="test" width=140 height=140></canvas-->
       <span class="canest"><a href="/register?from=register">立即注册</a></span>
     </div>
     <div class="num"><a href="/register?from=login">已有账号，登陆</a></div>
@@ -170,7 +170,10 @@
         <i>199-599</i>
       </div>
     </div>
-    <p class="design text-center"><a href="/designer">去选择我的专属设计师</a></p>
+    <p class="design text-center">
+    <span style="display:block;font-size:26px;">舒适便捷的高品质购衣生活</span>
+    <a href="designer.html">成为奇异果会员， 选择我的专属设计师</a>
+    </p>
   </div>
   <footer class="row">
   <ul class="ansow clearfloat col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12">
@@ -184,30 +187,30 @@
 </body>
   <script>
     //canvas
-    var canvas2d = document.getElementById("test").getContext("2d");
-    var deg = 0;
-    var test = function(deg){
-      var r = deg*Math.PI/180;   //canvas绘制圆形进度
-      canvas2d.clearRect(0,0,200,200);   //先清理
-      canvas2d.beginPath();  //路径开始
+   // var canvas2d = document.getElementById("test").getContext("2d");
+    // var deg = 0;
+    // var test = function(deg){
+     //  var r = deg*Math.PI/180;   //canvas绘制圆形进度
+     //  canvas2d.clearRect(0,0,200,200);   //先清理
+      // canvas2d.beginPath();  //路径开始
       //canvas2d.fillStyle = "#fff"; //填充颜色
-      canvas2d.strokeStyle = "#E8324A"; //canvas边框颜色
-      canvas2d.lineWidth = 3; //线宽
-      canvas2d.arc(70,70,63,0-90*Math.PI/180,r-90*Math.PI/180,false); //canvas绘制弧形
+      // canvas2d.strokeStyle = "#E8324A"; //canvas边框颜色
+      // canvas2d.lineWidth = 3; //线宽
+      // canvas2d.arc(70,70,63,0-90*Math.PI/180,r-90*Math.PI/180,false); //canvas绘制弧形
       //canvas2d.fill();
-      canvas2d.stroke();
+      // canvas2d.stroke();
       //canvas2d.closePath();
-    };
+    // };
     //使用定时器让html5 canvas绘制圆形进度动起来
-    var t = setInterval(function(){
-      deg+=10;
-      test(deg);
-      if(deg>360){
+    // var t = setInterval(function(){
+      // deg+=10;
+      // test(deg);
+      // if(deg>360){
         //clearInterval(t);
-        deg=0;
-      }
+       //  deg=0;
+     //  }
      // console.log(deg);
-    },80);
+    // },80);
 
 
     $(function(){
