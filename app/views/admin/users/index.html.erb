@@ -2,8 +2,8 @@
   <tr>
     <td class="col-sm-5 form-inline" >
       <%= form_for '', method: 'get' do |f|%>
-        <%= text_field_tag :email, params[:mobilephone] , placeholder: '输入手机号查询', :class=>"form-control"%>
-        <%= text_field_tag :name, params[:name] , placeholder: '输入姓名查询', :class=>"form-control"%>
+        <%= text_field_tag :email, params[:mobilephone] , placeholder: '输入手机号查询如:18888888888', :class=>"form-control"%>
+        <%= text_field_tag :name, params[:name] , placeholder: '输入姓名查询如:小王', :class=>"form-control"%>
         <%= f.submit '搜索', class: 'btn btn-primary form-control'%>
       <% end %>
     </td>
@@ -17,7 +17,7 @@
       <th class="text-center">电话</th>
       <th class="text-center">邮箱</th>
       <th class="text-center">创建时间</th>
-      <th class="text-center" colspan="3">操作</th>
+      <th class="text-center" colspan="2">操作</th>
     </tr>
     <% @users.each do |user| %>
       <tr>
@@ -27,13 +27,7 @@
         <td class="text-center"><%= user.email %></td>
         <td class="text-center"><%= user.created_at.to_date %></td>
         <td class="text-center">
-          <%= link_to '编辑',{:action=>'edit', :id=>user.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
-        <td class="text-center">
           <%= link_to '查看详情',{:action=>'zhanshi', :id=>user.id, :page=>params[:page]}, :class => 'btn btn-default' %></td>
-        <td class="text-center"> <%= link_to '删除',
-                      {:action=>'shanchu', :id=>user.id},
-                      :data => { :confirm => '你确定删除?' },
-                      :class => 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
