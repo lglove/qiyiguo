@@ -677,7 +677,7 @@
           }
         })
       <%end%>
-      if (!<%= @wanzheng %> && @user.userStyle.style.present?) {
+      if (!<%= @wanzheng %> && <%= @user.userStyle.style.present?%>) {
         $("#myModal5").modal('show');
       }
       $("dt").hide();

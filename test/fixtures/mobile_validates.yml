@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  mobile: MyString
+  checked: 1
+
+two:
+  code: MyString
+  mobile: MyString
+  checked: 1

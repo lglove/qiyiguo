@@ -9,7 +9,9 @@
     </ul>
     <div class="register" <% if params[:from] == "login"%>style="display:none"<%end%>>
       <form action="/home/mobile_register" method="post">
-        <input class="text-center" type="text" name="mobilephone" placeholder="您的手机号" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='您的手机号'" value="" />
+        <input class="text-center" type="text" id="mobile" name="mobilephone" placeholder="您的手机号" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='您的手机号'" value="" />
+        <input style="width:70%; float:left;" class="text-center" name="code" type="password" placeholder="请输入验证码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入验证码'" value="" />
+        <input style="width:30%; float:left; background-color:#ccc; padding-bottom:0;" readonly class="text-center" id="send" type="button" value="免费获取验证码" />
         <input class="text-center" type="password" id="password" name="password" placeholder="创建密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='创建密码'" value="" />
         <input class="text-center" type="password" id="password_confirm" placeholder="确认密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='确认密码', validate_password();" value="" />
         <input class="text-center" name="from" type="hidden"  value="<%= params[:from]%>" />
@@ -18,7 +20,7 @@
         <p class="text-center"><span data-toggle="modal" data-target="#myModal6">什么是奇衣果邀请码</span></p>
         <input class="text-center" type="submit" value="提交" />
       </form>
-      <p class="text-center agre"><img src="img/ok.png" />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
+      <p class="text-center agre"><input id="xieyi" type="checkbox" value="on" />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
       <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-dialog1" role="document">
           <div class="modal-content modal-content1">
@@ -42,9 +44,10 @@
         <input class="text-center" name="password" type="password" placeholder="请输入密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入密码'" value="" />
         <input class="text-center" name="from" type="hidden"  value="<%= params[:from]%>" />
         <input class="text-center" name="designer" type="hidden"  value="<%= params[:designer]%>" />
-        <input class="text-center" type="submit" value="登录" data-toggle="modal" data-target="#myModal5" />
+        <p class="text-right"><a href="/home/forgetpassword" style="font-size:16px;">忘记密码?</a></p>
+        <input class="text-center" type="submit" style="margin:0 0 10px 0" value="登录" data-toggle="modal" data-target="#myModal5" />
       </form>
-      <p class="text-center agre"><img src="img/ok.png" />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
+      <p class="text-center agre"><input type="checkbox" checked=checked />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
     </div>
   </div>
 </div>
@@ -85,4 +88,41 @@
       alert("两次输入的密码不相同,请检查!");
     }
   }
+
+  //点击发送验证码
+  var wait=60;
+  function time(o) {
+    if (wait == 0) {
+      o.removeAttribute("disabled");
+      o.value="重新发送";
+      wait = 60;
+      } else {
+      o.setAttribute("disabled", true);
+      o.value=wait+"s";
+      wait--;
+      setTimeout(function() {
+        time(o)
+      },1000)
+    }
+  }
+  document.getElementById("send").onclick=function(){
+    //监测手机号是否为空
+    if ($('#mobile').val()=='') {
+      alert("请输入手机号");
+      return;
+    };
+    time(this);
+    //检测是否勾选同意服务协议
+    <%#if ($('#xieyi').val()=='') {  %>
+    <%#  alert("请输入手机号");%>
+    <%#  return;                     %>
+    <%#};                            %>
+    //执行获取验证码的请求
+    $.ajax({
+      type: 'post',
+      url: '/home/mobile_validate',
+      data: { 'mobile': $('#mobile').val()},
+    })
+  }
+
 </script>

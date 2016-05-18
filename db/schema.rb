@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511085041) do
+ActiveRecord::Schema.define(version: 20160518164053) do
 
   create_table "admin_admin_menus", force: :cascade do |t|
     t.integer  "admin_id",   limit: 4
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160511085041) do
     t.integer  "parent_id",  limit: 4
     t.string   "text",       limit: 255
     t.string   "url",        limit: 255
-    t.string   "hide",       limit: 45,  default: "0"
+    t.string   "hide",       limit: 255, default: "0"
     t.integer  "position",   limit: 4,   default: 100
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(version: 20160511085041) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "mobile_validates", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "mobile",     limit: 255
+    t.integer  "checked",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "orders", force: :cascade do |t|
