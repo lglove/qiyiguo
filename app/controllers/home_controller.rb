@@ -173,7 +173,7 @@ class HomeController < ApplicationController
       redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll?from=welcome"
     else
       flash[:notice] = "该手机号已经注册"
-      redirect_to action: "register", from: params[:from], designer: params[:designer]
+      redirect_to action: "register", from: "register", designer: params[:designer]
     end
 
   end
