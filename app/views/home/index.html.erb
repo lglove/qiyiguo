@@ -67,11 +67,15 @@
         <p>先试穿后决定是否付款购买。</p>
       </div>
     </div>
-    <div class="canvas">
-      <!--canvas id="test" width=140 height=140></canvas-->
-      <span class="canest"><a href="/register?from=register">立即注册</a></span>
-    </div>
-    <div class="num"><a href="/register?from=login">已有账号，登陆</a></div>
+    <% if session[:user_id] %>
+      <div class="num"><a href="/home/manner_1">进行风格测试</a></div>
+    <%else%>
+      <div class="canvas">
+        <!--canvas id="test" width=140 height=140></canvas-->
+        <span class="canest"><a href="/register?from=register">立即注册</a></span>
+      </div>
+      <div class="num"><a href="/register?from=login">已有账号，登陆</a></div>
+    <% end%>
   </div>
   <div class="page2">
     <div class="row">

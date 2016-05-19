@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       post :update_body
       post :mobile_validate
       post :password_update
+      post :order_validate
       get :forgetpassword
       get :signin
       get :signout

@@ -551,6 +551,21 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="myModal15" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content modal-content1">
+          <div class="modal-header modal-header1">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="img/del-.png" /></button>
+          </div>
+          <div class="modal-body text-center loginas">
+            <p>美女，你有未支付的果子，请先支付哦！</p>
+            <a class="btn btn-danger btn-danger1 btn1" data-dismiss="modal" href="personalAll">现在就去</a>
+            <a class="btn btn-danger btn-danger1 btn1" data-dismiss="modal" aria-label="Close" >稍后吧</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </dl>
 </div>
 </section>
@@ -680,9 +695,21 @@
       if (!<%= @wanzheng %> && <%= @user.userStyle.style.present?%>) {
         $("#myModal5").modal('show');
       }
-      $("dt").hide();
-      $("dd").show();
-      $(".liste>li>span").removeClass("activer");
+      $.ajax({
+        type: 'post',
+        url: 'home/order_validate',
+        data: {"user": <%= @user.id%>},
+        success: function(data){
+          if (data['code']==0){
+            $("dt").hide();
+            $("dd").show();
+            $(".liste>li>span").removeClass("activer");
+          };
+          if (data['code'] == 1){
+            $("#myModal15").modal('show');
+          };
+        }
+      })
     })
 
     $("#qiyiguo").click(function(){

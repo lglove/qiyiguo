@@ -98,6 +98,15 @@ class HomeController < ApplicationController
   def serve
   end
 
+  def order_validate
+    order = Order.where("user_id = '#{@user.id}' and paid = '待付款'")
+    if !order
+      render :json=>{code: 0}
+    else
+     render :json=>{code: 1}
+    end
+  end
+
   def use
     if params[:order] == "yes"
       @order = Order.find_by_user_id(2)
@@ -131,7 +140,7 @@ class HomeController < ApplicationController
     #  mobile: params[:mobile],
     #  text: "【奇衣果】您好，您的验证码是#{v.code}。"
 
-    RestClient.post SMS_URL, apikey: "2ce832e429d73c821b3ad2b954b92bae", mobile: params[:mobile], tpl_id: 1379519, tpl_value: "#code#=#{v.code}"
+    RestClient.post SMS_URL, apikey: "2ce832e429d73c821b3ad2b954b92bae", mobile: params[:mobile], tpl_id: 1380861, tpl_value: "#code#=#{v.code}"
     flash.now[:notice] = "验证码已发送，请在手机上查看"
     render :text=>"ok"
   end
