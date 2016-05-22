@@ -126,8 +126,8 @@ dt:first-child{
 	font-size:18px;
 	margin-bottom:20px;
 }
-.revise>p:nth-child(7),
-.save>p:nth-child(7){
+.revise>p:nth-child(6),
+.save>p:nth-child(6){
 	font-size:22px;
 	margin-top:40px;
 }
@@ -376,6 +376,7 @@ dd>h1{
     top: -0.6em!important;
     margin-left: 0!important;
 }
+.expect1{margin-bottom:30px;}
 @media (min-width: 992px) and (max-width:1199px){
 	aside{
 		text-align:center;

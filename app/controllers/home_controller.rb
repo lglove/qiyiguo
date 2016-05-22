@@ -99,26 +99,16 @@ class HomeController < ApplicationController
   end
 
   def order_validate
-    order = Order.where("user_id = '#{@user.id}' and paid = '待付款'")
-    if !order
-      render :json=>{code: 0}
+    order = Order.where("user_id = '#{@user.id}'").last
+    puts order.inspect
+    if order && order.paid == "待付款"
+      render :json=>{code: 1}
     else
-     render :json=>{code: 1}
+      render :json=>{code: 0}
     end
   end
 
   def use
-    if params[:order] == "yes"
-      @order = Order.find_by_user_id(2)
-      unless @order
-        @order = Order.new
-        @order.user_id = 2
-        @order.name = "测试的果子"
-        @order.price = 500
-        @order.address = "呼家楼"
-        @order.save
-      end
-    end
   end
 
   def welcome

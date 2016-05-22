@@ -48,3 +48,12 @@ $(function(){
     $("html,body").animate({scrollTop:0}, 500);
   });
 })
+
+//点击复制邀请码
+function copyInviteCode()
+{
+var code =document.getElementById("invite_code");
+code.select(); // 选择对象
+document.execCommand("Copy"); // 执行浏览器复制命令
+alert("复制成功。");
+}

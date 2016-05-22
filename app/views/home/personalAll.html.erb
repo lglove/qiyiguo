@@ -91,7 +91,7 @@
       </article>
     <%end%>
     </dt>
-    <div class="modal fade" id="myModal4_again" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal4_again" tabindex="-1" role="dialog"  data-backdrop="static" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -106,7 +106,7 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -319,14 +319,14 @@
     <dt>
     <h1>我的奇衣邀请码</h1>
     <table class="table table-responsive">
-      <caption class=""><%= @user.invitecode%></caption>
-      <!--thead>
+      <caption class="invite_code" id="invite_code"><%= @user.invitecode%></caption>
+      <thead>
         <tr>
-          <th class="active"><span>点击复制邀请码</span></th>
+          <!--th class="active"><span onclick="copyInviteCode()" >点击复制邀请码</span></th-->
           <th>&nbsp;</th>
           <th>&nbsp;</th>
           <th>&nbsp;</th>
-        </tr-->
+        </tr>
       </thead>
       <tbody class="table-striped sourcf">
         <tr colspan="4">
@@ -339,7 +339,7 @@
           <td>&nbsp;</td>
         </tr>
         <tr colspan="4">
-          <td><span>0</span>次(15天之内)</td>
+          <td><span><%= User.where("invite_id = '#{@user.id}'").count %></span>次(15天之内)</td>
         </tr>
         <tr class="active" colspan="4">
           <td>已使用奇衣基金</td>
@@ -362,32 +362,14 @@
       </tbody>
     </table>
     <p class="text-center rule rue"><span data-toggle="modal" data-target="#myModal3">奇衣基金邀请码使用规则</span></p>
-    <%#<p class="text-center"><a class="btn btn1 btn-danger btn-danger1 visit">邀请朋友，共享奇衣基金</a></p>%>
-
-    <p class="text-center"><a class="-mob-share-ui-button -mob-share-open btn btn1 btn-danger btn-danger1 visit" style="background-color: #E9314B">邀请朋友，共享奇衣基金</a></p>
-  <div class="-mob-share-ui" style="display: none">
-    <ul class="-mob-share-list">
-      <li class="-mob-share-weibo"><p>新浪微博</p></li>
-      <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
-      <li class="-mob-share-weixin"><p>微信</p></li>
-      <li class="-mob-share-qzone"><p>QQ空间</p></li>
-      <li class="-mob-share-qq"><p>QQ好友</p></li>
-      <li class="-mob-share-renren"><p>人人网</p></li>
-      <li class="-mob-share-kaixin"><p>开心网</p></li>
-      <li class="-mob-share-douban"><p>豆瓣</p></li>
-      <li class="-mob-share-facebook"><p>Facebook</p></li>
-      <li class="-mob-share-twitter"><p>Twitter</p></li>
-    </ul>
-    <div class="-mob-share-close">取消</div>
-  </div>
-  <div class="-mob-share-ui-bg"></div>
-    <p class="text-center icon">
-    <a href="#"><img src="img/weixin.png" /></a>
-    <a href="#"><img src="img/qq.png" /></a>
-    <a href="#"><img src="img/xinlang.png" /></a>
-    <a href="#"><img src="img/dou.png" /></a>
-    </p>
-    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <p class="text-center"><a class="btn btn1 btn-danger btn-danger1 visit">邀请朋友，共享奇衣基金</a></p>
+  <p class="text-center icon">
+  <a class="-mob-share-weixin"><img src="/img/weixin.png" /></a>
+  <a class="-mob-share-tencentweibo" href="#"><img src="/img/qq.png" /></a>
+  <a class="-mob-share-weibo"><img src="/img/xinlang.png" /></a>
+  <a class="-mob-share-douban"><img src="/img/dou.png" /></a>
+  </p>
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -447,7 +429,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -455,14 +437,14 @@
           </div>
           <div class="modal-body">
             <h4 class="No">订单编号：</h4>
-            <p class="text-center" id="qrcodeTable" style="padding-left:0px"></p>
+            <p class="text-center" id="qrcodeTable1" style="padding-left:0px"></p>
             <p class="text-center Noa">打开支付宝，扫码完成支付</p>
             <p class="text-center Noa"><a href="/personalAll" class="btn btn1 btn-danger btn-danger1">完成支付</a></p>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal10" tabindex="-1" role="dialog"  data-backdrop="static" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -477,7 +459,7 @@
     </div>
     </dd>
 
-    <div class="modal fade" id="myModal14" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal14" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -494,16 +476,16 @@
             <p class="text-center Nof"><span data-toggle="modal" data-target="#myModal3" data-dismiss="modal" aria-label="Close">了解详情</span></p>
             <p class="text-center">用奇衣邀请码邀请朋友加入奇衣，即可与朋友共享奇衣基金</p>
             <p class="text-center icon">
-            <a href="#"><img src="/img/weixin.png" /></a>
-            <a href="#"><img src="/img/qq.png" /></a>
-            <a href="#"><img src="/img/xinlang.png" /></a>
-            <a href="#"><img src="/img/dou.png" /></a>
+            <a class="-mob-share-weixin"><img src="/img/weixin.png" /></a>
+            <a class="-mob-share-tencentweibo" href="#"><img src="/img/qq.png" /></a>
+            <a class="-mob-share-weibo"><img src="/img/xinlang.png" /></a>
+            <a class="-mob-share-douban"><img src="/img/dou.png" /></a>
             </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="order_panduan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="order_panduan" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -521,11 +503,11 @@
       </div>
     </div>
 
-    <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal9" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="/img/del-.png" /></button>
+            <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><img src="/img/del-.png" /></button>
           </div>
           <div class="modal-body text-center">
             <p class="dossier">奇衣果为你创建档案</p>
@@ -537,7 +519,7 @@
       </div>
     </div>
 
-    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -552,7 +534,7 @@
       </div>
     </div>
 
-    <div class="modal fade" id="myModal15" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal15" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
       <div class="modal-dialog modal-dialog1" role="document">
         <div class="modal-content modal-content1">
           <div class="modal-header modal-header1">
@@ -570,7 +552,7 @@
 </div>
 </section>
 <input id="user_id" style="display:none" value="<%= @user.id %>"/>
-<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=你的appkey"></script>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1303549a71dcc"></script>
 <script type="text/javascript" src="/src/jquery.qrcode.js"></script>
 <script type="text/javascript" src="/src/qrcode.js"></script>
 <script>
@@ -608,7 +590,7 @@
          // width   : "175",
          // height  : "165"
        // });
-        jQuery('#qrcodeTable').qrcode({
+        jQuery('#qrcodeTable1').qrcode({
           text  :data["data"]
         });
       }
@@ -692,24 +674,25 @@
           }
         })
       <%end%>
-      if (!<%= @wanzheng %> && <%= @user.userStyle.style.present?%>) {
-        $("#myModal5").modal('show');
-      }
       $.ajax({
         type: 'post',
         url: 'home/order_validate',
         data: {"user": <%= @user.id%>},
         success: function(data){
+          if (data['code'] == 1){
+            $("#myModal15").modal('show');
+          };
           if (data['code']==0){
             $("dt").hide();
             $("dd").show();
             $(".liste>li>span").removeClass("activer");
           };
-          if (data['code'] == 1){
-            $("#myModal15").modal('show');
-          };
         }
       })
+
+      if (!<%= @wanzheng %> && <%= @user.userStyle.style.present?%>) {
+        $("#myModal5").modal('show');
+      }
     })
 
     $("#qiyiguo").click(function(){

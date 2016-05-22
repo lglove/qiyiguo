@@ -1,10 +1,10 @@
-<%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
 <script type="text/javascript">
   window.onload = function(){
     var h=$(".manner").height();
     $(".mannerA>p").css("margin-top",h/2+30);
   }
 </script>
+<%= stylesheet_link_tag    'manner', media: 'all', 'data-turbolinks-track' => true %>
 <head>
   <title>风格测试中1</title>
 </head>
@@ -59,7 +59,7 @@
     <figcaption>浪漫甜美</figcaption>
     </figure>
   </div>
-  <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="myModal7" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-dialog1" role="document">
       <div class="modal-content modal-content1">
         <div class="modal-header modal-header1">
