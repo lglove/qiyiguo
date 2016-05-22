@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get :signin
       get :signout
       get :welcome
+      get :manner
       get :manner_1
       get :manner_2
       get :manner_3

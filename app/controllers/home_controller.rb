@@ -25,6 +25,10 @@ class HomeController < ApplicationController
   def explain
   end
 
+  def manner
+    redirect_to :action=>"manner_1"
+  end
+
   def manner_1
   end
 
