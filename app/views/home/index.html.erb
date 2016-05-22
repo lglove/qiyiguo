@@ -73,9 +73,9 @@
     <%else%>
       <div class="canvas">
         <!--canvas id="test" width=140 height=140></canvas-->
-        <span class="canest"><a href="/register?from=register">立即注册</a></span>
+        <span class="canest"><a class="login" >立即注册</a></span>
       </div>
-      <div class="num"><a href="/register?from=login">已有账号，登陆</a></div>
+      <div class="num"><a class="login">已有账号，登陆</a></div>
     <% end%>
   </div>
   <div class="page2">
@@ -230,9 +230,6 @@
         }
       })
 
-    $(".login").click(function(){
-      $("#register_modal").modal('show');
-    })
     })
   </script>
 </html>

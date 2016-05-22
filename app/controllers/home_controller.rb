@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  #layout "home"
+  layout "home"
   SMS_URL = "http://yunpian.com/v1/sms/tpl_send.json"
 
   before_filter :check_login, :only => ["manner_1","personalAll"]
@@ -124,27 +124,24 @@ class HomeController < ApplicationController
     v.checked = 0
     v.save
 
-    #RestClient.post "https://sms.yunpian.com/v1/sms/send.json",
-    #  apikey: "2ce832e429d73c821b3ad2b954b92bae",
-    #  #mobile: "18710846413",
-    #  mobile: params[:mobile],
-    #  text: "【奇衣果】您好，您的验证码是#{v.code}。"
-
-    RestClient.post SMS_URL, apikey: "2ce832e429d73c821b3ad2b954b92bae", mobile: params[:mobile], tpl_id: 1380861, tpl_value: "#code#=#{v.code}"
+#    RestClient.post SMS_URL, apikey: "2ce832e429d73c821b3ad2b954b92bae", mobile: params[:mobile], tpl_id: 1380861, tpl_value: "#code#=#{v.code}"
     flash.now[:notice] = "验证码已发送，请在手机上查看"
     render :text=>"ok"
   end
 
   def password_update
     v = MobileValidate.find_by(["mobile = ? and code = ? and checked = 0", params[:mobilephone], params[:code]])
+    user = User.find_by(["(name = ? or mobilephone = ?)", params[:mobilephone], params[:mobilephone]])
     if v
-       user = User.find_by(["(name = ? or mobilephone = ?)", params[:mobilephone], params[:mobilephone]])
-       user.password=params[:password]
+       user.password=User.md5(params[:password])
        user.save
        v.checked = "1"
+       v.save
     end
       flash.now[:notice] = "密码修改成功"
       session[:user_id] = user.id
+      puts user.id
+      puts session[:user_id]
       redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll?from=welcome"
   end
 

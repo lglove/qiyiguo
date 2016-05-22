@@ -88,6 +88,9 @@
       $(".loading").show();
     })
   })
+    $(".login").click(function(){
+      $("#register_modal").modal('show');
+    })
     //检测是否勾选同意服务协议
     $(".agre").click(function(){
       if ($("input[type='checkbox']").is(':checked')){
