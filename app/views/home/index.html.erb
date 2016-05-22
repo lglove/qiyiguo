@@ -43,7 +43,8 @@
       <li class="text-center"><a href="designer">选设计师</a></li>
       <li class="text-center"><a href="designervideo">奇衣体验</a></li>
       <% if session[:user_id].nil?%>
-        <li class="text-center"><a class="login" href="/register?from=login">登陆</a></li>
+        <%#<li class="text-center"><a class="login" href="/register?from=login">登陆</a></li>%>
+        <li class="text-center"><a class="login">登陆</a></li>
       <%else%>
         <li class="text-center"><a href="/personalAll"><%= User.find(session[:user_id]).name%></a></li>
       <% end%>
@@ -179,6 +180,7 @@
     <a href="designer.html">成为奇异果会员， 选择我的专属设计师</a>
     </p>
   </div>
+      <%=render "register" %>
   <footer class="row">
   <ul class="ansow clearfloat col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12">
     <li class="pull-left"><a href="/explain">常见问题<br/>FAQ</a></li>
@@ -227,6 +229,10 @@
           $("#menu>li>a").css("color","#fff");
         }
       })
+
+    $(".login").click(function(){
+      $("#register_modal").modal('show');
+    })
     })
   </script>
 </html>

@@ -141,6 +141,7 @@ class HomeController < ApplicationController
        user = User.find_by(["(name = ? or mobilephone = ?)", params[:mobilephone], params[:mobilephone]])
        user.password=params[:password]
        user.save
+       v.checked = "1"
     end
       flash.now[:notice] = "密码修改成功"
       session[:user_id] = user.id
@@ -158,6 +159,7 @@ class HomeController < ApplicationController
       user.password = User.md5(params[:password])
       user.invitecode = "qiyi"+params[:mobilephone]
       user.save
+      v.checked = "1"
       if user && params[:invitecode].present?
         invite_user = User.find_by("invitecode = ?", params[:invitecode])
         invite_user.invite_amount += 20

@@ -1,0 +1,139 @@
+<%= stylesheet_link_tag    'register', media: 'all', 'data-turbolinks-track' => true %>
+<div class="container">
+  <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-content1">
+        <div class="modal-header modal-header1">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="img/del-.png" /></button>
+        </div>
+        <div class="modal-body">
+          <div class="fourm">
+            <ul class="clearfloat">
+              <li class="pull-left active">注册</li>
+              <li class="pull-left">登录</li>
+            </ul>
+            <div class="register" style="display:none">
+              <form action="/home/mobile_register" method="post">
+                <input class="text-center" type="text" id="mobile" name="mobilephone" placeholder="您的手机号" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='您的手机号'" value="" />
+                <input style="width:70%; float:left;" class="text-center" name="code" type="password" placeholder="请输入验证码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入验证码'" value="" />
+                <input style="width:30%; float:left; background-color:#ccc; padding-bottom:0;" readonly class="text-center" id="send" type="button" value="免费获取验证码" />
+                <input class="text-center" type="password" id="password" name="password" placeholder="创建密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='创建密码'" value="" />
+                <input class="text-center" type="password" id="password_confirm" placeholder="确认密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='确认密码', validate_password();" value="" />
+                <input class="text-center" name="from" type="hidden"  value="<%= params[:from]%>" />
+                <input class="text-center" name="designer" type="hidden"  value="<%= params[:designer]%>" />
+                <input class="text-center munb" type="text" name="invitecode" placeholder="有奇衣果邀请码？请在这里输入"  onfocus="this.placeholder=''"  onblur="this.placeholder='有奇衣果邀请码？请在这里输入'" value="" />
+                <p class="text-center"><span data-toggle="modal" data-target="#myModal6">什么是奇衣果邀请码</span></p>
+                <input class="text-center submit" type="submit" value="提交" />
+              </form>
+              <p class="text-center agre"><input id="xieyi" type="checkbox" checked="checked" />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
+              <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-dialog1" role="document">
+                  <div class="modal-content modal-content1">
+                    <div class="modal-header modal-header1">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="img/del-.png" /></button>
+                    </div>
+                    <div class="modal-body">
+                      <h2 class="text-center visin">关于奇衣果邀请码</h2>
+                      <P class="rule">让朋友用你的邀请码注册，共享奇衣基金</P>
+                      <p class="rule">1.每位奇衣用户拥有一个独立的邀请码，用于邀请感兴趣的朋友，一起获得奇衣基金，分享消费返现！</p>
+                      <p class="rule">2.当朋友使用你的邀请码完成注册，你们都获得奇衣基金。xxx（后面一样）</p>
+                      <p class="rule">3.奇衣基金可用于抵扣你在奇衣的消费。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="loading">
+              <form action="/home/signin" method="get">
+                <input class="text-center" name="mobilephone" type="text" placeholder="请输入手机号" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入手机号'" value="" />
+                <input class="text-center" name="password" type="password" placeholder="请输入密码" required="required" onfocus="this.placeholder=''"  onblur="this.placeholder='请输入密码'" value="" />
+                <input class="text-center" name="from" type="hidden"  value="<%= params[:from]%>" />
+                <input class="text-center" name="designer" type="hidden"  value="<%= params[:designer]%>" />
+                <p class="text-right"><a href="/home/forgetpassword" style="font-size:16px;">忘记密码?</a></p>
+                <input class="text-center" type="submit" style="margin:0 0 10px 0" value="登录" data-toggle="modal" data-target="#myModal5" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-dialog1" role="document">
+          <div class="modal-content modal-content1">
+            <div class="modal-header modal-header1">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><img src="img/del-.png" /></button>
+            </div>
+            <div class="modal-body text-center loginas">
+              <p>美女，你的个人资料还没完善哦！</p>
+              <a class="btn btn-danger btn-danger1 btn1" href="login.html">现在就去</a>
+              <a class="btn btn-danger btn-danger1 btn1" href="login.html">稍后吧</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function(){
+    $(".fourm>ul>li").click(function(){
+      $(this).removeClass("active").siblings().addClass("active");
+    })
+    $(".fourm>ul>li:eq(0)").click(function(){
+      $(".register").show();
+      $(".loading").hide();
+    })
+    $(".fourm>ul>li:eq(1)").click(function(){
+      $(".register").hide();
+      $(".loading").show();
+    })
+  })
+    //检测是否勾选同意服务协议
+    $(".agre").click(function(){
+      if ($("input[type='checkbox']").is(':checked')){
+        $(".submit").removeAttr("disabled");
+        }else{
+        alert("您需要同意服务协议");
+        $(".submit").attr("disabled", "disabled");
+      }
+    })
+
+  function validate_password(){
+    var password = $("#password").val();
+    var password_confirm  = $("#password_confirm").val();
+    if  (password != password_confirm) {
+      alert("两次输入的密码不相同,请检查!");
+    }
+  }
+
+  //点击发送验证码
+  var wait=60;
+  function time(o) {
+    if (wait == 0) {
+      o.removeAttribute("disabled");
+      o.value="重新发送";
+      wait = 60;
+      } else {
+      o.setAttribute("disabled", true);
+      o.value=wait+"s";
+      wait--;
+      setTimeout(function() {
+        time(o)
+      },1000)
+    }
+  }
+  document.getElementById("send").onclick=function(){
+    //监测手机号是否为空
+    if ($('#mobile').val()=='') {
+      alert("请输入手机号");
+      return;
+    };
+    time(this);
+    $.ajax({
+      type: 'post',
+      url: '/home/mobile_validate',
+      data: { 'mobile': $('#mobile').val()},
+    })
+  }
+
+</script>
