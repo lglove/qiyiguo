@@ -18,9 +18,9 @@
         <input class="text-center" name="designer" type="hidden"  value="<%= params[:designer]%>" />
         <input class="text-center munb" type="text" name="invitecode" placeholder="有奇衣果邀请码？请在这里输入"  onfocus="this.placeholder=''"  onblur="this.placeholder='有奇衣果邀请码？请在这里输入'" value="" />
         <p class="text-center"><span data-toggle="modal" data-target="#myModal6">什么是奇衣果邀请码</span></p>
-        <input class="text-center" type="submit" value="提交" />
+        <input class="text-center submit" type="submit" value="提交" />
       </form>
-      <p class="text-center agre"><input id="xieyi" type="checkbox" value="on" />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
+      <p class="text-center agre"><input id="xieyi" type="checkbox" checked="checked" />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
       <div class="modal fade" id="myModal6" tabindex="-1" role="dialog" data-backdrop="static"  aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-dialog1" role="document">
           <div class="modal-content modal-content1">
@@ -47,7 +47,6 @@
         <p class="text-right"><a href="/home/forgetpassword" style="font-size:16px;">忘记密码?</a></p>
         <input class="text-center" type="submit" style="margin:0 0 10px 0" value="登录" data-toggle="modal" data-target="#myModal5" />
       </form>
-      <p class="text-center agre"><input type="checkbox" checked=checked />同意<a href="serve.html">《奇衣果用户服务条款》</a></p>
     </div>
   </div>
 </div>
@@ -80,6 +79,15 @@
       $(".loading").show();
     })
   })
+    //检测是否勾选同意服务协议
+    $(".agre").click(function(){
+      if ($("input[type='checkbox']").is(':checked')){
+        $(".submit").removeAttr("disabled");
+        }else{
+        alert("您需要同意服务协议");
+        $(".submit").attr("disabled", "disabled");
+      }
+    })
 
   function validate_password(){
     var password = $("#password").val();
