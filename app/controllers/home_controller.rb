@@ -128,8 +128,8 @@ class HomeController < ApplicationController
     v.checked = 0
     v.save
 
-#    RestClient.post SMS_URL, apikey: "2ce832e429d73c821b3ad2b954b92bae", mobile: params[:mobile], tpl_id: 1380861, tpl_value: "#code#=#{v.code}"
-    flash.now[:notice] = "验证码已发送，请在手机上查看"
+    RestClient.post SMS_URL, apikey: "2ce832e429d73c821b3ad2b954b92bae", mobile: params[:mobile], tpl_id: 1380861, tpl_value: "#code#=#{v.code}"
+    flash[:notice] = "验证码已发送，请在手机上查看"
     render :text=>"ok"
   end
 
