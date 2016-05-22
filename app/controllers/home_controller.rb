@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 
   before_filter :check_login, :only => ["manner_1","personalAll"]
   before_filter :get_login_user
-  protect_from_forgery :except => :mobile_register
+  protect_from_forgery :except => ["mobile_register","password_update"]
 
   def index
     render :layout=>false
@@ -137,12 +137,16 @@ class HomeController < ApplicationController
        user.save
        v.checked = "1"
        v.save
-    end
       flash.now[:notice] = "密码修改成功"
       session[:user_id] = user.id
-      puts user.id
-      puts session[:user_id]
       redirect_to params[:designer] == "designer" ? "/designer" : "/personalAll?from=welcome"
+    else
+      flash[:notice] = "验证码错误"
+      redirect_to "/home/forgetpassword"
+    end
+  end
+
+  def forgetpassword
   end
 
   def mobile_register
