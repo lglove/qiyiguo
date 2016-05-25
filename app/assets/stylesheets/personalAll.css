@@ -159,8 +159,10 @@ dt:first-child{
 	display:none;
 }
 .qiyi{
-	font-size:36px;
+	font-size:30px;
 	margin:10px 0 15px;
+    font-weight:normal;
+    color: #000;
 }
 th,td{
 	font-size:14px;

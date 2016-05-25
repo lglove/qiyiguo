@@ -46,7 +46,7 @@
   </aside>
   <dl>
     <dt>
-    <h1><span><%= @user.name%></span>，欢迎你回到奇衣</h1>
+    <h2><span><%= @user.name%></span>，欢迎你回到奇衣</h2>
     <% if @user.orders.present? %>
       <table class="table table-responsive">
         <caption class="qiyi">我的奇衣果</caption>
@@ -86,7 +86,7 @@
       </div>
     <% else%>
       <article class="hidden-xs hidden-sm">
-      <h1 style="color:#A3A3A3">我的奇衣果</h1>
+      <h2 style="color:#A3A3A3">我的奇衣果</h2>
       <p style="font-size:16px; color:#A3A3A3">啊呀妈呀！一个订单都没有，赶快奇选择一个设计师为你服务吧</p>
       </article>
     <%end%>
@@ -122,7 +122,7 @@
     </div>
     <dt>
     <div class="revise">
-      <h1><span><%= @user.name%></span>,你的个人信息</h1>
+      <h2><span><%= @user.name%></span>,你的个人信息</h2>
       <p>昵称：<span><%= @user.name%></span></p>
       <p>生日：<span><%= @user.birthday%></span></p>
       <p>邮箱：<span><%= @user.email%></span></p>
@@ -170,7 +170,7 @@
     </dt>
     <dt>
     <div class="bodyRevise">
-      <h1><span><%= @user.name%></span>,你的体型信息</h1>
+      <h2><span><%= @user.name%></span>,你的体型信息</h2>
       <p class="bodyCss">身高：<span><%= @user.userInfo.height || '150cm'%></span></p>
       <p class="bodyCss">体重：<span><%= @user.userInfo.weight || '40kg'%></span></p>
       <p class="bodyCss">上衣尺码：<span><%= @user.userInfo.shangyichima || 'XS'%></span></p>
@@ -186,7 +186,7 @@
     </div>
     <div class="bodySave" style="display: none">
       <form  action="/users/body" action="get">
-        <h1 class="sfdrt"><span><%= @user.name%></span>，你的体型信息</h1>
+        <h2 class="sfdrt"><span><%= @user.name%></span>，你的体型信息</h2>
         <div class="progt">
           <span class="drtye">身高</span>
           <p id="slider1">
@@ -296,7 +296,7 @@
     </div>
     </dt>
     <dt>
-    <h1><span><%= @user.name%></span>，你的账户<p class="cash">将押金留在奇衣每个月可以自动获得20元奇衣代金券</p></h1>
+    <h2><span><%= @user.name%></span>，你的账户<p class="cash">将押金留在奇衣每个月可以自动获得20元奇衣代金券</p></h2>
     <table class="table table-responsive">
       <caption class="nows">当前账户余额：<span class="numt"><%= @user.amount.to_i + @user.invite_amount.to_i%></span></caption>
       <thead>
@@ -317,7 +317,7 @@
     </table>
     </dt>
     <dt>
-    <h1>我的奇衣邀请码</h1>
+    <h2>我的奇衣邀请码</h2>
     <table class="table table-responsive">
       <caption class="invite_code" id="invite_code"><%= @user.invitecode%></caption>
       <thead>
@@ -387,7 +387,7 @@
     </div>
     </dt>
     <dt>
-    <h1>确定要一个奇衣果吗？</h1>
+    <h2>确定要一个奇衣果吗？</h2>
     <table class="table table-responsive">
       <tbody class="table-striped">
         <tr colspan="4">

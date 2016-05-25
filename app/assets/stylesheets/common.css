@@ -11,6 +11,9 @@ li{
 a,a:focus,a:hover,a:active{
 	text-decoration:none;
 }
+header {
+  margin-top:112px;
+}
 .on{
 	background:rgba(255,255,255,1)!important;
 	/*padding:5px 0;*/
@@ -37,6 +40,9 @@ a,a:focus,a:hover,a:active{
 .login{
 	font-size:22px!important;
 }
+.navbar-toggle{
+  margin-top:39px;
+}
 .navbar-toggle .icon-bar{
 	color:#fff;
 }
@@ -54,6 +60,7 @@ a,a:focus,a:hover,a:active{
 
 .navbar-brand{
 	padding-left:70px;
+    height: auto;
 }
 .navbar-brand>img{
 	width:160px;
@@ -96,7 +103,7 @@ footer{
 .modal-header1{
 	border-bottom:0;
 }
-.modal.in .modal-dialog {
+/*.modal.in .modal-dialog {
     -webkit-transform: translate(0,50%)!important;
     -ms-transform: translate(0,50%)!important;
     -o-transform: translate(0,50%)!important;
@@ -106,7 +113,7 @@ footer{
     -webkit-transition: -webkit-transform .8s ease-out!important;
     -o-transition: -o-transform .8s ease-out!important;
     transition: transform .8s ease-out!important;
-}
+}*/
 .btn1{
 	padding:6px 42px;
 	border-radius:0;
