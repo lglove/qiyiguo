@@ -7,10 +7,10 @@
     <p>你的专属设计师</p>
     <figure>
     <% if session[:user_id] %>
-      <a id="designer" href="/personalAll?designer_id=<%= @designers.first.id%>">
+      <a id="designer" href="/personalAll?designer_id=<%= @designer.id%>">
         <div class="pare">
           <span>选择她</span>
-          <img src="<%= @designers.first.logo%>" />
+          <img src="<%= @designer.logo%>" />
         </div>
       </a>
     <%else%>

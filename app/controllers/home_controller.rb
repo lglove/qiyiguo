@@ -12,6 +12,7 @@ class HomeController < ApplicationController
 
   def designer
     @designers = Designer.all
+    @designer = User.find(session[:user_id]).designer
   end
 
   def designervideo
