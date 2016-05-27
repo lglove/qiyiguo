@@ -1,6 +1,6 @@
 
 body{
-	font-family: "宋体";
+	font-family: "尚雅体";
 	font-size:12px;
 	overflow-x:hidden;
 	color:#000;
@@ -38,7 +38,7 @@ header {
 	width:90px;
 	font-size:14px;
 }
-.login{
+.login11{
 	font-size:22px!important;
 }
 .navbar-toggle{

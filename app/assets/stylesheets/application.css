@@ -21,3 +21,15 @@
 .sss>p>span{
   display:none;
 }
+
+@font-face {
+  font-family: '尚雅体';
+  font-weight: normal;
+  font-style: normal;
+  src: font-url('FZ.eot');
+  src: font-url('FZ.eot?#iefix') format('embedded-opentype'),
+  font-url('FZ.woff') format('woff'),
+  font-url('FZDBSJW_1.ttf') format('truetype'),
+  font-url('FZXBSJW_1.ttf') format('truetype'),
+  font-url('FZ.svg') format('svg');
+                             }

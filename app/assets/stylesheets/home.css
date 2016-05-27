@@ -12,16 +12,19 @@
 .bag1{
 	background:url(../img/banner6.jpg) no-repeat;
 	width:100%;
+    min-height:900px;
 	background-size: cover;
 }
 .bag2{
 	background:url(../img/banner7.jpg) no-repeat;
 	width:100%;
+    min-height:900px;
 	background-size: cover;
 }
 .bag3{
 	background:url(../img/banner6.jpg) no-repeat;
 	width:100%;
+    min-height:900px;
 	background-size: cover;
 }
 .text{
@@ -53,18 +56,19 @@
 .canvas{
 	position:relative;
 	margin:100px auto 0;
-	width:200px;
+	width:270px;
 }
 .canest{
 	position:absolute;
     top:40%;
-    width:200px;
+    width:270px;
     background-color:#fff;
 	text-align:center;
 }
 .canest>a{
 	font-size:24px;
-    color:rgba(0,0,0,.9);
+    color:rgba(0,0,0,1);
+    font-weight:bold;
 }
 .num{
 	width: 100%;
@@ -74,7 +78,7 @@
 }
 .num>a{
 	color:#E7E9E8;
-	font-size:16px;
+	font-size:14px;
 }
 .page2{
 	padding-top:100px;
@@ -114,14 +118,14 @@
 }
 .page3{
 	position:relative;
-	min-height:800px;
+	min-height:900px;
 	background:url(../img/banner2.jpg) no-repeat;
 	background-size:cover;
 }
 .sp{
 	position: absolute;
-	width:525px;
-	height:525px;
+	width:500px;
+	height:500px;
 	border-radius:50%;
 	background-color:rgba(204,203,204,.8);
 	filter:Alpha(opacity=80);
