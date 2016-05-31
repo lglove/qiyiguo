@@ -188,6 +188,11 @@ class OrdersController < ApplicationController
       order.paid = "已支付"
       order.status = "paid"
       order.save
+
+      user = order.user
+      user.amount = payment.amount
+      user.amount_date = Time.now
+      user.save
     end
     render :text=>"ok"
   end
