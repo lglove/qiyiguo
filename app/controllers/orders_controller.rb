@@ -66,6 +66,8 @@ class OrdersController < ApplicationController
   def cancel_order
     order = User.find(params[:id]).orders.last
     order.destroy
+    payment = Payment.find_by_order_id(order.id)
+    payment.destroy
     redirect_to controller: "home", action: "personalAll"
   end
 
