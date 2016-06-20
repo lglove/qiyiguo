@@ -102,7 +102,8 @@ class OrdersController < ApplicationController
 
       res = Pingpp::Charge.create(
         :order_no => payment.order_id,
-        :amount   => payment.amount.to_i*100, #以分为单位
+        #:amount   => payment.amount.to_i*100, #以分为单位
+        :amount   => 1, #以分为单位,  测试生产环境 1分钱
         :subject  => order.name,
         :body     => "#{order.user.name}奇衣果定金",
         :channel  => payment.channel,
@@ -163,7 +164,8 @@ class OrdersController < ApplicationController
 
       res = Pingpp::Charge.create(
         :order_no => payment.order_id,
-        :amount   => payment.amount.to_i*100, #以分为单位
+        #:amount   => payment.amount.to_i*100, #以分为单位
+        :amount   => 1, #以分为单位,  测试生产环境 1分钱
         :subject  => "order.name",
         :body     => "奇衣果定金",
         :channel  => payment.channel,
