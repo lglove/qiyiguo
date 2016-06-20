@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :check_login, :expect => [ "register","index","desigervideo", "explain", "politial", "serve", "use", "mobile_register"]
-  before_filter :get_login_user
+  before_filter :check_login, :expect => [ "register", "notify", "index","desigervideo", "explain", "politial", "serve", "use", "mobile_register"]
+  before_filter :get_login_user, :expect => [ "register","notify","index","desigervideo", "explain", "politial", "serve", "use", "mobile_register"]
+
 
   def check_login
     if session[:user_id].nil?
