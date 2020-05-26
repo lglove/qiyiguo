@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 CarrierWave.configure do |config|
   config.storage           = :aliyun
-  config.aliyun_access_id  = "XuRFyky9UvGub1wp"
-  config.aliyun_access_key = 'axaRXhCftyaUI6ozEjhXibX3W02xzb'
+  config.aliyun_access_id  = "xxx"
+  config.aliyun_access_key = 'xxxxxzb'
   # 你需要在 Aliyum OSS 上面提前创建一个 Bucket
   config.aliyun_bucket     = Rails.env == "production" ? "ceshikongjian" : "ceshikongjian"
   # 是否使用内部连接，true - 使用 Aliyun 局域网的方式访问  false - 外部网络访问
